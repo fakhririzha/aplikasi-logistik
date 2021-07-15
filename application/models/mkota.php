@@ -29,6 +29,17 @@ class Mkota extends CI_Model
 		return $data;
 	}
 
+	public function getAllKotaBiaya(){
+		$data = array();
+		$query = $this->db->get('view_all_kota_biaya');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
 	public function getKotaNotEqual($nama_kota)
 	{
 		$data = array();

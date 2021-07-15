@@ -21,7 +21,8 @@ class Page extends CI_Controller
 		$data['judul'] = 'Biaya Pengiriman';
 		$data['konten'] = 'guest/biaya';
 		$data['aktif'] = 'active';
-		$data['biaya'] = $this->mbiaya->getBiayaForView();
+		// $data['biaya'] = $this->mbiaya->getBiayaForView();
+		$data['biaya'] = $this->mkota->getAllKotaBiaya();
 		$data['kota'] = $this->mkota->getKotaNotEqual('Surabaya');
 		$this->load->view('guest/page', $data);
 	}

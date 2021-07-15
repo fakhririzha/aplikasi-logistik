@@ -10,8 +10,13 @@
       <td>Kota Asal</td>
       <td>:</td>
       <td>
-        <select name="cbKotaAsal" disabled>
-          <option value="1">Surabaya</option>
+        <select name="cbKotaAsal">
+          <!-- <option value="1">Surabaya</option> -->
+          <?php
+          foreach ($kota as $data) {
+            echo "<option value='".$data['id_kota']."'>".$data['nama_kota']."</option>";
+          }
+          ?>
         </select>
       </td>
     </tr>
@@ -67,8 +72,8 @@
           $idx = 1;
           foreach ($biaya as $list) {
             echo "<tr>";
-            echo "<td>Surabaya</td>";
-            echo "<td>".$list['nama_kota']."</td>";
+            echo "<td>".$list['nama_kota_asal']."</td>";
+            echo "<td>".$list['nama_kota_tujuan']."</td>";
             echo "<td>".$list['total_berat']." Kg</td>";
             echo "<td>Rp".number_format($list['biaya'], 0, ",", ".").",00</td>";
             echo "</tr>";
