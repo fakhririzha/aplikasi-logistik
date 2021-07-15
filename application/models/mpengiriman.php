@@ -41,6 +41,19 @@ class Mpengiriman extends CI_Model
 		return $data;
 	}
 
+	public function getAllPengirimanBelumDiproses() {
+		$data = array();
+		$this->db->order_by('jarak', 'ASC');
+		$query = $this->db->get("view_all_pengiriman_belum_diproses");
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
 	public function getPengirimanById($id)
 	{
 		$data = array();

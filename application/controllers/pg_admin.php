@@ -120,6 +120,18 @@ class Pg_admin extends CI_Controller
 		$this->load->view('admin/pg_admin', $data, FALSE);
 	}
 
+	public function urutkan_pengiriman()
+	{
+		$data['judul'] = 'Biaya Pengiriman';
+		$data['konten'] = 'admin/urutkan_pengiriman';
+		$data['aktif'] = 'active';
+		$data['belum_urut'] = $this->mpengiriman->getAllPengirimanBelumDiproses();
+		$data['kota'] = $this->mkota->getAllKota();
+		$data['provinsi'] = $this->mkota->getAllProvinsi();
+		$this->load->vars($data);
+		$this->load->view('admin/pg_admin', $data, FALSE);
+	}
+
 	public function jenis_barang()
 	{
 		$data['judul'] = 'Jenis Barang';

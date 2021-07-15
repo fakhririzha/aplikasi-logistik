@@ -117,7 +117,11 @@
 						</li>
 						<!-- <li class="<?php //if ($this->uri->segment(2)=='bidang_kerja') echo $aktif; ?>">
 							<a href="<?php //echo base_url(); ?>index.php/pg_admin/bidang_kerja">Bidang Kerja
-							<i class="icon-chevron-right pull-right"></i></a> -->
+							<i class="icon-chevron-right pull-right"></i></a>
+						</li> -->
+						<li class="<?php if ($this->uri->segment(2)=='status') echo $aktif; ?>">
+							<a href="<?php echo base_url(); ?>index.php/pg_admin/urutkan_pengiriman">Urutkan Pengiriman
+							<i class="icon-chevron-right pull-right"></i></a>
 						</li>
 						<li class="<?php if ($this->uri->segment(2)=='status') echo $aktif; ?>">
 							<a href="<?php echo base_url(); ?>index.php/pg_admin/status">Status Pengiriman
