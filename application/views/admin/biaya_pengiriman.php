@@ -19,6 +19,7 @@
 				<th>No.</th>
 				<th>Kota Asal</th>
 				<th>Kota Tujuan</th>
+				<th>Jarak</th>
 				<th>Total Berat (Kg)</th>
 				<th>Biaya (Rp)</th>
 				<th>Pilihan</th>
@@ -33,6 +34,7 @@
 					echo "<td>".$idx."</td>";
 					echo "<td>".$list['nama_kota_asal']."</td>";
 					echo "<td>".$list['nama_kota_tujuan']."</td>";
+					echo "<td>".$list['jarak']." km</td>";
 					echo "<td>".$list['total_berat']."</td>";
 					echo "<td>Rp".number_format($list['biaya'], 0, ",", ".").",00</td>";
 					echo "<td>";
@@ -81,6 +83,12 @@
 						}
 						?>
 					</select>
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputTotalBerat">Jarak</label>
+				<div class="controls">
+					<input type="number" id="inputTotalJarak" name="txtTotalJarak" placeholder="Jarak" class="input-small" required> Km
 				</div>
 			</div>
 			<div class="control-group">

@@ -26,6 +26,18 @@ class Mbiaya extends CI_Model
 		return $data;
 	}
 
+	public function getAllBiayaForView(){
+		$data = array();
+		$query = $this->db->get('view_all_biaya_jarak');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
 	public function getBiayaForView()
 	{
 		$data = array();
@@ -93,11 +105,13 @@ class Mbiaya extends CI_Model
 		return $data;
 	}
 
-	public function insert($kota_asal, $kota_tujuan, $berat, $biaya)
+	public function insert($kota_asal, $kota_tujuan, $jarak, $berat, $biaya)
 	{
+
 		$data = array(
 			'id_kota_asal' => $kota_asal,
 			'id_kota_tujuan' => $kota_tujuan,
+			'jarak' => $jarak,
 			'total_berat' => $berat,
 			'biaya' => $biaya
 			);
