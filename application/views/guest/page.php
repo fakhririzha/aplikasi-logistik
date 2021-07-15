@@ -1,10 +1,10 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title><?php echo $judul; ?> - PT. Haluan Indah Transporindo</title>
+	<title><?php echo $judul; ?> - PesanTruk</title>
 	<!-- Meta -->
 	<?php 
-		echo meta('description', 'Website tracking PT. Haluan Indah Transporindo');
+		echo meta('description', 'Website tracking PesanTruk');
 		echo meta('keywoards', 'kirim barang, tracking, pelayaran, pengiriman');
 		echo meta('Content-type', 'text/html; charset=utf-8', 'equiv'); 
 		echo meta('viewport', 'width=device-width, initial-scale=1.0');
