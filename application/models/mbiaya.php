@@ -42,13 +42,18 @@ class Mbiaya extends CI_Model
 		return $data;
 	}
 
-	public function getBiayaForSearch($id_kota_tujuan)
+	public function getBiayaForSearch($id_kota_asal, $id_kota_tujuan)
 	{
+		// $data = array();
+		// $this->db->select('id_biaya, id_kota_tujuan, nama_kota_tujuan, total_berat, biaya');
+		// $this->db->from('view_cari_biaya');
+		// $this->db->where('id_kota_tujuan', $id_kota_tujuan);
 		$data = array();
-		$this->db->select('id_biaya, id_kota_tujuan, nama_kota_tujuan, total_berat, biaya');
-		$this->db->from('view_cari_biaya');
-		$this->db->where('id_kota_tujuan', $id_kota_tujuan);
-		$query = $this->db->get();
+		$this->db->where(array(
+			'id_kota_asal' => $id_kota_asal,
+			'id_kota_tujuan' => $id_kota_tujuan
+		));
+		$query = $this->db->get('view_all_kota_biaya');
 		if ($query->num_rows() > 0) {
 			foreach ($query->result_array() as $row) {
 				$data[] = $row;

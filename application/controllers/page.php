@@ -23,18 +23,21 @@ class Page extends CI_Controller
 		$data['aktif'] = 'active';
 		// $data['biaya'] = $this->mbiaya->getBiayaForView();
 		$data['biaya'] = $this->mkota->getAllKotaBiaya();
-		$data['kota'] = $this->mkota->getKotaNotEqual('Surabaya');
+		// $data['kota'] = $this->mkota->getKotaNotEqual('Surabaya');
+		$data['kota'] = $this->mkota->getAllKota();
 		$this->load->view('guest/page', $data);
 	}
 
 	public function cek_biaya_pengiriman()
 	{
+		$id_kota_asal = $this->input->post('cbKotaAsal');
 		$id_kota_tujuan = $this->input->post('cbKotaTujuan');
 		$data['judul'] = 'Biaya Pengiriman';
 		$data['konten'] = 'guest/cek_biaya';
 		$data['aktif'] = 'active';
-		$data['biaya'] = $this->mbiaya->getBiayaForSearch($id_kota_tujuan);
-		$data['kota'] = $this->mkota->getKotaNotEqual('Surabaya');
+		$data['biaya'] = $this->mbiaya->getBiayaForSearch($id_kota_asal, $id_kota_tujuan);
+		// $data['kota'] = $this->mkota->getKotaNotEqual('Surabaya');
+		$data['kota'] = $this->mkota->getAllKota();
 		$this->load->view('guest/page', $data);
 	}
 

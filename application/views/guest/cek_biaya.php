@@ -10,8 +10,13 @@
       <td>Kota Asal</td>
       <td>:</td>
       <td>
-        <select name="cbKotaAsal" disabled>
-          <option value="1">Surabaya</option>
+        <select name="cbKotaAsal">
+          <!-- <option value="1">Surabaya</option> -->
+          <?php
+          foreach ($kota as $data) {
+            echo "<option value='".$data['id_kota']."'>".$data['nama_kota']."</option>";
+          }
+          ?>
         </select>
       </td>
     </tr>
