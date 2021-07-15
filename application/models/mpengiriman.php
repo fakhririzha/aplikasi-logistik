@@ -177,7 +177,7 @@ class Mpengiriman extends CI_Model
 		$data = array();
 		$param = array('id_pengiriman' => $id_pengiriman);
 		$query = $this->db->query('select * from view_sum_berat_pengiriman where id_pengiriman = '.$id_pengiriman);
-		if (count($query) > 0) {
+		if (count(array($query)) > 0) {
 			foreach ($query->result_array() as $row) {
 				$data[] = $row;
 			}
