@@ -182,7 +182,6 @@
 					<ul>
 						<li class="head-list">Informasi Umum</li>
 						<li><a href="<?php echo base_url(); ?>index.php/page/profil">Profil Perusahaan</a></li>
-						<li><a href="<?php echo base_url(); ?>index.php/page/rekanan">Perusahaan Rekanan</a></li>
 					</ul>
 				</div>
 				<div class="span3">
