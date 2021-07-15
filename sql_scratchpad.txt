@@ -1,0 +1,36 @@
+SELECT tracking.no_resi       AS no_resi,
+       tracking.id_cust       AS id_cust,
+       tracking.id_pengiriman AS id_pengiriman,
+       barang.id_barang       AS id_barang,
+       barang.nama_barang     AS nama_barang,
+       barang.berat_barang    AS berat_barang
+FROM   tracking
+       JOIN detil_pengiriman
+         ON tracking.id_pengiriman = detil_pengiriman.id_pengiriman
+       JOIN barang
+         ON barang.id_barang = detil_pengiriman.id_barang 
+
+
+
+
+==================================
+
+
+SELECT tracking.no_resi             AS no_resi,
+       tracking.id_cust             AS id_cust,
+       customer.nama_cust           AS nama_pengirim,
+       pengiriman.nama_penerima     AS nama_penerima,
+       pengiriman.tujuan_pengiriman AS tujuan_pengiriman,
+       kota.nama_kota               AS kota_tujuan,
+       biaya_pengiriman.biaya       AS biaya_pengiriman,
+       pengiriman.alamat_penerima   AS alamat_penerima,
+       pengiriman.berat_pengiriman  AS berat_pengiriman
+FROM   pengiriman
+       JOIN tracking
+         ON pengiriman.id_pengiriman = tracking.id_pengiriman
+       JOIN customer
+         ON tracking.id_cust = customer.id_cust
+       JOIN biaya_pengiriman
+         ON pengiriman.id_biaya = biaya_pengiriman.id_biaya
+       JOIN kota
+         ON biaya_pengiriman.id_kota_tujuan = kota.id_kota 
