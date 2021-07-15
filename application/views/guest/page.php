@@ -186,13 +186,13 @@
 				</div>
 				<div class="span3">
 					<ul>
-						<li class="head-list"><strong>PT. Haluan Indah Transporindo</strong></li>
+						<li class="head-list"><strong>PesanTruk</strong></li>
 						<li>
-							Jawa Timur, Indonesia<br>
-							<abbr title="Phone">CS:</abbr> (123) 456-7890<br>
+							Sumatera Utara, Indonesia<br>
+							<abbr title="Phone">CS :</abbr> (123) 456-7890<br>
 							&nbsp;<br>
-							2014&copy;&nbsp;
-							<a href="http://www.stikom.edu">SI - STIKOM Surabaya</a>
+							&copy; <?php echo date("Y"); ?>&nbsp;
+							<a href="http://www.stikom.edu">Teknik Sipil - Universitas Sumatera Utara</a>
 						</li>
 					</ul>
 				</div>
