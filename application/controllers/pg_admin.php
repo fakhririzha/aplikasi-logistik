@@ -122,7 +122,7 @@ class Pg_admin extends CI_Controller
 
 	public function urutkan_pengiriman()
 	{
-		$data['judul'] = 'Biaya Pengiriman';
+		$data['judul'] = 'Urutkan Pengiriman';
 		$data['konten'] = 'admin/urutkan_pengiriman';
 		$data['aktif'] = 'active';
 		$data['belum_urut'] = $this->mpengiriman->getAllPengirimanBelumDiproses();
