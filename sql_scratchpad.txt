@@ -34,3 +34,21 @@ FROM   pengiriman
          ON pengiriman.id_biaya = biaya_pengiriman.id_biaya
        JOIN kota
          ON biaya_pengiriman.id_kota_tujuan = kota.id_kota 
+
+
+========================================
+
+SELECT
+    k1.ID_BIAYA AS id_biaya,
+    k1.ID_KOTA_ASAL AS id_kota_asal,
+    namak1.NAMA_KOTA AS nama_kota_asal,
+    k1.ID_KOTA_TUJUAN AS id_kota_tujuan,
+    namak2.NAMA_KOTA AS nama_kota_tujuan,
+    k1.TOTAL_BERAT AS total_berat,
+    k1.BIAYA AS biaya
+FROM
+    biaya_pengiriman k1,
+    kota namak1,
+    kota namak2
+WHERE
+    k1.ID_KOTA_ASAL = namak1.ID_KOTA AND k1.ID_KOTA_TUJUAN = namak2.ID_KOTA

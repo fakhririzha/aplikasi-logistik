@@ -31,8 +31,8 @@
 				foreach ($biaya as $list) {
 					echo "<tr>";
 					echo "<td>".$idx."</td>";
-					echo "<td>".$list['id_kota_asal']."</td>";
-					echo "<td>".$list['id_kota_tujuan']."</td>";
+					echo "<td>".$list['nama_kota_asal']."</td>";
+					echo "<td>".$list['nama_kota_tujuan']."</td>";
 					echo "<td>".$list['total_berat']."</td>";
 					echo "<td>Rp".number_format($list['biaya'], 0, ",", ".").",00</td>";
 					echo "<td>";

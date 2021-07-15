@@ -113,7 +113,7 @@ class Pg_admin extends CI_Controller
 		$data['judul'] = 'Biaya Pengiriman';
 		$data['konten'] = 'admin/biaya_pengiriman';
 		$data['aktif'] = 'active';
-		$data['biaya'] = $this->mbiaya->getAllBiaya();
+		$data['biaya'] = $this->mkota->getAllKotaBiaya();
 		$data['kota'] = $this->mkota->getAllKota();
 		$data['provinsi'] = $this->mkota->getAllProvinsi();
 		$this->load->vars($data);
