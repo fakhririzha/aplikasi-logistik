@@ -160,12 +160,12 @@
 					</ul>
 				</div>
 				<div class="left-foot">
-					<strong>PT. Haluan Indah Transporindo</strong><br>
-					Jawa Timur, Indonesia<br>
-					<abbr title="Phone">CS:</abbr> (123) 456-7890<br>
+					<strong>PesanTruk</strong><br>
+					Sumatera Utara, Indonesia<br>
+					<abbr title="Phone">CS :</abbr> (123) 456-7890<br>
 					&nbsp;<br>
-					2014&copy;&nbsp;
-					<a href="http://www.stikom.edu">SI - STIKOM Surabaya</a>
+					&copy; <?php echo date("Y"); ?>&nbsp;
+					<a href="https://www.usu.ac.id">Teknik Sipil - Universitas Sumatera Utara</a>
 				</div>
 			</div>
 			<div class="span9">

@@ -192,7 +192,7 @@
 							<abbr title="Phone">CS :</abbr> (123) 456-7890<br>
 							&nbsp;<br>
 							&copy; <?php echo date("Y"); ?>&nbsp;
-							<a href="http://www.stikom.edu">Teknik Sipil - Universitas Sumatera Utara</a>
+							<a href="https://www.usu.ac.id">Teknik Sipil - Universitas Sumatera Utara</a>
 						</li>
 					</ul>
 				</div>
