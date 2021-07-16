@@ -15,7 +15,7 @@ class Mlaporan extends CI_Model
 	{
 		$data = array();
 		$query = $this->db->query('select distinct(year(tgl_pengiriman)) as tahun from pengiriman');
-		if (count($query) > 0) {
+		if (count(array($query)) > 0) {
 			foreach ($query->result_array() as $value) {
 				$data[] = $value;
 			}
@@ -28,7 +28,7 @@ class Mlaporan extends CI_Model
 	{
 		$data = array();
 		$query = $this->db->query('select distinct(month(tgl_pengiriman)) as tahun from pengiriman');
-		if (count($query) > 0) {
+		if (count(array($query)) > 0) {
 			foreach ($query->result_array() as $value) {
 				$data[] = $value;
 			}

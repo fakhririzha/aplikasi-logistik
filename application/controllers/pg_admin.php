@@ -142,9 +142,19 @@ class Pg_admin extends CI_Controller
 		$this->load->view('admin/pg_admin', $data, FALSE);
 	}
 
+	public function forwarder()
+	{
+		$data['judul'] = 'Kelola Forwarder';
+		$data['konten'] = 'admin/forwarder';
+		$data['aktif'] = 'active';
+		$data['forwarder'] = $this->mforwarder->get_all_forwarder();
+		$this->load->vars($data);
+		$this->load->view('admin/pg_admin', $data, FALSE);
+	}
+
 	public function admin()
 	{
-		$data['judul'] = 'Kelolah Otorisasi';
+		$data['judul'] = 'Kelola Otorisasi';
 		$data['konten'] = 'admin/admin';
 		$data['aktif'] = 'active';
 		$data['admin'] = $this->madmin->getAllAdmin();

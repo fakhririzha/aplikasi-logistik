@@ -153,14 +153,18 @@
 						</li>
 						<!-- kategori baru -->
 						<li class="nav-header">Fasilitas</li>
-						<li class="<?php if ($this->uri->segment(2)=='admin') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/admin">Kelolah Otorisasi
+						<li class="<?php if ($this->uri->segment(2)=='forwarder') echo $aktif; ?>">
+							<a href="<?php echo base_url(); ?>index.php/pg_admin/forwarder">Kelola Forwarder
 							<i class="icon-chevron-right pull-right"></i></a>
 						</li>
-						<li class="<?php if ($this->uri->segment(2)=='laporan') echo $aktif; ?>">
+						<li class="<?php if ($this->uri->segment(2)=='admin') echo $aktif; ?>">
+							<a href="<?php echo base_url(); ?>index.php/pg_admin/admin">Informasi Login
+							<i class="icon-chevron-right pull-right"></i></a>
+						</li>
+						<!-- <li class="<?php if ($this->uri->segment(2)=='laporan') echo $aktif; ?>">
 							<a href="<?php echo base_url(); ?>index.php/pg_admin/laporan">Laporan
 							<i class="icon-chevron-right pull-right"></i></a>
-						</li>
+						</li> -->
 					</ul>
 				</div>
 				<div class="left-foot">

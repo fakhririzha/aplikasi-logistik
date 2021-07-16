@@ -110,7 +110,7 @@ $autoload['language'] = array();
 */
 
 $autoload['model'] = array('mkota', 'mprovinsi', 'mloginadmin', 'mpromo',
-	'mbidang', 'mbiaya', 'mjenis', 'madmin', 'mbarang', 'mcustomer', 'mpengiriman', 'mstatus', 'mtracking', 'mlaporan');
+	'mbidang', 'mbiaya', 'mjenis', 'madmin', 'mbarang', 'mcustomer', 'mpengiriman', 'mstatus', 'mtracking', 'mlaporan', 'mforwarder');
 
 
 /* End of file autoload.php */
