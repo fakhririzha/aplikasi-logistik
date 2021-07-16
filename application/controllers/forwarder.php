@@ -10,17 +10,19 @@ class Pg_admin extends CI_Controller
 		parent::__construct();
 	}
 
-	public function index()
+	public function add()
 	{
-		// $masuk = $this->session->userdata('status');
-		// if ($masuk != "masuk") {
-		// 	$this->login();
-		// } else {
-		// 	$data['judul'] = 'Beranda';
-		// 	$data['aktif'] = 'active';
-		// 	$data['konten'] = 'admin/beranda';
-		// 	$this->load->view('admin/pg_admin', $data);
-		// }
+		$forwarder_email = $this->input->post('forwarderEmail');
+		$forwarder_password = $this->input->post('forwarderPassword');
+		$data = $this->mforwarder->insert_forwarder($forwarder_email, $forwarder_password);
+		$this->session->set_flashdata('message', 'Forwarder telah berhasil ditambahkan');
+		redirect('pg_admin/forwarder', 'refresh');
+	}
+
+	public function remove($id){
+		$data = $this->mforwarder->delete_forwarder($id);
+		$this->session->set_flashdata('message', 'Forwarder telah berhasil dihapus');
+		redirect('pg_admin/forwarder', 'refresh');
 	}
 }
 
