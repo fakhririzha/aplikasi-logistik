@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title><?php echo $judul; ?> - PT. Haluan Indah Transporindo</title>
+	<title><?php echo $judul; ?> - PesanTruk</title>
 	<!-- Meta -->
 	<?php 
 		echo meta('description', 'Website tracking PT. Haluan Indah Transporindo');

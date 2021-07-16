@@ -20,13 +20,49 @@ class Forwarder extends CI_Controller
 		}
 	}
 
+	public function login()
+	{
+		$data['judul'] = 'Login Halaman Forwarder';
+		$this->load->view('forwarder/login', $data);
+	}
+
+	public function check_login()
+	{
+		$this->load->library('encrypt');
+		$username = $this->input->post('email');
+		$password = $this->input->post('password');
+		// $row = $this->mloginadmin->validasi($username, $password);
+		$row = $this->mforwarder->validasi_login($username, $password);
+		if (count($row) > 0) {
+			$item = array(
+				'FORWARDER_ID' => $row['FORWARDER_ID'],
+				'FORWARDER_EMAIL' => $row['FORWARDER_EMAIL'],
+				'FORWARDER_PASSWORD' => $row['FORWARDER_PASSWORD'],
+				'status' => 'masuk'
+			);
+			$this->session->set_userdata($item);
+			redirect('forwarder', 'refresh');
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, silahkan coba lagi!');
+			redirect('forwarder/login', 'refresh');
+		}
+	}
+
+	public function logout()
+	{	
+		$this->session->sess_destroy();
+		$this->session->set_flashdata('result', 'Anda sudah keluar');
+		header('location:'.base_url().'index.php/forwarder/login');
+		redirect('forwarder/login', 'refresh');
+	}
+
 	public function add()
 	{
 		$forwarder_email = $this->input->post('forwarderEmail');
 		$forwarder_password = $this->input->post('forwarderPassword');
 		$data = $this->mforwarder->insert_forwarder($forwarder_email, $forwarder_password);
 		$this->session->set_flashdata('message', 'Forwarder telah berhasil ditambahkan');
-		redirect('pg_admin/forwarder', 'refresh');
+		redirect('forwarder/forwarder', 'refresh');
 	}
 
 	public function remove($id){

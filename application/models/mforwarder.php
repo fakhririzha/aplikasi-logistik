@@ -35,6 +35,23 @@ class Mforwarder extends CI_Model
 		$data = array('FORWARDER_ID' => $forwarder_id);
 		$this->db->delete('forwarder', $data);
 	}
+
+	function validasi_login($email, $password)
+	{
+		$this->db->select('FORWARDER_ID, FORWARDER_EMAIL, FORWARDER_PASSWORD');
+		$this->db->where('FORWARDER_EMAIL', $email);
+		$this->db->where('FORWARDER_PASSWORD', $password);
+		$this->db->limit(1);
+		$query = $this->db->get('forwarder');
+		$this->session->set_userdata('lastquery', $this->db->last_query());
+		if ($query->num_rows() > 0) {
+			$row = $query->row_array();
+			return $row;
+		} else {
+			$this->session->set_flashdata('error', 'Maaf, silahkan coba lagi!');
+			return array();
+		}
+	}
 }
 
 ?>

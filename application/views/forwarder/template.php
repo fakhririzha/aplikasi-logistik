@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title><?php echo $judul; ?> - PT. Haluan Indah Transporindo</title>
+	<title><?php echo $judul; ?> - PesanTruk</title>
 	<!-- Meta -->
 	<?php 
 		echo meta('description', 'Website tracking PT. Haluan Indah Transporindo');
@@ -75,10 +75,10 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="brand" href="#">Dashboard Front Office</a>
+				<a class="brand" href="#">Dashboard Forwarder</a>
 				<div class="nav-collapse collapse">
 					<ul class="nav pull-right">
-						<li><a href="<?php echo base_url(); ?>index.php/pg_admin/logout">
+						<li><a href="<?php echo base_url(); ?>index.php/forwarder/logout">
 							<i class="icon-off icon-white"></i>&nbsp;Keluar</a>
 						</li>
 					</ul>
@@ -106,65 +106,23 @@
 					<ul class="nav nav-list">
 						<!-- kategori baru -->
 						<li class="<?php if ($this->uri->segment(2)=='') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/">Beranda
+							<a href="<?php echo base_url(); ?>index.php/forwarder/">Beranda
 							<i class="icon-home pull-right"></i></a>
 						</li>
 						<!-- kategori baru -->
 						<li class="nav-header">Manajemen Data</li>
-						<li class="<?php if ($this->uri->segment(2)=='kota_provinsi') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/kota_provinsi">Kota & Provinsi
+						<li class="<?php if ($this->uri->segment(2)=='daftar_kiriman') echo $aktif; ?>">
+							<a href="<?php echo base_url(); ?>index.php/forwarder/daftar_kiriman">Daftar Kiriman
 							<i class="icon-chevron-right pull-right"></i></a>
 						</li>
-						<!-- <li class="<?php //if ($this->uri->segment(2)=='bidang_kerja') echo $aktif; ?>">
-							<a href="<?php //echo base_url(); ?>index.php/pg_admin/bidang_kerja">Bidang Kerja
-							<i class="icon-chevron-right pull-right"></i></a>
-						</li> -->
-						<li class="<?php if ($this->uri->segment(2)=='urutkan_pengiriman') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/urutkan_pengiriman">Urutkan Pengiriman
+						<li class="<?php if ($this->uri->segment(2)=='ambil_kiriman') echo $aktif; ?>">
+							<a href="<?php echo base_url(); ?>index.php/forwarder/ambil_kiriman">Ambil Kiriman
 							<i class="icon-chevron-right pull-right"></i></a>
 						</li>
-						<li class="<?php if ($this->uri->segment(2)=='status') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/status">Status Pengiriman
+						<li class="<?php if ($this->uri->segment(2)=='ubah_status_kiriman') echo $aktif; ?>">
+							<a href="<?php echo base_url(); ?>index.php/forwarder/ubah_status_kiriman">Ubah Status Kiriman
 							<i class="icon-chevron-right pull-right"></i></a>
 						</li>
-						<li class="<?php if ($this->uri->segment(2)=='biaya') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/biaya">Biaya Pengiriman
-							<i class="icon-chevron-right pull-right"></i></a>
-						</li>
-						<li class="<?php if ($this->uri->segment(2)=='jenis_barang') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/jenis_barang">Jenis Barang
-							<i class="icon-chevron-right pull-right"></i></a>
-						</li>
-						<li class="<?php if ($this->uri->segment(2)=='barang') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/barang">Barang
-							<i class="icon-chevron-right pull-right"></i></a>
-						</li>
-						<li class="<?php if ($this->uri->segment(2)=='customer') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/customer">Customer
-							<i class="icon-chevron-right pull-right"></i></a>
-						</li>
-						<li class="<?php if ($this->uri->segment(2)=='pengiriman') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/pengiriman">Pengiriman
-							<i class="icon-chevron-right pull-right"></i></a>
-						</li>
-						<li class="<?php if ($this->uri->segment(2)=='tracking') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/tracking">Tracking
-							<i class="icon-chevron-right pull-right"></i></a>
-						</li>
-						<!-- kategori baru -->
-						<li class="nav-header">Fasilitas</li>
-						<li class="<?php if ($this->uri->segment(2)=='forwarder') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/forwarder">Kelola Forwarder
-							<i class="icon-chevron-right pull-right"></i></a>
-						</li>
-						<li class="<?php if ($this->uri->segment(2)=='admin') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/admin">Informasi Login
-							<i class="icon-chevron-right pull-right"></i></a>
-						</li>
-						<!-- <li class="<?php if ($this->uri->segment(2)=='laporan') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/pg_admin/laporan">Laporan
-							<i class="icon-chevron-right pull-right"></i></a>
-						</li> -->
 					</ul>
 				</div>
 				<div class="left-foot">
