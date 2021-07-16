@@ -31,6 +31,8 @@
 			?>
 		</tbody>
 	</table>
+    <
+    <button type="button" class="btn btn-primary">Urutkan pengiriman</button>
 </div>
 <!-- Modal -->
 <form class="form-horizontal" method="post" action="<?php echo base_url(); ?>index.php/biaya/add">

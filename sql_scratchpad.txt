@@ -73,3 +73,34 @@ FROM
     kota k2
 WHERE
     p.ID_PENGIRIMAN = t.ID_PENGIRIMAN AND p.ID_BIAYA = b.ID_BIAYA AND b.ID_KOTA_ASAL = k1.ID_KOTA AND b.ID_KOTA_TUJUAN = k2.ID_KOTA AND t.STATUS_PENGIRIMAN = 'Sedang Diproses'
+
+
+  ================================
+SELECT ID_PENGIRIMAN, COUNT(STATUS_PENGIRIMAN) 
+FROM tracking
+GROUP BY ID_PENGIRIMAN
+HAVING COUNT(STATUS_PENGIRIMAN) < 2
+
+===========================
+
+SELECT
+    t.ID_PENGIRIMAN AS id_pengiriman,
+    t.NO_RESI AS no_resi,
+    b.ID_BIAYA AS id_biaya,
+    b.ID_KOTA_ASAL AS id_kota_asal,
+    b.ID_KOTA_TUJUAN AS id_kota_tujuan,
+    k1.NAMA_KOTA AS nama_kota_asal,
+    k2.NAMA_KOTA AS nama_kota_tujuan,
+    b.JARAK AS jarak
+FROM
+    pengiriman p,
+    tracking t,
+    biaya_pengiriman b,
+    kota k1,
+    kota k2
+WHERE
+    p.ID_PENGIRIMAN = t.ID_PENGIRIMAN AND p.ID_BIAYA = b.ID_BIAYA AND b.ID_KOTA_ASAL = k1.ID_KOTA AND b.ID_KOTA_TUJUAN = k2.ID_KOTA
+GROUP BY
+	t.ID_PENGIRIMAN
+HAVING
+	COUNT(t.STATUS_PENGIRIMAN) < 2
