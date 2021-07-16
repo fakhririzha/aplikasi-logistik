@@ -44,8 +44,9 @@ class Biaya extends CI_Controller
 		$kota_asal = $this->input->post('cbKotaAsal');
 		$kota_tujuan = $this->input->post('cbKotaTujuan');
 		$total_berat = $this->input->post('txtTotalBerat');
+		$jarak = $this->input->post('txtJarak');
 		$biaya = $this->input->post('txtBiaya');
-		$data = $this->mbiaya->update($id, $kota_asal, $kota_tujuan, $total_berat, $biaya);
+		$data = $this->mbiaya->update($id, $kota_asal, $kota_tujuan, $total_berat, $jarak, $biaya);
 		$this->session->set_flashdata('message', 'Biaya pengiriman sudah diubah');
 		redirect('pg_admin/biaya', 'refresh');
 		//echo $id." ".$kota_asal." ".$kota_tujuan." ".$total_berat." ".$biaya;

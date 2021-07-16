@@ -79,8 +79,8 @@ class Mbiaya extends CI_Model
 	{
 		$data = array();
 		$param = array('id_biaya' => $id_biaya);
-		$this->db->select('id_biaya, id_kota_asal, id_kota_tujuan, total_berat, biaya');
-		$query = $this->db->get_where('biaya_pengiriman', $param, 1);
+		// $this->db->select('id_biaya, id_kota_asal, id_kota_tujuan, total_berat, jarak, biaya');
+		$query = $this->db->get_where('view_all_biaya_jarak', $param);
 		if ($query->num_rows() > 0) {
 			foreach ($query->result_array() as $row) {
 				$data[] = $row;
@@ -124,12 +124,11 @@ class Mbiaya extends CI_Model
 		$this->db->delete('biaya_pengiriman', $data);
 	}
 
-	public function update($id_biaya, $kota_asal, $kota_tujuan, $berat, $biaya)
+	public function update($id_biaya, $kota_asal, $kota_tujuan, $berat, $jarak, $biaya)
 	{
 		$data = array(
-			'id_kota_asal' => $kota_asal,
-			'id_kota_tujuan' => $kota_tujuan,
 			'total_berat' => $berat,
+			'jarak' => $jarak,
 			'biaya' => $biaya
 			);
 		$this->db->where('id_biaya', $id_biaya);
