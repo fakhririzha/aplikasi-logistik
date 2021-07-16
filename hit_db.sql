@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 15, 2021 at 12:04 PM
+-- Generation Time: Jul 16, 2021 at 02:35 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -119,6 +119,7 @@ CREATE TABLE `biaya_pengiriman` (
   `ID_BIAYA` int(11) NOT NULL,
   `ID_KOTA_ASAL` int(11) DEFAULT NULL,
   `ID_KOTA_TUJUAN` int(11) DEFAULT NULL,
+  `JARAK` int(11) DEFAULT NULL,
   `TOTAL_BERAT` decimal(8,2) DEFAULT NULL,
   `BIAYA` decimal(8,2) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -127,13 +128,14 @@ CREATE TABLE `biaya_pengiriman` (
 -- Dumping data for table `biaya_pengiriman`
 --
 
-INSERT INTO `biaya_pengiriman` (`ID_BIAYA`, `ID_KOTA_ASAL`, `ID_KOTA_TUJUAN`, `TOTAL_BERAT`, `BIAYA`) VALUES
-(1, 1, 1, '50.00', '20000.00'),
-(2, 1, 3, '100.00', '500000.00'),
-(3, 1, 6, '40.00', '75000.00'),
-(4, 1, 4, '50.00', '35000.00'),
-(5, 1, 5, '50.00', '45000.00'),
-(7, 1, 2, '40.00', '100000.00');
+INSERT INTO `biaya_pengiriman` (`ID_BIAYA`, `ID_KOTA_ASAL`, `ID_KOTA_TUJUAN`, `JARAK`, `TOTAL_BERAT`, `BIAYA`) VALUES
+(1, 1, 1, 0, '50.00', '20000.00'),
+(2, 1, 1, 20, '100.00', '500000.00'),
+(3, 1, 6, 30, '40.00', '75000.00'),
+(4, 1, 4, 40, '50.00', '35000.00'),
+(5, 1, 5, 50, '50.00', '45000.00'),
+(7, 1, 2, 60, '40.00', '100000.00'),
+(8, 1, 1, 70, '50.00', '400000.00');
 
 -- --------------------------------------------------------
 
@@ -213,8 +215,7 @@ INSERT INTO `detil_pengiriman` (`ID_BARANG`, `ID_PENGIRIMAN`) VALUES
 (15, 1010),
 (16, 1011),
 (17, 1012),
-(18, 1013),
-(25, 1014);
+(18, 1013);
 
 -- --------------------------------------------------------
 
@@ -293,8 +294,7 @@ INSERT INTO `pengiriman` (`ID_PENGIRIMAN`, `ID_BIAYA`, `TGL_PENGIRIMAN`, `BIAYA_
 (1010, 7, '2014-06-02', '100000.00', 'Rio Sonja Permana', 'PT. Karangan Indah Semesta', 'Jl. Nias Nusantara No. 190-201', '50.00'),
 (1011, 7, '2014-06-05', '100000.00', 'Thony Hermawan', 'PT. Semoga Tidak Bencana', 'Jl. Selamat No. 99', '150.00'),
 (1012, 7, '2014-06-02', '100000.00', 'Dwi Prasetyo', 'PT. Pesona Bahari Nusantara', 'Jl. Cinggarum No. 24-29', '100.00'),
-(1013, 5, '2014-06-04', '45000.00', 'Thony Hermawan', 'PT. Sumbangan Suka Rela', 'Jl. Pandaan Malang Km. 30', '150.00'),
-(1014, 3, '2021-07-14', '75000.00', 'Fakhri Rizha Ananda', 'PT. Kalvo Company', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '1.00');
+(1013, 5, '2014-06-04', '45000.00', 'Thony Hermawan', 'PT. Sumbangan Suka Rela', 'Jl. Pandaan Malang Km. 30', '150.00');
 
 -- --------------------------------------------------------
 
@@ -364,7 +364,6 @@ CREATE TABLE `tracking` (
 
 INSERT INTO `tracking` (`NO_RESI`, `ID_PENGIRIMAN`, `ID_CUST`, `STATUS_PENGIRIMAN`, `TANGGAL`, `POSISI`, `KETERANGAN`) VALUES
 ('BMHS819050', 1013, 2, 'Sedang Diproses', '2014-05-31', 'Surabaya', ''),
-('HJHT004153', 1014, 6, 'Sedang Diproses', '2021-07-15', 'Surabaya', ''),
 ('MGOH973487', 1012, 2, 'Sedang Diproses', '2014-05-31', 'Surabaya', ''),
 ('RXK001', 1001, 4, 'Sedang Diproses', '2014-05-21', 'Surabaya', ''),
 ('RXK002', 1006, 4, 'Sedang Diproses', '2014-05-24', 'Surabaya', ''),
@@ -375,6 +374,56 @@ INSERT INTO `tracking` (`NO_RESI`, `ID_PENGIRIMAN`, `ID_CUST`, `STATUS_PENGIRIMA
 ('YVVN191918', 1009, 1, 'Pengemasan', '2014-05-25', 'Surabaya', ''),
 ('YVVN191918', 1009, 1, 'Pengiriman', '2014-05-31', 'Surabaya', ''),
 ('YVVN191918', 1009, 1, 'Sedang Diproses', '2014-05-25', 'Surabaya', '');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_all_biaya_jarak`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_all_biaya_jarak` (
+`id_biaya` int(11)
+,`id_kota_asal` int(11)
+,`nama_kota_asal` varchar(30)
+,`id_kota_tujuan` int(11)
+,`nama_kota_tujuan` varchar(30)
+,`jarak` int(11)
+,`total_berat` decimal(8,2)
+,`biaya` decimal(8,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_all_kota_biaya`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_all_kota_biaya` (
+`id_biaya` int(11)
+,`id_kota_asal` int(11)
+,`nama_kota_asal` varchar(30)
+,`id_kota_tujuan` int(11)
+,`nama_kota_tujuan` varchar(30)
+,`total_berat` decimal(8,2)
+,`biaya` decimal(8,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_all_pengiriman_belum_diproses`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_all_pengiriman_belum_diproses` (
+`id_pengiriman` int(11)
+,`no_resi` varchar(10)
+,`id_biaya` int(11)
+,`id_kota_asal` int(11)
+,`id_kota_tujuan` int(11)
+,`nama_kota_asal` varchar(30)
+,`nama_kota_tujuan` varchar(30)
+,`jarak` int(11)
+);
 
 -- --------------------------------------------------------
 
@@ -596,6 +645,23 @@ CREATE TABLE `view_pengiriman` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `view_pengiriman_sedang_diproses`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_pengiriman_sedang_diproses` (
+`id_pengiriman` int(11)
+,`no_resi` varchar(10)
+,`id_biaya` int(11)
+,`id_kota_asal` int(11)
+,`id_kota_tujuan` int(11)
+,`nama_kota_asal` varchar(30)
+,`nama_kota_tujuan` varchar(30)
+,`jarak` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `view_sum_berat_pengiriman`
 -- (See below for the actual view)
 --
@@ -616,6 +682,33 @@ CREATE TABLE `view_surat_pengiriman` (
 ,`nama_cust` varchar(50)
 ,`tgl_pengiriman` date
 );
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_all_biaya_jarak`
+--
+DROP TABLE IF EXISTS `view_all_biaya_jarak`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_all_biaya_jarak`  AS  select `k1`.`ID_BIAYA` AS `id_biaya`,`k1`.`ID_KOTA_ASAL` AS `id_kota_asal`,`namak1`.`NAMA_KOTA` AS `nama_kota_asal`,`k1`.`ID_KOTA_TUJUAN` AS `id_kota_tujuan`,`namak2`.`NAMA_KOTA` AS `nama_kota_tujuan`,`k1`.`JARAK` AS `jarak`,`k1`.`TOTAL_BERAT` AS `total_berat`,`k1`.`BIAYA` AS `biaya` from ((`biaya_pengiriman` `k1` join `kota` `namak1`) join `kota` `namak2`) where ((`k1`.`ID_KOTA_ASAL` = `namak1`.`ID_KOTA`) and (`k1`.`ID_KOTA_TUJUAN` = `namak2`.`ID_KOTA`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_all_kota_biaya`
+--
+DROP TABLE IF EXISTS `view_all_kota_biaya`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_all_kota_biaya`  AS  select `k1`.`ID_BIAYA` AS `id_biaya`,`k1`.`ID_KOTA_ASAL` AS `id_kota_asal`,`namak1`.`NAMA_KOTA` AS `nama_kota_asal`,`k1`.`ID_KOTA_TUJUAN` AS `id_kota_tujuan`,`namak2`.`NAMA_KOTA` AS `nama_kota_tujuan`,`k1`.`TOTAL_BERAT` AS `total_berat`,`k1`.`BIAYA` AS `biaya` from ((`biaya_pengiriman` `k1` join `kota` `namak1`) join `kota` `namak2`) where ((`k1`.`ID_KOTA_ASAL` = `namak1`.`ID_KOTA`) and (`k1`.`ID_KOTA_TUJUAN` = `namak2`.`ID_KOTA`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_all_pengiriman_belum_diproses`
+--
+DROP TABLE IF EXISTS `view_all_pengiriman_belum_diproses`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_all_pengiriman_belum_diproses`  AS  select `t`.`ID_PENGIRIMAN` AS `id_pengiriman`,`t`.`NO_RESI` AS `no_resi`,`b`.`ID_BIAYA` AS `id_biaya`,`b`.`ID_KOTA_ASAL` AS `id_kota_asal`,`b`.`ID_KOTA_TUJUAN` AS `id_kota_tujuan`,`k1`.`NAMA_KOTA` AS `nama_kota_asal`,`k2`.`NAMA_KOTA` AS `nama_kota_tujuan`,`b`.`JARAK` AS `jarak` from ((((`pengiriman` `p` join `tracking` `t`) join `biaya_pengiriman` `b`) join `kota` `k1`) join `kota` `k2`) where ((`p`.`ID_PENGIRIMAN` = `t`.`ID_PENGIRIMAN`) and (`p`.`ID_BIAYA` = `b`.`ID_BIAYA`) and (`b`.`ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`b`.`ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`) and (`t`.`STATUS_PENGIRIMAN` = 'Sedang Diproses')) ;
 
 -- --------------------------------------------------------
 
@@ -746,6 +839,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `view_pengiriman_sedang_diproses`
+--
+DROP TABLE IF EXISTS `view_pengiriman_sedang_diproses`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_pengiriman_sedang_diproses`  AS  select `t`.`ID_PENGIRIMAN` AS `id_pengiriman`,`t`.`NO_RESI` AS `no_resi`,`b`.`ID_BIAYA` AS `id_biaya`,`b`.`ID_KOTA_ASAL` AS `id_kota_asal`,`b`.`ID_KOTA_TUJUAN` AS `id_kota_tujuan`,`k1`.`NAMA_KOTA` AS `nama_kota_asal`,`k2`.`NAMA_KOTA` AS `nama_kota_tujuan`,`b`.`JARAK` AS `jarak` from ((((`pengiriman` `p` join `tracking` `t`) join `biaya_pengiriman` `b`) join `kota` `k1`) join `kota` `k2`) where ((`p`.`ID_PENGIRIMAN` = `t`.`ID_PENGIRIMAN`) and (`p`.`ID_BIAYA` = `b`.`ID_BIAYA`) and (`b`.`ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`b`.`ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`)) group by `t`.`ID_PENGIRIMAN` having (count(`t`.`STATUS_PENGIRIMAN`) < 2) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `view_sum_berat_pengiriman`
 --
 DROP TABLE IF EXISTS `view_sum_berat_pengiriman`;
@@ -862,7 +964,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `biaya_pengiriman`
 --
 ALTER TABLE `biaya_pengiriman`
-  MODIFY `ID_BIAYA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID_BIAYA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
 
 --
 -- AUTO_INCREMENT for table `bidang_kerja`
@@ -934,7 +1036,7 @@ ALTER TABLE `kota`
 -- Constraints for table `pengiriman`
 --
 ALTER TABLE `pengiriman`
-  ADD CONSTRAINT `FK_PENGIRIMAN_MEMPUNYAI_BIAYA_PENGIRIMAN` FOREIGN KEY (`ID_BIAYA`) REFERENCES `biaya_pengiriman` (`ID_BIAYA`);
+  ADD CONSTRAINT `FK_PENGIRIMAN_MEMPUNYAI_BIAYA_PENGIRIMAN` FOREIGN KEY (`ID_BIAYA`) REFERENCES `biaya_pengiriman` (`ID_BIAYA`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tracking`

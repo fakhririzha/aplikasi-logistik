@@ -76,7 +76,7 @@
 			<div class="control-group">
 				<label class="control-label" for="inputKotaTujuan">Kota Tujuan</label>
 				<div class="controls">
-					<select id="inputKotaTujuan" name="cbKotaTujuan">
+					<select id="inputKotaTujuan" name="cbKotaTujuan" required>
 						<?php
 						foreach ($kota as $data) {
 							echo "<option value='".$data['id_kota']."'>".$data['nama_kota']."</option>";
@@ -100,7 +100,7 @@
 			<div class="control-group">
 				<label class="control-label" for="inputBiaya">Biaya Pengiriman</label>
 				<div class="controls">
-					Rp<input type="text" id="inputBiaya" name="txtBiaya" placeholder="Biaya" class="input-medium">,-
+					Rp <input type="number" id="inputBiaya" name="txtBiaya" placeholder="Biaya" class="input-medium" required> ,-
 				</div>
 			</div>
 		</div>
