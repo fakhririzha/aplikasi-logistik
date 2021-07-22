@@ -20,6 +20,17 @@ class Forwarder extends CI_Controller
 		}
 	}
 
+	public function daftar_kiriman(){
+		$data['judul'] = 'Urutkan Pengiriman';
+		$data['konten'] = 'forwarder/daftar_kiriman';
+		$data['aktif'] = 'active';
+		$data['belum_urut'] = $this->mpengiriman->getAllPengirimanBelumDiproses();
+		$data['kota'] = $this->mkota->getAllKota();
+		$data['provinsi'] = $this->mkota->getAllProvinsi();
+		$this->load->vars($data);
+		$this->load->view('forwarder/template', $data, FALSE);
+	}
+
 	public function login()
 	{
 		$data['judul'] = 'Login Halaman Forwarder';
