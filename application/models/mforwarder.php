@@ -37,6 +37,25 @@ class Mforwarder extends CI_Model
 		return $data;
     }
 
+	public function get_all_pengiriman_by_forwarder($id) {
+		$data = array();
+		$query = $this->db->query(
+		"
+		SELECT * FROM armada
+		WHERE ARMADA_FORWARDER_ID = '".$id."'
+		JOIN pengiriman
+		ON ID_ARMADA_PENGIRIMAN = ARMADA_ID
+		"
+		);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
 	public function insert_forwarder($nama, $email, $password, $asal, $tujuan){
 		$data = array(
 			'FORWARDER_NAMA' => $nama,

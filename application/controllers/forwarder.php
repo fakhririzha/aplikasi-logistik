@@ -31,6 +31,17 @@ class Forwarder extends CI_Controller
 		$this->load->view('forwarder/template', $data, FALSE);
 	}
 
+	public function list_kiriman(){
+		$data['judul'] = 'List Pengiriman';
+		$data['konten'] = 'forwarder/list_kiriman';
+		$data['aktif'] = 'active';
+		$data['belum_urut'] = $this->mforwarder->get_all_pengiriman_by_forwarder();
+		$data['kota'] = $this->mkota->getAllKota();
+		$data['provinsi'] = $this->mkota->getAllProvinsi();
+		$this->load->vars($data);
+		$this->load->view('forwarder/template', $data, FALSE);
+	}
+
 	public function kelola_armada(){
 		$data['judul'] = 'Kelola Armada';
 		$data['konten'] = 'forwarder/kelola_armada';
