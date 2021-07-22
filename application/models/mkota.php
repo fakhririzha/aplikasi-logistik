@@ -113,4 +113,3 @@ class Mkota extends CI_Model
 		return $data;
 	}
 }
-?>

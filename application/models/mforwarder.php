@@ -23,10 +23,13 @@ class Mforwarder extends CI_Model
 		return $data;
     }
 
-	public function insert_forwarder($email, $password){
+	public function insert_forwarder($nama, $email, $password, $asal, $tujuan){
 		$data = array(
+			'FORWARDER_NAMA' => $nama,
 			'FORWARDER_EMAIL' => $email,
-			'FORWARDER_PASSWORD' => $password
+			'FORWARDER_PASSWORD' => $password,
+			'FORWARDER_ID_KOTA_ASAL' => $asal,
+			'FORWARDER_ID_KOTA_TUJUAN' => $tujuan,
 			);
 		$this->db->insert('forwarder', $data);
 	}

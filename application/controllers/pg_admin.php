@@ -1,10 +1,11 @@
-<?php 
+<?php
+
 /**
-* @author Thony Hermawan
-*/
+ * @author Thony Hermawan
+ */
 class Pg_admin extends CI_Controller
 {
-	
+
 	function __construct()
 	{
 		parent::__construct();
@@ -51,10 +52,10 @@ class Pg_admin extends CI_Controller
 	}
 
 	public function logout()
-	{	
+	{
 		$this->session->sess_destroy();
 		$this->session->set_flashdata('result', 'Anda sudah keluar');
-		header('location:'.base_url().'index.php/pg_admin/login');
+		header('location:' . base_url() . 'index.php/pg_admin/login');
 		redirect('pg_admin/login', 'refresh');
 	}
 
@@ -64,7 +65,7 @@ class Pg_admin extends CI_Controller
 		$data['konten'] = 'admin/kota_provinsi';
 		$data['aktif'] = 'active';
 		$data['kota'] = $this->mkota->getAllKota();
-		$data['provinsi'] = $this->mkota->getAllProvinsi();//$this->mprovinsi->getAllProvinsi();
+		$data['provinsi'] = $this->mkota->getAllProvinsi(); //$this->mprovinsi->getAllProvinsi();
 		$this->load->vars($data);
 		$this->load->view('admin/pg_admin', $data, FALSE);
 	}
@@ -148,6 +149,7 @@ class Pg_admin extends CI_Controller
 		$data['konten'] = 'admin/forwarder';
 		$data['aktif'] = 'active';
 		$data['forwarder'] = $this->mforwarder->get_all_forwarder();
+		$data['list_kota'] = $this->mkota->getAllKota();
 		$this->load->vars($data);
 		$this->load->view('admin/pg_admin', $data, FALSE);
 	}
@@ -174,8 +176,8 @@ class Pg_admin extends CI_Controller
 		}
 
 		$this->load->library('pagination');
-		
-		$config['base_url'] = base_url().'index.php/pg_admin/barang';
+
+		$config['base_url'] = base_url() . 'index.php/pg_admin/barang';
 		$config['total_rows'] = $jml_barang;
 		$config['per_page'] = 10;
 		$config['uri_segment'] = 3;
@@ -196,9 +198,9 @@ class Pg_admin extends CI_Controller
 		$config['prev_tag_close'] = '</div>';
 		$config['cur_tag_open'] = '<b>';
 		$config['cur_tag_close'] = '</b>';
-		
+
 		$this->pagination->initialize($config);
-		
+
 		$data['judul'] = 'Barang';
 		$data['konten'] = 'admin/barang';
 		$data['aktif'] = 'active';
@@ -256,8 +258,8 @@ class Pg_admin extends CI_Controller
 		$jml = $this->db->get('view_list_tracking');
 
 		$this->load->library('pagination');
-		
-		$config['base_url'] = base_url().'index.php/pg_admin/tracking';
+
+		$config['base_url'] = base_url() . 'index.php/pg_admin/tracking';
 		$config['total_rows'] = $jml->num_rows();
 		$config['per_page'] = 10;
 		$config['uri_segment'] = 3;
@@ -278,9 +280,9 @@ class Pg_admin extends CI_Controller
 		//$config['prev_tag_close'] = '</li>';
 		//$config['cur_tag_open'] = '<b>';
 		//$config['cur_tag_close'] = '</b>';
-		
+
 		$this->pagination->initialize($config);
-		
+
 		$data['paging'] = $this->pagination->create_links();
 
 		$data['judul'] = 'Tracking';
@@ -291,4 +293,3 @@ class Pg_admin extends CI_Controller
 		$this->load->view('admin/pg_admin', $data, FALSE);
 	}
 }
-?>
