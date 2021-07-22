@@ -58,11 +58,11 @@ class Forwarder extends CI_Controller
 
 	public function add()
 	{
-		$forwarder_email = $this->input->post('forwarderEmail');
-		$forwarder_password = $this->input->post('forwarderPassword');
+		$forwarder_email = $this->input->post('emailForwarder');
+		$forwarder_password = $this->input->post('passwordForwarder');
 		$data = $this->mforwarder->insert_forwarder($forwarder_email, $forwarder_password);
 		$this->session->set_flashdata('message', 'Forwarder telah berhasil ditambahkan');
-		redirect('forwarder/forwarder', 'refresh');
+		redirect('pg_admin/forwarder', 'refresh');
 	}
 
 	public function remove($id){

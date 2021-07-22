@@ -72,7 +72,7 @@
           $idx = 1;
           foreach ($biaya as $list) {
             echo "<tr>";
-            echo "<td>Surabaya</td>";
+            echo "<td>".$list['nama_kota_asal']."</td>";
             echo "<td>".$list['nama_kota_tujuan']."</td>";
             echo "<td>".$list['total_berat']." Kg</td>";
             echo "<td>Rp".number_format($list['biaya'], 0, ",", ".").",00</td>";
