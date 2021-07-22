@@ -78,18 +78,19 @@
 					placeholder="Nama Perusahaan">
 			</div>
 		</div>
-		<div class="control-group">
-			<label class="control-label" for="inputPekerjaan">Bidang Kerja</label>
-			<div class="controls">
+		<input type="hidden" name="inputPekerjaan" value="3">
+		<!-- <div class="control-group"> -->
+			<!-- <label class="control-label" for="inputPekerjaan">Bidang Kerja</label> -->
+			<!-- <div class="controls">
 				<select name="inputPekerjaan" id="inputPekerjaan" class="span4">
 					<?php
-					foreach ($bidang as $option) {
-						echo "<option value='".$option['id_bidang_kerja']."'>".$option['nama_bidang_kerja']."</option>";
-					}
+					// foreach ($bidang as $option) {
+					// 	echo "<option value='".$option['id_bidang_kerja']."'>".$option['nama_bidang_kerja']."</option>";
+					// }
 					?>
 				</select>
-			</div>
-		</div>
+			</div> -->
+		<!-- </div> -->
 		<div class="control-group">
 			<label class="control-label" for="inputAlamatPerusahaan">Alamat Perusahaan</label>
 			<div class="controls">
