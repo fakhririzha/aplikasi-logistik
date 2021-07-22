@@ -112,15 +112,20 @@
 						<!-- kategori baru -->
 						<li class="nav-header">Manajemen Data</li>
 						<li class="<?php if ($this->uri->segment(2)=='daftar_kiriman') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/forwarder/daftar_kiriman">Daftar Kiriman
+							<a href="<?php echo base_url(); ?>index.php/forwarder/daftar_kiriman">Request Kiriman
 							<i class="icon-chevron-right pull-right"></i></a>
 						</li>
-						<li class="<?php if ($this->uri->segment(2)=='ambil_kiriman') echo $aktif; ?>">
-							<a href="<?php echo base_url(); ?>index.php/forwarder/ambil_kiriman">Ambil Kiriman
+						<li class="<?php if ($this->uri->segment(2)=='list_kiriman') echo $aktif; ?>">
+							<a href="<?php echo base_url(); ?>index.php/forwarder/list_kiriman">List Kiriman
 							<i class="icon-chevron-right pull-right"></i></a>
 						</li>
 						<li class="<?php if ($this->uri->segment(2)=='ubah_status_kiriman') echo $aktif; ?>">
 							<a href="<?php echo base_url(); ?>index.php/forwarder/ubah_status_kiriman">Ubah Status Kiriman
+							<i class="icon-chevron-right pull-right"></i></a>
+						</li>
+						<li class="nav-header">Armada</li>
+						<li class="<?php if ($this->uri->segment(2)=='kelola_armada') echo $aktif; ?>">
+							<a href="<?php echo base_url(); ?>index.php/forwarder/kelola_armada">Kelola Armada
 							<i class="icon-chevron-right pull-right"></i></a>
 						</li>
 					</ul>

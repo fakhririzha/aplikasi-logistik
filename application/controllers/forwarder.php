@@ -31,6 +31,27 @@ class Forwarder extends CI_Controller
 		$this->load->view('forwarder/template', $data, FALSE);
 	}
 
+	public function kelola_armada(){
+		$data['judul'] = 'Kelola Armada';
+		$data['konten'] = 'forwarder/kelola_armada';
+		$data['aktif'] = 'active';
+		$data['armada'] = $this->mforwarder->get_all_armada($this->session->userdata('FORWARDER_ID'));
+		$data['kota'] = $this->mkota->getAllKota();
+		$this->load->vars($data);
+		$this->load->view('forwarder/template', $data, FALSE);
+	}
+
+	public function tambah_armada(){
+		$nama = $this->input->post('namaArmada');
+		$forwarder_id = $this->input->post('forwarderId');
+		$kapasitas = $this->input->post('kapasitasArmada');
+		$asal = $this->input->post('cbKotaAsal');
+		$tujuan = $this->input->post('cbKotaTujuan');
+		$data = $this->mforwarder->insert_armada($nama, $forwarder_id, $kapasitas, $asal, $tujuan);
+		$this->session->set_flashdata('message', 'Armada telah berhasil ditambahkan');
+		redirect('forwarder/kelola_armada', 'refresh');
+	}
+
 	public function login()
 	{
 		$data['judul'] = 'Login Halaman Forwarder';

@@ -23,6 +23,20 @@ class Mforwarder extends CI_Model
 		return $data;
     }
 
+    public function get_all_armada($forwarder_id){
+        $data = array();
+        $query = $this->db->get_where('view_all_armada', [
+			'ARMADA_FORWARDER_ID' => $forwarder_id
+		]);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+    }
+
 	public function insert_forwarder($nama, $email, $password, $asal, $tujuan){
 		$data = array(
 			'FORWARDER_NAMA' => $nama,
@@ -32,6 +46,17 @@ class Mforwarder extends CI_Model
 			'FORWARDER_ID_KOTA_TUJUAN' => $tujuan,
 			);
 		$this->db->insert('forwarder', $data);
+	}
+
+	public function insert_armada($nama, $forwarder_id, $kapasitas, $asal, $tujuan){
+		$data = array(
+			'ARMADA_FORWARDER_ID' => $forwarder_id,
+			'ARMADA_NAMA' => $nama,
+			'ARMADA_KAPASITAS' => $kapasitas,
+			'ARMADA_ID_KOTA_ASAL' => $asal,
+			'ARMADA_ID_KOTA_TUJUAN' => $tujuan,
+			);
+		$this->db->insert('armada', $data);
 	}
 
 	public function delete_forwarder($forwarder_id){
