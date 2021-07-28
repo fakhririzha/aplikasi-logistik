@@ -9,6 +9,7 @@
 				<th>Kota Asal</th>
 				<th>Kota Tujuan</th>
 				<th>Jarak</th>
+				<th>Berat Total</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -22,6 +23,7 @@
 					echo "<td>".$list['nama_kota_asal']."</td>";
 					echo "<td>".$list['nama_kota_tujuan']."</td>";
 					echo "<td>".$list['jarak']." km</td>";
+					echo "<td>".intval($list['berat_total_pengiriman'])." kg</td>";
 					echo "</tr>";
 					$idx++;
 				}
@@ -31,7 +33,6 @@
 			?>
 		</tbody>
 	</table>
-    <
     <button type="button" class="btn btn-primary">Urutkan pengiriman</button>
 </div>
 <!-- Modal -->
