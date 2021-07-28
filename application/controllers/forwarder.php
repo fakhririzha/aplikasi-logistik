@@ -46,7 +46,7 @@ class Forwarder extends CI_Controller
 		$data['judul'] = 'Kelola Armada';
 		$data['konten'] = 'forwarder/kelola_armada';
 		$data['aktif'] = 'active';
-		$data['armada'] = $this->mforwarder->get_all_armada($this->session->userdata('FORWARDER_ID'));
+		$data['armada'] = $this->mforwarder->get_all_armada_by_forwarder_id($this->session->userdata('FORWARDER_ID'));
 		$data['kota'] = $this->mkota->getAllKota();
 		$this->load->vars($data);
 		$this->load->view('forwarder/template', $data, FALSE);

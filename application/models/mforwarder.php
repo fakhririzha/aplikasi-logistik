@@ -23,7 +23,7 @@ class Mforwarder extends CI_Model
 		return $data;
     }
 
-    public function get_all_armada($forwarder_id){
+    public function get_all_armada_by_forwarder_id($forwarder_id){
         $data = array();
         $query = $this->db->get_where('view_all_armada', [
 			'ARMADA_FORWARDER_ID' => $forwarder_id
