@@ -104,6 +104,7 @@ class Mforwarder extends CI_Model
 			'ARMADA_FORWARDER_ID' => $forwarder_id,
 			'ARMADA_NAMA' => $nama,
 			'ARMADA_KAPASITAS' => $kapasitas,
+			'ARMADA_KAPASITAS_TERSEDIA' => $kapasitas,
 			'ARMADA_ID_KOTA_ASAL' => $asal,
 			'ARMADA_ID_KOTA_TUJUAN' => $tujuan,
 			);
