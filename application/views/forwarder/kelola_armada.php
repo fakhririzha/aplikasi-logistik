@@ -1,6 +1,6 @@
 <h3>Kelola Armada</h3>
 <p>Berikut adalah daftar forwarder yang tersedia:</p>
-<form method="post" class="form-seacrh">
+<form method="post" class="form-search">
 	<legend>Operasi</legend>
 	<div class="input-append">
 		<a href="#myModal" role="button" class="btn btn-primary" data-toggle="modal">

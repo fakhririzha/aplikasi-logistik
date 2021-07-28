@@ -37,6 +37,38 @@ class Mforwarder extends CI_Model
 		return $data;
     }
 
+	public function get_armada_info_by_id($armada_id){
+		$data = array();
+        $query = $this->db->get_where('view_all_armada', [
+			'ARMADA_ID' => $armada_id
+		]);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
+	public function get_all_kota_kecuali_armada_tertentu($nama_kota)
+	{
+		$data = array();
+		$this->db->select('id_kota, nama_provinsi, nama_kota');
+		$this->db->where('NAMA_KOTA !=', $nama_kota);
+		$this->db->from('kota');
+		$this->db->join('provinsi', 'provinsi.id_provinsi = kota.id_provinsi');
+		$query = $this->db->get();
+		$this->db->order_by('nama_provinsi', 'asc');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
 	public function get_all_pengiriman_by_forwarder($id) {
 		$data = array();
 		$query = $this->db->query(
@@ -76,6 +108,17 @@ class Mforwarder extends CI_Model
 			'ARMADA_ID_KOTA_TUJUAN' => $tujuan,
 			);
 		$this->db->insert('armada', $data);
+	}
+
+	public function ubah_armada($nama, $id_armada, $kapasitas, $asal, $tujuan){
+		$data = array(
+			'ARMADA_NAMA' => $nama,
+			'ARMADA_KAPASITAS' => $kapasitas,
+			'ARMADA_ID_KOTA_ASAL' => $asal,
+			'ARMADA_ID_KOTA_TUJUAN' => $tujuan,
+			);
+		$this->db->where('ARMADA_ID', $id_armada);
+		$this->db->update('armada', $data);
 	}
 
 	public function delete_forwarder($forwarder_id){

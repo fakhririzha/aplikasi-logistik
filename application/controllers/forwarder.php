@@ -63,6 +63,29 @@ class Forwarder extends CI_Controller
 		redirect('forwarder/kelola_armada', 'refresh');
 	}
 
+	public function ubah_armada($id){
+		$data['judul'] = 'Ubah Armada';
+		$data['konten'] = 'forwarder/ubah_armada';
+		$data['aktif'] = 'active';
+		$data['armada'] = $this->mforwarder->get_armada_info_by_id($id);
+		// echo $data['armada'][0]['NAMA_KOTA_ASAL'];die;
+		$data['kota_asal'] = $this->mforwarder->get_all_kota_kecuali_armada_tertentu($data['armada'][0]['NAMA_KOTA_ASAL']);
+		$data['kota_tujuan'] = $this->mforwarder->get_all_kota_kecuali_armada_tertentu($data['armada'][0]['NAMA_KOTA_TUJUAN']);
+		$this->load->vars($data);
+		$this->load->view('forwarder/template', $data, FALSE);
+	}
+
+	public function ubah_armada_action(){
+		$nama = $this->input->post('namaArmada');
+		$id_armada = $this->input->post('idArmada');
+		$kapasitas = $this->input->post('kapasitasArmada');
+		$asal = $this->input->post('cbKotaAsal');
+		$tujuan = $this->input->post('cbKotaTujuan');
+		$data = $this->mforwarder->ubah_armada($nama, $id_armada, $kapasitas, $asal, $tujuan);
+		$this->session->set_flashdata('message', 'Informasi armada berhasil diubah');
+		redirect('forwarder/kelola_armada', 'refresh');
+	}
+
 	public function login()
 	{
 		$data['judul'] = 'Login Halaman Forwarder';
