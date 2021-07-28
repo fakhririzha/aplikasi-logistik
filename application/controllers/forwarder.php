@@ -86,6 +86,12 @@ class Forwarder extends CI_Controller
 		redirect('forwarder/kelola_armada', 'refresh');
 	}
 
+	// public function hapus_armada($id){
+	// 	$this->mforwarder->hapus_armada($id);
+	// 	$this->session->set_flashdata('message', 'Armada berhasil dihapus!');
+	// 	redirect('forwarder/kelola_armada', 'refresh');
+	// }
+
 	public function login()
 	{
 		$data['judul'] = 'Login Halaman Forwarder';

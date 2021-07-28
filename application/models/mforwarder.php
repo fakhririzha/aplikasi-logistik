@@ -121,6 +121,11 @@ class Mforwarder extends CI_Model
 		$this->db->update('armada', $data);
 	}
 
+	// public function hapus_armada($id_armada){
+	// 	$this->db->where('ARMADA_ID', $id_armada);
+	// 	$this->db->delete('armada');
+	// }
+
 	public function delete_forwarder($forwarder_id){
 		$data = array('FORWARDER_ID' => $forwarder_id);
 		$this->db->delete('forwarder', $data);

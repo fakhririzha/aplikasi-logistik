@@ -33,8 +33,6 @@
 					echo "<td>" . $list['NAMA_KOTA_TUJUAN'] . "</td>";
 					echo "<td>";
 					echo anchor('forwarder/ubah_armada/' . $list['ARMADA_ID'], 'Ubah', '');
-					echo nbs(2) . "/" . nbs(2);
-					echo anchor('forwarder/hapus_armada/' . $list['ARMADA_ID'], 'Hapus', '');
 					echo "</td>";
 					echo "</tr>";
 					$idx++;
