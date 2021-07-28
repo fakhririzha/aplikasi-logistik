@@ -28,7 +28,7 @@
 					echo "<tr>";
 					echo "<td>" . $list['ARMADA_ID'] . "</td>";
 					echo "<td>" . $list['ARMADA_NAMA'] . "</td>";
-					echo "<td>" . $list['ARMADA_KAPASITAS'] . "</td>";
+					echo "<td>" . $list['ARMADA_KAPASITAS'] . " kg</td>";
 					echo "<td>" . $list['NAMA_KOTA_ASAL'] . "</td>";
 					echo "<td>" . $list['NAMA_KOTA_TUJUAN'] . "</td>";
 					echo "<td>";
