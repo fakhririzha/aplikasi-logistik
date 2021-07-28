@@ -127,6 +127,7 @@ class Pg_admin extends CI_Controller
 		$data['konten'] = 'admin/urutkan_pengiriman';
 		$data['aktif'] = 'active';
 		$data['belum_urut'] = $this->mpengiriman->getAllPengirimanBelumDiproses();
+		$data['forwarder'] = $this->mforwarder->get_all_forwarder();
 		$data['kota'] = $this->mkota->getAllKota();
 		$data['provinsi'] = $this->mkota->getAllProvinsi();
 		$this->load->vars($data);

@@ -10,6 +10,8 @@
 				<th>Kota Tujuan</th>
 				<th>Jarak</th>
 				<th>Berat Total</th>
+				<th>Forwarder</th>
+				<th>Aksi</th>
 			</tr>
 		</thead>
 		<tbody>
@@ -24,6 +26,18 @@
 					echo "<td>".$list['nama_kota_tujuan']."</td>";
 					echo "<td>".$list['jarak']." km</td>";
 					echo "<td>".intval($list['berat_total_pengiriman'])." kg</td>";
+					echo "<form class=\"form-horizontal\" method=\"post\" action=\"".base_url()."index.php/pg_admin/pilih_forwarder_kiriman\">";
+					echo "<td>";
+					echo "<select name=\"idForwarder\" class=\"form-control\">";
+					foreach ($forwarder as $data) {
+						echo "<option value=\"". $data['FORWARDER_ID'] ."\">".$data['FORWARDER_NAMA']."</option>";
+					}
+					echo "</select>";
+					echo "</td>";
+					echo "<td>";
+					echo "<button type=\"submit\" class=\"btn btn-primary\">Pilih Forwarder</button>";
+					echo "</td>";
+					echo "</form>";
 					echo "</tr>";
 					$idx++;
 				}
