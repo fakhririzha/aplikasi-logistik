@@ -23,6 +23,18 @@ class Mforwarder extends CI_Model
 		return $data;
     }
 
+	public function get_all_armada(){
+		$data = array();
+        $query = $this->db->get('view_all_armada');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
     public function get_all_armada_by_forwarder_id($forwarder_id){
         $data = array();
         $query = $this->db->get_where('view_all_armada', [
@@ -120,6 +132,26 @@ class Mforwarder extends CI_Model
 			);
 		$this->db->where('ARMADA_ID', $id_armada);
 		$this->db->update('armada', $data);
+	}
+
+	public function update_forwarder_armada_pengiriman($id_forwarder, $id_armada, $id_pengiriman, $berat_total_pengiriman){
+		$berat_tersedia_armada = $this->db->get_where("armada", [
+			"ARMADA_ID" => $id_armada
+		])->row_array();
+		$berat_sisa = intval($berat_tersedia_armada['ARMADA_KAPASITAS_TERSEDIA']) - $berat_total_pengiriman;
+
+		$data = array(
+			'ID_FORWARDER_PENGIRIMAN' => $id_forwarder,
+			'ID_ARMADA_PENGIRIMAN' => $id_armada,
+			);
+		$this->db->where('ID_PENGIRIMAN', $id_pengiriman);
+		$this->db->update('pengiriman', $data);
+
+		$data2 = array(
+			'ARMADA_KAPASITAS_TERSEDIA' => $berat_sisa
+		);
+		$this->db->where('ARMADA_ID', $id_armada);
+		$this->db->update('armada', $data2);
 	}
 
 	// public function hapus_armada($id_armada){
