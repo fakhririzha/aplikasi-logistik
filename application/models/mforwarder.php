@@ -1,31 +1,21 @@
 <?php
+
 /**
-* 
-*/
+ * 
+ */
 class Mforwarder extends CI_Model
 {
-	
+
 	function __construct()
 	{
 		parent::__construct();
 		$this->load->database();
 	}
 
-    public function get_all_forwarder(){
-        $data = array();
-        $query = $this->db->get('view_all_forwarder');
-		if ($query->num_rows() > 0) {
-			foreach ($query->result_array() as $row) {
-				$data[] = $row;
-			}
-		}
-		$query->free_result();
-		return $data;
-    }
-
-	public function get_all_armada(){
+	public function get_all_forwarder()
+	{
 		$data = array();
-        $query = $this->db->get('view_all_armada');
+		$query = $this->db->get('view_all_forwarder');
 		if ($query->num_rows() > 0) {
 			foreach ($query->result_array() as $row) {
 				$data[] = $row;
@@ -35,9 +25,23 @@ class Mforwarder extends CI_Model
 		return $data;
 	}
 
-    public function get_all_armada_by_forwarder_id($forwarder_id){
-        $data = array();
-        $query = $this->db->get_where('view_all_armada', [
+	public function get_all_armada()
+	{
+		$data = array();
+		$query = $this->db->get('view_all_armada');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
+	public function get_all_armada_by_forwarder_id($forwarder_id)
+	{
+		$data = array();
+		$query = $this->db->get_where('view_all_armada', [
 			'ARMADA_FORWARDER_ID' => $forwarder_id
 		]);
 		if ($query->num_rows() > 0) {
@@ -47,11 +51,12 @@ class Mforwarder extends CI_Model
 		}
 		$query->free_result();
 		return $data;
-    }
+	}
 
-	public function get_armada_info_by_id($armada_id){
+	public function get_armada_info_by_id($armada_id)
+	{
 		$data = array();
-        $query = $this->db->get_where('view_all_armada', [
+		$query = $this->db->get_where('view_all_armada', [
 			'ARMADA_ID' => $armada_id
 		]);
 		if ($query->num_rows() > 0) {
@@ -81,12 +86,13 @@ class Mforwarder extends CI_Model
 		return $data;
 	}
 
-	public function get_all_pengiriman_by_forwarder($id) {
+	public function get_all_pengiriman_by_forwarder($id)
+	{
 		$data = array();
 		$query = $this->db->query(
-		"
+			"
 		SELECT * FROM armada
-		WHERE ARMADA_FORWARDER_ID = '".$id."'
+		WHERE ARMADA_FORWARDER_ID = '" . $id . "'
 		JOIN pengiriman
 		ON ID_ARMADA_PENGIRIMAN = ARMADA_ID
 		"
@@ -100,18 +106,20 @@ class Mforwarder extends CI_Model
 		return $data;
 	}
 
-	public function insert_forwarder($nama, $email, $password, $asal, $tujuan){
+	public function insert_forwarder($nama, $email, $password, $asal, $tujuan)
+	{
 		$data = array(
 			'FORWARDER_NAMA' => $nama,
 			'FORWARDER_EMAIL' => $email,
 			'FORWARDER_PASSWORD' => $password,
 			'FORWARDER_ID_KOTA_ASAL' => $asal,
 			'FORWARDER_ID_KOTA_TUJUAN' => $tujuan,
-			);
+		);
 		$this->db->insert('forwarder', $data);
 	}
 
-	public function insert_armada($nama, $forwarder_id, $kapasitas, $asal, $tujuan){
+	public function insert_armada($nama, $forwarder_id, $kapasitas, $asal, $tujuan)
+	{
 		$data = array(
 			'ARMADA_FORWARDER_ID' => $forwarder_id,
 			'ARMADA_NAMA' => $nama,
@@ -119,39 +127,47 @@ class Mforwarder extends CI_Model
 			'ARMADA_KAPASITAS_TERSEDIA' => $kapasitas,
 			'ARMADA_ID_KOTA_ASAL' => $asal,
 			'ARMADA_ID_KOTA_TUJUAN' => $tujuan,
-			);
+		);
 		$this->db->insert('armada', $data);
 	}
 
-	public function ubah_armada($nama, $id_armada, $kapasitas, $asal, $tujuan){
+	public function ubah_armada($nama, $id_armada, $kapasitas, $asal, $tujuan)
+	{
 		$data = array(
 			'ARMADA_NAMA' => $nama,
 			'ARMADA_KAPASITAS' => $kapasitas,
 			'ARMADA_ID_KOTA_ASAL' => $asal,
 			'ARMADA_ID_KOTA_TUJUAN' => $tujuan,
-			);
+		);
 		$this->db->where('ARMADA_ID', $id_armada);
 		$this->db->update('armada', $data);
 	}
 
-	public function update_forwarder_armada_pengiriman($id_forwarder, $id_armada, $id_pengiriman, $berat_total_pengiriman){
+	public function update_forwarder_armada_pengiriman($id_forwarder, $id_armada, $id_pengiriman, $berat_total_pengiriman)
+	{
 		$berat_tersedia_armada = $this->db->get_where("armada", [
 			"ARMADA_ID" => $id_armada
 		])->row_array();
 		$berat_sisa = intval($berat_tersedia_armada['ARMADA_KAPASITAS_TERSEDIA']) - $berat_total_pengiriman;
 
-		$data = array(
-			'ID_FORWARDER_PENGIRIMAN' => $id_forwarder,
-			'ID_ARMADA_PENGIRIMAN' => $id_armada,
+		if ($berat_sisa < 0) {
+			return 0;
+		} else {
+			$data = array(
+				'ID_FORWARDER_PENGIRIMAN' => $id_forwarder,
+				'ID_ARMADA_PENGIRIMAN' => $id_armada
 			);
-		$this->db->where('ID_PENGIRIMAN', $id_pengiriman);
-		$this->db->update('pengiriman', $data);
+			$this->db->where('ID_PENGIRIMAN', $id_pengiriman);
+			$this->db->update('pengiriman', $data);
 
-		$data2 = array(
-			'ARMADA_KAPASITAS_TERSEDIA' => $berat_sisa
-		);
-		$this->db->where('ARMADA_ID', $id_armada);
-		$this->db->update('armada', $data2);
+			$data2 = array(
+				'ARMADA_KAPASITAS_TERSEDIA' => $berat_sisa
+			);
+			$this->db->where('ARMADA_ID', $id_armada);
+			$this->db->update('armada', $data2);
+
+			return 1;
+		}
 	}
 
 	// public function hapus_armada($id_armada){
@@ -159,7 +175,8 @@ class Mforwarder extends CI_Model
 	// 	$this->db->delete('armada');
 	// }
 
-	public function delete_forwarder($forwarder_id){
+	public function delete_forwarder($forwarder_id)
+	{
 		$data = array('FORWARDER_ID' => $forwarder_id);
 		$this->db->delete('forwarder', $data);
 	}
@@ -181,5 +198,3 @@ class Mforwarder extends CI_Model
 		}
 	}
 }
-
-?>

@@ -1,7 +1,7 @@
-<?php 
+<?php
 class Forwarder extends CI_Controller
 {
-	
+
 	function __construct()
 	{
 		parent::__construct();
@@ -20,7 +20,8 @@ class Forwarder extends CI_Controller
 		}
 	}
 
-	public function daftar_kiriman(){
+	public function daftar_kiriman()
+	{
 		$data['judul'] = 'Urutkan Pengiriman';
 		$data['konten'] = 'forwarder/daftar_kiriman';
 		$data['aktif'] = 'active';
@@ -31,7 +32,8 @@ class Forwarder extends CI_Controller
 		$this->load->view('forwarder/template', $data, FALSE);
 	}
 
-	public function list_kiriman(){
+	public function list_kiriman()
+	{
 		$data['judul'] = 'List Pengiriman';
 		$data['konten'] = 'forwarder/list_kiriman';
 		$data['aktif'] = 'active';
@@ -42,7 +44,8 @@ class Forwarder extends CI_Controller
 		$this->load->view('forwarder/template', $data, FALSE);
 	}
 
-	public function kelola_armada(){
+	public function kelola_armada()
+	{
 		$data['judul'] = 'Kelola Armada';
 		$data['konten'] = 'forwarder/kelola_armada';
 		$data['aktif'] = 'active';
@@ -52,7 +55,8 @@ class Forwarder extends CI_Controller
 		$this->load->view('forwarder/template', $data, FALSE);
 	}
 
-	public function tambah_armada(){
+	public function tambah_armada()
+	{
 		$nama = $this->input->post('namaArmada');
 		$forwarder_id = $this->input->post('forwarderId');
 		$kapasitas = $this->input->post('kapasitasArmada');
@@ -63,7 +67,8 @@ class Forwarder extends CI_Controller
 		redirect('forwarder/kelola_armada', 'refresh');
 	}
 
-	public function ubah_armada($id){
+	public function ubah_armada($id)
+	{
 		$data['judul'] = 'Ubah Armada';
 		$data['konten'] = 'forwarder/ubah_armada';
 		$data['aktif'] = 'active';
@@ -75,7 +80,8 @@ class Forwarder extends CI_Controller
 		$this->load->view('forwarder/template', $data, FALSE);
 	}
 
-	public function ubah_armada_action(){
+	public function ubah_armada_action()
+	{
 		$nama = $this->input->post('namaArmada');
 		$id_armada = $this->input->post('idArmada');
 		$kapasitas = $this->input->post('kapasitasArmada');
@@ -121,10 +127,10 @@ class Forwarder extends CI_Controller
 	}
 
 	public function logout()
-	{	
+	{
 		$this->session->sess_destroy();
 		$this->session->set_flashdata('result', 'Anda sudah keluar');
-		header('location:'.base_url().'index.php/forwarder/login');
+		header('location:' . base_url() . 'index.php/forwarder/login');
 		redirect('forwarder/login', 'refresh');
 	}
 
@@ -140,7 +146,8 @@ class Forwarder extends CI_Controller
 		redirect('pg_admin/forwarder', 'refresh');
 	}
 
-	public function remove($id){
+	public function remove($id)
+	{
 		$data = $this->mforwarder->delete_forwarder($id);
 		$this->session->set_flashdata('message', 'Forwarder telah berhasil dihapus');
 		redirect('pg_admin/forwarder', 'refresh');

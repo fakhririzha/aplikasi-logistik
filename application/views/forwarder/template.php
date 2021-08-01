@@ -111,10 +111,10 @@
 						</li>
 						<!-- kategori baru -->
 						<li class="nav-header">Manajemen Data</li>
-						<li class="<?php if ($this->uri->segment(2)=='daftar_kiriman') echo $aktif; ?>">
+						<!-- <li class="<?php if ($this->uri->segment(2)=='daftar_kiriman') echo $aktif; ?>">
 							<a href="<?php echo base_url(); ?>index.php/forwarder/daftar_kiriman">Request Kiriman
 							<i class="icon-chevron-right pull-right"></i></a>
-						</li>
+						</li> -->
 						<li class="<?php if ($this->uri->segment(2)=='list_kiriman') echo $aktif; ?>">
 							<a href="<?php echo base_url(); ?>index.php/forwarder/list_kiriman">List Kiriman
 							<i class="icon-chevron-right pull-right"></i></a>

@@ -1,10 +1,11 @@
-<?php 
+<?php
+
 /**
-* 
-*/
+ * 
+ */
 class Mkota extends CI_Model
 {
-	
+
 	function __construct()
 	{
 		parent::__construct();
@@ -29,7 +30,21 @@ class Mkota extends CI_Model
 		return $data;
 	}
 
-	public function getAllKotaBiaya(){
+	public function get_all_kota_by_alphabet()
+	{
+		$data = array();
+		$query = $this->db->order_by('nama_kota', 'asc')->get('kota');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
+	public function getAllKotaBiaya()
+	{
 		$data = array();
 		$query = $this->db->get('view_all_kota_biaya');
 		if ($query->num_rows() > 0) {
@@ -59,8 +74,10 @@ class Mkota extends CI_Model
 	public function getIdKota($id_provinsi, $kota)
 	{
 		$data = array();
-		$param = array('id_provinsi' => $id_provinsi,
-						'nama_kota' => $kota);
+		$param = array(
+			'id_provinsi' => $id_provinsi,
+			'nama_kota' => $kota
+		);
 		$this->db->select('id_kota');
 		$query = $this->db->get_where('kota', $param, 1);
 		if ($query->num_rows() > 0) {
@@ -70,7 +87,8 @@ class Mkota extends CI_Model
 		return $data;
 	}
 
-	public function getNamaKotaById($id_kota){
+	public function getNamaKotaById($id_kota)
+	{
 		$data = array();
 		$this->db->select('nama_kota');
 		$this->db->where('id_kota', $id_kota);
@@ -106,9 +124,10 @@ class Mkota extends CI_Model
 
 	public function addKota($id_provinsi, $nama_kota)
 	{
-		$data = array('id_provinsi' => $id_provinsi,
-						'nama_kota' => $nama_kota
-			 		);
+		$data = array(
+			'id_provinsi' => $id_provinsi,
+			'nama_kota' => $nama_kota
+		);
 		$this->db->insert('kota', $data);
 		return $data;
 	}

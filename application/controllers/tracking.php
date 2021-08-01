@@ -1,10 +1,11 @@
 <?php
+
 /**
-* @author Thony Hermawan
-*/
+ * @author Thony Hermawan
+ */
 class Tracking extends CI_Controller
 {
-	
+
 	function __construct()
 	{
 		parent::__construct();
@@ -29,6 +30,7 @@ class Tracking extends CI_Controller
 		$data['aktif'] = 'active';
 		$data['status'] = $this->mstatus->getAllStatus();
 		$data['tracking'] = $this->mtracking->detil_tracking($no_resi);
+		$data['kota'] = $this->mkota->get_all_kota_by_alphabet();
 		$this->load->view('admin/pg_admin', $data);
 	}
 
@@ -41,11 +43,11 @@ class Tracking extends CI_Controller
 		$tanggal = $this->input->post('txtTanggalTracking');
 		$posisi = $this->input->post('txtPosisi');
 		$ket = $this->input->post('txtKeterangan');
-		if (empty($ket)) $keterangan = ""; else $keterangan = $ket;
+		if (empty($ket)) $keterangan = "";
+		else $keterangan = $ket;
 		$this->mtracking->insert($no_resi, $id_pengiriman, $id_cust, $status_pengiriman, $tanggal, $posisi, $keterangan);
 		$this->session->set_flashdata('message', 'Status pengiriman sudah diperbarui.');
-		redirect('tracking/page_detil/'.$no_resi, 'refresh');
+		redirect('tracking/page_detil/' . $no_resi, 'refresh');
 		//echo $no_resi." ".$id_pengiriman." ".$id_cust." ".$status_pengiriman." ".$tanggal." ".$posisi." ".$keterangan;
 	}
 }
-?>
