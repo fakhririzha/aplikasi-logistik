@@ -7,8 +7,7 @@
 		<button type="submit" class="btn">
 			<i class="icon-search"></i>&nbsp;Cari
 		</button>
-		<a href="javascript:;" role="button" class="btn btn-primary" 
-			onclick="win_popup('<?php echo base_url(); ?>index.php/pengiriman/buat_permintaan_pengiriman', 800, 600)">
+		<a href="javascript:;" role="button" class="btn btn-primary" onclick="win_popup('<?php echo base_url(); ?>index.php/pengiriman/buat_permintaan_pengiriman', 800, 600)">
 			<i class="icon-plus-sign icon-white"></i>&nbsp;Tambah Data
 		</a>
 	</div>
@@ -29,31 +28,31 @@
 			</tr>
 		</thead>
 		<tbody>
-			<?php 
+			<?php
 			if (count($pengiriman) > 0) {
 				foreach ($pengiriman as $list) {
 					$tanggal = date('d F Y', strtotime($list['tgl_pengiriman']));
 					echo "<tr>";
-					echo "<td>".$list['id_pengiriman']."</td>";
-					echo "<td>".$tanggal."</td>";
+					echo "<td>" . $list['id_pengiriman'] . "</td>";
+					echo "<td>" . $tanggal . "</td>";
 					//echo "<td>Rp".number_format($list['biaya_pengiriman'], 0, ",", ".").",00</td>";
-					echo "<td>".$list['nama_penerima']."</td>";
-					echo "<td>".$list['tujuan_pengiriman']." -";
-					echo " ".$list['kota_tujuan']."</td>";
+					echo "<td>" . $list['nama_penerima'] . "</td>";
+					echo "<td>" . $list['tujuan_pengiriman'] . " -";
+					echo " " . $list['kota_tujuan'] . "</td>";
 					//echo "<td>".$list['alamat_penerima']."</td>";
 					//echo "<td>".$list['berat_pengiriman']."</td>";
 					echo "<td>";
 					//echo anchor('pengiriman/detil/'.$list['id_pengiriman'], 'Detil', '');
-					?>
+			?>
 					<a href="javascript:;" onclick="win_popup('<?php echo base_url(); ?>index.php/pengiriman/detil/<?php echo $list['id_pengiriman']; ?>', 800, 600)">Detil</a>
 					<?php
-					echo nbs(2)."/".nbs(2);
-					echo anchor('pengiriman/edit/'.$list['id_pengiriman'], 'Ubah', '');
+					echo nbs(2) . "/" . nbs(2);
+					echo anchor('pengiriman/edit/' . $list['id_pengiriman'], 'Ubah', '');
 					?>
 					<!--<a href="javascript:;" onclick="win_popup('<?php echo base_url(); ?>index.php/pengiriman/edit/<?php echo $list['id_pengiriman']; ?>', 500, 435)">Ubah</a>-->
-					<?php
-					echo nbs(2)."/".nbs(2);
-					echo anchor('pengiriman/hapus/'.$list['id_pengiriman'], 'Hapus', '');
+			<?php
+					echo nbs(2) . "/" . nbs(2);
+					echo anchor('pengiriman/hapus/' . $list['id_pengiriman'], 'Hapus', '');
 					echo "</td>";
 					echo "</tr>";
 				}

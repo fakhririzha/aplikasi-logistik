@@ -32,16 +32,53 @@ class Forwarder extends CI_Controller
 		$this->load->view('forwarder/template', $data, FALSE);
 	}
 
-	public function list_kiriman()
+	public function list_kiriman($id = NULL)
 	{
 		$data['judul'] = 'List Pengiriman';
 		$data['konten'] = 'forwarder/list_kiriman';
 		$data['aktif'] = 'active';
-		$data['belum_urut'] = $this->mforwarder->get_all_pengiriman_by_forwarder();
-		$data['kota'] = $this->mkota->getAllKota();
-		$data['provinsi'] = $this->mkota->getAllProvinsi();
+		$jml = $this->db->get('view_list_tracking');
+
+		$this->load->library('pagination');
+
+		$config['base_url'] = base_url() . 'index.php/forwarder/list_kiriman';
+		$config['total_rows'] = $jml->num_rows();
+		$config['per_page'] = 10;
+		$config['uri_segment'] = 3;
+		$config['num_links'] = 3;
+		$config['full_tag_open'] = '<ul>';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = 'Awal';
+		$config['last_link'] = 'Akhir';
+		$config['next_link'] = '&raquo;';
+		$config['prev_link'] = '&laquo;';
+
+		$this->pagination->initialize($config);
+
+		$data['paging'] = $this->pagination->create_links();
+		$data['tracking'] = $this->mforwarder->get_informasi_pengiriman($this->session->userdata('FORWARDER_ID'), $config['per_page'], $id);
+
 		$this->load->vars($data);
 		$this->load->view('forwarder/template', $data, FALSE);
+	}
+
+	public function detail_tracking($no_resi)
+	{
+		$data['judul'] = 'Detail Tracking';
+		$data['konten'] = 'forwarder/detail_tracking';
+		$data['aktif'] = 'active';
+		$data['status'] = $this->mstatus->getAllStatus();
+		$data['tracking'] = $this->mtracking->detil_tracking($no_resi);
+		$data['kota'] = $this->mkota->get_all_kota_by_alphabet();
+		$this->load->view('forwarder/template', $data);
+	}
+
+	public function cetak_dokumen_pengiriman($id)
+	{
+		$data['judul'] = 'Cetak Dokumen Pengiriman';
+		$data['pengiriman'] = $this->mpengiriman->getPengirimanById($id);
+		$this->load->vars($data);
+		$this->load->view('forwarder/cetak_dokumen_pengiriman', $data, FALSE);
 	}
 
 	public function kelola_armada()
@@ -90,6 +127,23 @@ class Forwarder extends CI_Controller
 		$data = $this->mforwarder->ubah_armada($nama, $id_armada, $kapasitas, $asal, $tujuan);
 		$this->session->set_flashdata('message', 'Informasi armada berhasil diubah');
 		redirect('forwarder/kelola_armada', 'refresh');
+	}
+
+	public function detail_tracking_action()
+	{
+		$no_resi = $this->input->post('txtNoResi');
+		$id_pengiriman = $this->input->post('txtIdPengiriman');
+		$id_cust = $this->input->post('txtIdCust');
+		$status_pengiriman = $this->input->post('cbStatusPengiriman');
+		$tanggal = $this->input->post('txtTanggalTracking');
+		$posisi = $this->input->post('txtPosisi');
+		$ket = $this->input->post('txtKeterangan');
+		if (empty($ket)) $keterangan = "";
+		else $keterangan = $ket;
+		$this->mtracking->insert($no_resi, $id_pengiriman, $id_cust, $status_pengiriman, $tanggal, $posisi, $keterangan);
+		$this->session->set_flashdata('message', 'Status pengiriman sudah diperbarui.');
+		redirect('forwarder/detail_tracking/' . $no_resi, 'refresh');
+		//echo $no_resi." ".$id_pengiriman." ".$id_cust." ".$status_pengiriman." ".$tanggal." ".$posisi." ".$keterangan;
 	}
 
 	// public function hapus_armada($id){

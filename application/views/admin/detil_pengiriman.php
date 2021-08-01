@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<title><?php echo $judul; ?> - PT. Haluan Indah Transporindo</title>
+	<title><?php echo $judul; ?> - PT. PesanTruk Indonesia</title>
 	<!-- CSS -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/mystyle.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/flick/jquery-ui-1.9.2.custom.css">
 </head>
+
 <body>
 	<!-- Navbar -->
 	<div class="navbar navbar-fixed-top navbar-inverse">
@@ -40,58 +42,58 @@
 		}
 	?>
 
-	<form class="form-horizontal">
-		<div class="control-group">
-			<label class="control-label" for="inputNoPengiriman">No. Pengiriman</label>
-			<div class="controls">
-				<input type="text" id="inputNoPengiriman" value="<?php echo $id; ?>" disabled>
+		<form class="form-horizontal">
+			<div class="control-group">
+				<label class="control-label" for="inputNoPengiriman">No. Pengiriman</label>
+				<div class="controls">
+					<input type="text" id="inputNoPengiriman" value="<?php echo $id; ?>" disabled>
+				</div>
 			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label" for="inputTanggalPengiriman">Tanggal Pengiriman</label>
-			<div class="controls">
-				<input type="text" id="inputTanggalPengiriman" value="<?php echo $tgl; ?>" disabled>
+			<div class="control-group">
+				<label class="control-label" for="inputTanggalPengiriman">Tanggal Pengiriman</label>
+				<div class="controls">
+					<input type="text" id="inputTanggalPengiriman" value="<?php echo $tgl; ?>" disabled>
+				</div>
 			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label" for="inputNamaPenerima">Nama Penerima</label>
-			<div class="controls">
-				<input type="text" id="inputNamaPenerima" value="<?php echo $nama; ?>" disabled>
+			<div class="control-group">
+				<label class="control-label" for="inputNamaPenerima">Nama Penerima</label>
+				<div class="controls">
+					<input type="text" id="inputNamaPenerima" value="<?php echo $nama; ?>" disabled>
+				</div>
 			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label" for="inputTujuanPengiriman">Tujuan Pengiriman</label>
-			<div class="controls">
-				<input type="text" id="inputTujuanPengiriman" value="<?php echo $tujuan; ?>" disabled>
+			<div class="control-group">
+				<label class="control-label" for="inputTujuanPengiriman">Tujuan Pengiriman</label>
+				<div class="controls">
+					<input type="text" id="inputTujuanPengiriman" value="<?php echo $tujuan; ?>" disabled>
+				</div>
 			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label" for="inputAlamatPengiriman">Alamat Pengiriman</label>
-			<div class="controls">
-				<textarea id="inputAlamatPengiriman" disabled><?php echo $alamat; ?></textarea>
+			<div class="control-group">
+				<label class="control-label" for="inputAlamatPengiriman">Alamat Pengiriman</label>
+				<div class="controls">
+					<textarea id="inputAlamatPengiriman" disabled><?php echo $alamat; ?></textarea>
+				</div>
 			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label" for="inputKotaTujuan">Kota Tujuan</label>
-			<div class="controls">
-				<input type="text" id="inputKotaTujuan" value="<?php echo $kota; ?>" disabled>
+			<div class="control-group">
+				<label class="control-label" for="inputKotaTujuan">Kota Tujuan</label>
+				<div class="controls">
+					<input type="text" id="inputKotaTujuan" value="<?php echo $kota; ?>" disabled>
+				</div>
 			</div>
-		</div>
-		<div class="control-group">
-			<label class="control-label">Operasi</label>
-			<div class="controls">
-				<a href="#modal" role="button" data-toggle="modal">
-					Buat Surat Pengambilan Barang
-				</a><br>
-				<a href="<?php echo base_url(); ?>index.php/pengiriman/buat_surat_pengiriman/<?php echo $id; ?>">
-					Buat Surat Pengiriman
-				</a>
+			<div class="control-group">
+				<label class="control-label">Operasi</label>
+				<div class="controls">
+					<a href="#modal" role="button" data-toggle="modal">
+						Buat Surat Pengambilan Barang
+					</a><br>
+					<a href="<?php echo base_url(); ?>index.php/pengiriman/buat_surat_pengiriman/<?php echo $id; ?>">
+						Buat Surat Pengiriman
+					</a>
+				</div>
 			</div>
-		</div>
-		<div class="form-actions">
-			<button type="button" class="btn pull-right" onclick="win_close()">Keluar</button>
-		</div>
-	</form>
+			<div class="form-actions">
+				<button type="button" class="btn pull-right" onclick="win_close()">Keluar</button>
+			</div>
+		</form>
 
 	<?php
 	} else {
@@ -101,37 +103,37 @@
 
 	<!-- Modal Tambah Provinsi -->
 	<form class="form-horizontal" method="post" action="<?php echo base_url(); ?>index.php/pengiriman/pengambilan_barang">
-	<div id="modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-		<div class="modal-header">
-			<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
-			<h3 id="myModalLabel">Buat Surat Pengambilan Barang</h3>
-		</div>
-		<div class="modal-body">
-			<input type="hidden" name="txtNoPengiriman" value="<?php echo $id; ?>">
-			<input type="hidden" name="txtTglPengiriman" value="<?php echo $tgl; ?>">
-			<input type="hidden" name="txtNamaPenerima" value="<?php echo $nama; ?>">
-			<input type="hidden" name="txtTujuanPengiriman" value="<?php echo $tujuan; ?>">
-			<input type="hidden" name="txtAlamatPenerima" value="<?php echo $alamat; ?>">
-			<input type="hidden" name="txtKotaTujuan" value="<?php echo $kota; ?>">
-			<div class="control-group">
-				<label class="control-label" for="inputNamaKaryawan">Nama Karyawan</label>
-				<div class="controls">
-					<input type="text" id="inputNamaKaryawan" name="inputNamaKaryawan" placeholder="Nama Karyawan">
+		<div id="modal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+			<div class="modal-header">
+				<button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
+				<h3 id="myModalLabel">Buat Surat Pengambilan Barang</h3>
+			</div>
+			<div class="modal-body">
+				<input type="hidden" name="txtNoPengiriman" value="<?php echo $id; ?>">
+				<input type="hidden" name="txtTglPengiriman" value="<?php echo $tgl; ?>">
+				<input type="hidden" name="txtNamaPenerima" value="<?php echo $nama; ?>">
+				<input type="hidden" name="txtTujuanPengiriman" value="<?php echo $tujuan; ?>">
+				<input type="hidden" name="txtAlamatPenerima" value="<?php echo $alamat; ?>">
+				<input type="hidden" name="txtKotaTujuan" value="<?php echo $kota; ?>">
+				<div class="control-group">
+					<label class="control-label" for="inputNamaKaryawan">Nama Karyawan</label>
+					<div class="controls">
+						<input type="text" id="inputNamaKaryawan" name="inputNamaKaryawan" placeholder="Nama Karyawan">
+					</div>
+				</div>
+				<div class="control-group">
+					<label class="control-label" for="inputTanggalNik">NIK</label>
+					<div class="controls">
+						<input type="text" id="inputTanggalNik" name="inputTanggalNik" placeholder="NIK">
+					</div>
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label" for="inputTanggalNik">NIK</label>
-				<div class="controls">
-					<input type="text" id="inputTanggalNik" name="inputTanggalNik" placeholder="NIK">
-				</div>
+			<div class="modal-footer">
+				<button type="submit" class="btn btn-primary">Simpan</button>
+				<button class="btn" data-dismiss="modal" aria-hidden="true">Batal</button>
 			</div>
 		</div>
-		<div class="modal-footer">
-			<button type="submit" class="btn btn-primary">Simpan</button>
-			<button class="btn" data-dismiss="modal" aria-hidden="true">Batal</button>
 		</div>
-	</div>
-	</div>
 	</form>
 
 	<!-- JavaScript -->
@@ -142,4 +144,5 @@
 	<script src="<?php echo base_url(); ?>assets/js/mine.js"></script>
 	<script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
 </body>
+
 </html>

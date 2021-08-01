@@ -166,3 +166,87 @@ ADD CONSTRAINT
 ADD CONSTRAINT
     FK_FORWARDER_PENGIRIMAN
     FOREIGN KEY (ID_FORWARDER_PENGIRIMAN) REFERENCES forwarder(FORWARDER_ID) ON DELETE SET NULL;
+
+DROP VIEW
+    view_all_armada;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `view_all_armada` AS SELECT
+    `a`.`ARMADA_ID` AS `ARMADA_ID`,
+    `a`.`ARMADA_FORWARDER_ID` AS `ARMADA_FORWARDER_ID`,
+    `a`.`ARMADA_NAMA` AS `ARMADA_NAMA`,
+    `a`.`ARMADA_KAPASITAS` AS `ARMADA_KAPASITAS`,
+    `a`.`ARMADA_KAPASITAS_TERSEDIA` AS `ARMADA_KAPASITAS_TERSEDIA`,
+    `k1`.`ID_KOTA` AS `ID_KOTA_ASAL`,
+    `k1`.`NAMA_KOTA` AS `NAMA_KOTA_ASAL`,
+    `k2`.`ID_KOTA` AS `ID_KOTA_TUJUAN`,
+    `k2`.`NAMA_KOTA` AS `NAMA_KOTA_TUJUAN`
+FROM
+    (
+        (`armada` `a`
+    JOIN `kota` `k1`)
+    JOIN `kota` `k2`
+    )
+WHERE
+    (
+        (
+            `a`.`ARMADA_ID_KOTA_ASAL` = `k1`.`ID_KOTA`
+        ) AND(
+            `a`.`ARMADA_ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`
+        )
+    )
+
+
+==================
+
+
+DROP VIEW
+    view_all_armada;
+CREATE ALGORITHM = UNDEFINED DEFINER = `root`@`localhost` SQL SECURITY DEFINER VIEW `view_all_armada` AS SELECT
+    `a`.`ARMADA_ID` AS `ARMADA_ID`,
+    `a`.`ARMADA_FORWARDER_ID` AS `ARMADA_FORWARDER_ID`,
+    `a`.`ARMADA_NAMA` AS `ARMADA_NAMA`,
+    `a`.`ARMADA_KAPASITAS` AS `ARMADA_KAPASITAS`,
+    `a`.`ARMADA_KAPASITAS_TERSEDIA` AS `ARMADA_KAPASITAS_TERSEDIA`,
+    `k1`.`ID_KOTA` AS `ID_KOTA_ASAL`,
+    `k1`.`NAMA_KOTA` AS `NAMA_KOTA_ASAL`,
+    `k2`.`ID_KOTA` AS `ID_KOTA_TUJUAN`,
+    `k2`.`NAMA_KOTA` AS `NAMA_KOTA_TUJUAN`
+FROM
+    (
+        (`armada` `a`
+    JOIN `kota` `k1`)
+    JOIN `kota` `k2`
+    )
+WHERE
+    (
+        (
+            `a`.`ARMADA_ID_KOTA_ASAL` = `k1`.`ID_KOTA`
+        ) AND(
+            `a`.`ARMADA_ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`
+        )
+    )
+
+=====
+
+CREATE
+ ALGORITHM = UNDEFINED
+ SQL SECURITY DEFINER
+ VIEW `view_pengiriman_detail`
+ AS SELECT
+	t.NO_RESI AS NO_RESI,
+    t.ID_PENGIRIMAN AS ID_PENGIRIMAN,
+    t.ID_CUST AS ID_CUST,
+    c.NAMA_CUST AS NAMA_CUST,
+    f.FORWARDER_ID AS FORWARDER_ID
+FROM
+	tracking t,
+    customer c,
+    pengiriman p,
+    forwarder f
+WHERE
+	t.ID_CUST = C.ID_CUST
+    AND t.ID_PENGIRIMAN = p.ID_PENGIRIMAN
+    AND p.ID_FORWARDER_PENGIRIMAN = f.FORWARDER_ID
+GROUP BY
+	t.NO_RESI
+ORDER BY
+	t.ID_PENGIRIMAN ASC

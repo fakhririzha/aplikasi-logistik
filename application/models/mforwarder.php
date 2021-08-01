@@ -106,6 +106,13 @@ class Mforwarder extends CI_Model
 		return $data;
 	}
 
+	public function get_informasi_pengiriman($forwarder_id, $num, $offset)
+	{
+		$this->db->where('FORWARDER_ID', $forwarder_id);
+		$query = $this->db->get('view_pengiriman_detail', $num, $offset);
+		return $query->result_array();
+	}
+
 	public function insert_forwarder($nama, $email, $password, $asal, $tujuan)
 	{
 		$data = array(
