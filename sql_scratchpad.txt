@@ -124,3 +124,45 @@ FROM
     kota k2
 WHERE
     a.ARMADA_ID_KOTA_ASAL = k1.ID_KOTA AND a.ARMADA_ID_KOTA_TUJUAN = k2.ID_KOTA;
+
+
+    ==========================
+
+SELECT vID.ID_PENGIRIMAN AS id_pengiriman,
+    t.NO_RESI AS no_resi,
+    b.ID_BIAYA AS id_biaya,
+    b.ID_KOTA_ASAL AS id_kota_asal,
+    b.ID_KOTA_TUJUAN AS id_kota_tujuan,
+    k1.NAMA_KOTA AS nama_kota_asal,
+    k2.NAMA_KOTA AS nama_kota_tujuan,
+    b.JARAK AS jarak,
+    SUM(br.BERAT_BARANG) AS berat_total_pengiriman
+FROM 
+	view_id_pengiriman_sedang_diproses vID,
+    pengiriman p,
+    tracking t,
+    biaya_pengiriman b,
+    kota k1,
+    kota k2,
+    detil_pengiriman dt,
+    barang br
+WHERE 
+	p.ID_PENGIRIMAN = vID.ID_PENGIRIMAN
+    AND p.ID_ARMADA_PENGIRIMAN IS NULL
+    AND t.ID_PENGIRIMAN = vID.ID_PENGIRIMAN
+    AND p.ID_BIAYA = b.ID_BIAYA
+    AND b.ID_KOTA_ASAL = k1.ID_KOTA
+    AND b.ID_KOTA_TUJUAN = k2.ID_KOTA
+    AND p.ID_PENGIRIMAN = dt.ID_PENGIRIMAN
+    AND br.ID_BARANG = dt.ID_BARANG
+GROUP BY
+	vID.ID_PENGIRIMAN
+
+
+ALTER TABLE pengiriman
+ADD CONSTRAINT
+	FK_ARMADA_PENGIRIMAN
+    FOREIGN KEY (ID_ARMADA_PENGIRIMAN) REFERENCES armada(ARMADA_ID) ON DELETE SET NULL,
+ADD CONSTRAINT
+    FK_FORWARDER_PENGIRIMAN
+    FOREIGN KEY (ID_FORWARDER_PENGIRIMAN) REFERENCES forwarder(FORWARDER_ID) ON DELETE SET NULL;
