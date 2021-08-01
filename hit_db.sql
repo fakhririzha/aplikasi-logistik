@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jul 16, 2021 at 02:35 PM
+-- Generation Time: Aug 01, 2021 at 03:37 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -63,6 +63,29 @@ CREATE TABLE `admin` (
 
 INSERT INTO `admin` (`ADMIN_ID`, `ADMIN_NAME`, `ADMIN_PASSWORD`) VALUES
 (1, 'admin', '123');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `armada`
+--
+
+CREATE TABLE `armada` (
+  `ARMADA_ID` int(11) NOT NULL,
+  `ARMADA_FORWARDER_ID` int(11) NOT NULL,
+  `ARMADA_NAMA` varchar(30) NOT NULL,
+  `ARMADA_KAPASITAS` int(11) NOT NULL,
+  `ARMADA_KAPASITAS_TERSEDIA` int(11) NOT NULL,
+  `ARMADA_ID_KOTA_ASAL` int(11) NOT NULL,
+  `ARMADA_ID_KOTA_TUJUAN` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `armada`
+--
+
+INSERT INTO `armada` (`ARMADA_ID`, `ARMADA_FORWARDER_ID`, `ARMADA_NAMA`, `ARMADA_KAPASITAS`, `ARMADA_KAPASITAS_TERSEDIA`, `ARMADA_ID_KOTA_ASAL`, `ARMADA_ID_KOTA_TUJUAN`) VALUES
+(1, 1, 'Hino Dutro', 1000, 950, 1, 2);
 
 -- --------------------------------------------------------
 
@@ -130,12 +153,10 @@ CREATE TABLE `biaya_pengiriman` (
 
 INSERT INTO `biaya_pengiriman` (`ID_BIAYA`, `ID_KOTA_ASAL`, `ID_KOTA_TUJUAN`, `JARAK`, `TOTAL_BERAT`, `BIAYA`) VALUES
 (1, 1, 1, 0, '50.00', '20000.00'),
-(2, 1, 1, 20, '100.00', '500000.00'),
 (3, 1, 6, 30, '40.00', '75000.00'),
 (4, 1, 4, 40, '50.00', '35000.00'),
 (5, 1, 5, 50, '50.00', '45000.00'),
-(7, 1, 2, 60, '40.00', '100000.00'),
-(8, 1, 1, 70, '50.00', '400000.00');
+(7, 1, 2, 60, '40.00', '100000.00');
 
 -- --------------------------------------------------------
 
@@ -220,6 +241,30 @@ INSERT INTO `detil_pengiriman` (`ID_BARANG`, `ID_PENGIRIMAN`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `forwarder`
+--
+
+CREATE TABLE `forwarder` (
+  `FORWARDER_ID` int(11) NOT NULL,
+  `FORWARDER_NAMA` varchar(30) DEFAULT NULL,
+  `FORWARDER_EMAIL` varchar(50) NOT NULL,
+  `FORWARDER_PASSWORD` varchar(16) NOT NULL,
+  `FORWARDER_ID_KOTA_ASAL` int(11) DEFAULT NULL,
+  `FORWARDER_ID_KOTA_TUJUAN` int(11) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `forwarder`
+--
+
+INSERT INTO `forwarder` (`FORWARDER_ID`, `FORWARDER_NAMA`, `FORWARDER_EMAIL`, `FORWARDER_PASSWORD`, `FORWARDER_ID_KOTA_ASAL`, `FORWARDER_ID_KOTA_TUJUAN`) VALUES
+(1, 'Serena', 'serena@usu.ac.id', 'serena', 1, 3),
+(3, 'Gilbert', 'gilbert@usu.ac.id', 'gilbert', 1, 3),
+(4, 'Fakhri', 'fakhri@usu.ac.id', 'fakhri', 1, 3);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `jenis_barang`
 --
 
@@ -256,12 +301,42 @@ CREATE TABLE `kota` (
 --
 
 INSERT INTO `kota` (`ID_KOTA`, `ID_PROVINSI`, `NAMA_KOTA`) VALUES
-(1, 1, 'Surabaya'),
+(1, 1, 'Medan'),
 (2, 2, 'Samarinda'),
 (3, 3, 'Bandung'),
-(4, 1, 'Sidoarjo'),
-(5, 1, 'Pasuruan'),
-(6, 5, 'Aceh');
+(4, 4, 'Sidoarjo'),
+(5, 4, 'Pasuruan'),
+(6, 5, 'Banda Aceh'),
+(8, 6, 'Denpasar'),
+(9, 7, 'Pangkal Pinang'),
+(10, 8, 'Serang'),
+(11, 9, 'Bengkulu'),
+(12, 27, 'Yogyakarta'),
+(13, 16, 'Jakarta'),
+(14, 15, 'Gorontalo'),
+(15, 17, 'Jambi'),
+(16, 10, 'Semarang'),
+(17, 4, 'Surabaya'),
+(18, 28, 'Pontianak'),
+(19, 29, 'Banjarmasin'),
+(20, 11, 'Palangkaraya'),
+(21, 30, 'Tanjung Selor'),
+(22, 19, 'Ambon'),
+(23, 20, 'Ternate'),
+(24, 14, 'Mataram'),
+(25, 13, 'Kupang'),
+(26, 22, 'Jayapura'),
+(27, 23, 'Manokwari'),
+(28, 33, 'Pekanbaru'),
+(29, 34, 'Tanjung Pinang'),
+(30, 25, 'Mamuju'),
+(31, 26, 'Makassar'),
+(32, 12, 'Palu'),
+(33, 24, 'Kendari'),
+(34, 21, 'Manado'),
+(35, 32, 'Padang'),
+(36, 31, 'Palembang'),
+(37, 18, 'Bandar Lampung');
 
 -- --------------------------------------------------------
 
@@ -277,24 +352,24 @@ CREATE TABLE `pengiriman` (
   `NAMA_PENERIMA` varchar(50) DEFAULT NULL,
   `TUJUAN_PENGIRIMAN` varchar(50) DEFAULT NULL,
   `ALAMAT_PENERIMA` varchar(100) DEFAULT NULL,
-  `BERAT_PENGIRIMAN` decimal(8,2) DEFAULT NULL
+  `BERAT_PENGIRIMAN` decimal(8,2) DEFAULT NULL,
+  `ID_ARMADA_PENGIRIMAN` int(11) DEFAULT NULL,
+  `ID_FORWARDER_PENGIRIMAN` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pengiriman`
 --
 
-INSERT INTO `pengiriman` (`ID_PENGIRIMAN`, `ID_BIAYA`, `TGL_PENGIRIMAN`, `BIAYA_PENGIRIMAN`, `NAMA_PENERIMA`, `TUJUAN_PENGIRIMAN`, `ALAMAT_PENERIMA`, `BERAT_PENGIRIMAN`) VALUES
-(1001, 1, '2014-05-22', '100000.00', 'Risqi Kurniawan', 'PT. Joyo Agromulyo', 'Jalan Anggrek No. 109', '0.00'),
-(1002, 2, '2014-05-24', '500000.00', 'Rio Sonja', 'PT. Karnamu Aku Ada', 'Jl. Cinta Kasih No. 69 Bandung', '0.00'),
-(1003, 2, '2014-05-24', '500000.00', 'Johanes', 'PT. Joyo Agromulyo', 'Jl. Indah ', '0.00'),
-(1006, 1, '2014-05-27', '100000.00', 'Moh. Oby Maulana', 'PT. Gunung Sari Merdeka', 'Jl. Sumatera No. 202-205', '0.00'),
-(1008, 3, '2014-05-28', '75000.00', 'Ali Bachtiar', 'PT. Karangan Indah Semesta', 'Jl. Nusantara No. 16', '0.00'),
-(1009, 5, '2014-05-30', '45000.00', 'Moh. Oby Maulana', 'CV. Kami Sayang Anda', 'Jl. Kusumo No. 86 Bangil', '0.00'),
-(1010, 7, '2014-06-02', '100000.00', 'Rio Sonja Permana', 'PT. Karangan Indah Semesta', 'Jl. Nias Nusantara No. 190-201', '50.00'),
-(1011, 7, '2014-06-05', '100000.00', 'Thony Hermawan', 'PT. Semoga Tidak Bencana', 'Jl. Selamat No. 99', '150.00'),
-(1012, 7, '2014-06-02', '100000.00', 'Dwi Prasetyo', 'PT. Pesona Bahari Nusantara', 'Jl. Cinggarum No. 24-29', '100.00'),
-(1013, 5, '2014-06-04', '45000.00', 'Thony Hermawan', 'PT. Sumbangan Suka Rela', 'Jl. Pandaan Malang Km. 30', '150.00');
+INSERT INTO `pengiriman` (`ID_PENGIRIMAN`, `ID_BIAYA`, `TGL_PENGIRIMAN`, `BIAYA_PENGIRIMAN`, `NAMA_PENERIMA`, `TUJUAN_PENGIRIMAN`, `ALAMAT_PENERIMA`, `BERAT_PENGIRIMAN`, `ID_ARMADA_PENGIRIMAN`, `ID_FORWARDER_PENGIRIMAN`) VALUES
+(1001, 1, '2014-05-22', '100000.00', 'Risqi Kurniawan', 'PT. Joyo Agromulyo', 'Jalan Anggrek No. 109', '0.00', 1, 1),
+(1006, 1, '2014-05-27', '100000.00', 'Moh. Oby Maulana', 'PT. Gunung Sari Merdeka', 'Jl. Sumatera No. 202-205', '0.00', NULL, NULL),
+(1008, 3, '2014-05-28', '75000.00', 'Ali Bachtiar', 'PT. Karangan Indah Semesta', 'Jl. Nusantara No. 16', '0.00', NULL, NULL),
+(1009, 5, '2014-05-30', '45000.00', 'Moh. Oby Maulana', 'CV. Kami Sayang Anda', 'Jl. Kusumo No. 86 Bangil', '0.00', NULL, NULL),
+(1010, 7, '2014-06-02', '100000.00', 'Rio Sonja Permana', 'PT. Karangan Indah Semesta', 'Jl. Nias Nusantara No. 190-201', '50.00', NULL, NULL),
+(1011, 7, '2014-06-05', '100000.00', 'Thony Hermawan', 'PT. Semoga Tidak Bencana', 'Jl. Selamat No. 99', '150.00', NULL, NULL),
+(1012, 7, '2014-06-02', '100000.00', 'Dwi Prasetyo', 'PT. Pesona Bahari Nusantara', 'Jl. Cinggarum No. 24-29', '100.00', NULL, NULL),
+(1013, 5, '2014-06-04', '45000.00', 'Thony Hermawan', 'PT. Sumbangan Suka Rela', 'Jl. Pandaan Malang Km. 30', '150.00', NULL, NULL);
 
 -- --------------------------------------------------------
 
@@ -312,11 +387,53 @@ CREATE TABLE `provinsi` (
 --
 
 INSERT INTO `provinsi` (`ID_PROVINSI`, `NAMA_PROVINSI`) VALUES
-(1, 'Jawa Timur'),
+(1, 'Sumatera Utara'),
 (2, 'Kalimantan Timur'),
 (3, 'Jawa Barat'),
-(4, 'Sumatra Utara'),
-(5, 'Sumatera');
+(4, 'Jawa Timur'),
+(5, 'Aceh'),
+(6, 'Bali'),
+(7, 'Bangka Belitung'),
+(8, 'Banten'),
+(9, 'Bengkulu'),
+(10, 'Jawa Tengah'),
+(11, 'Kalimantan Tengah'),
+(12, 'Sulawesi Tengah'),
+(13, 'Nusa Tenggara Timur'),
+(14, 'Nusa Tenggara Barat'),
+(15, 'Gorontalo'),
+(16, 'DKI Jakarta'),
+(17, 'Jambi'),
+(18, 'Lampung'),
+(19, 'Maluku'),
+(20, 'Maluku Utara'),
+(21, 'Sulawesi Utara'),
+(22, 'Papua'),
+(23, 'Papua Barat'),
+(24, 'Sulawesi Tenggara'),
+(25, 'Sulawesi Barat'),
+(26, 'Sulawesi Selatan'),
+(27, 'DI Yogyakarta'),
+(28, 'Kalimantan Barat'),
+(29, 'Kalimantan Selatan'),
+(30, 'Kalimantan Utara'),
+(31, 'Sumatera Selatan'),
+(32, 'Sumatera Barat'),
+(33, 'Riau'),
+(34, 'Kepulauan Riau');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `request_pengiriman`
+--
+
+CREATE TABLE `request_pengiriman` (
+  `REQUEST_ID` int(11) NOT NULL,
+  `REQUEST_ID_PENGIRIMAN` int(11) NOT NULL,
+  `REQUEST_STATUS` enum('Belum Konfirmasi','Dikonfirmasi','Selesai') NOT NULL,
+  `REQUEST_ARMADA_ID` int(11) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -365,6 +482,7 @@ CREATE TABLE `tracking` (
 INSERT INTO `tracking` (`NO_RESI`, `ID_PENGIRIMAN`, `ID_CUST`, `STATUS_PENGIRIMAN`, `TANGGAL`, `POSISI`, `KETERANGAN`) VALUES
 ('BMHS819050', 1013, 2, 'Sedang Diproses', '2014-05-31', 'Surabaya', ''),
 ('MGOH973487', 1012, 2, 'Sedang Diproses', '2014-05-31', 'Surabaya', ''),
+('RXK001', 1001, 4, 'Pengemasan', '2021-07-14', 'Medan', ''),
 ('RXK001', 1001, 4, 'Sedang Diproses', '2014-05-21', 'Surabaya', ''),
 ('RXK002', 1006, 4, 'Sedang Diproses', '2014-05-24', 'Surabaya', ''),
 ('RXK003', 1008, 1, 'Sedang Diproses', '2014-05-25', 'Surabaya', NULL),
@@ -374,6 +492,24 @@ INSERT INTO `tracking` (`NO_RESI`, `ID_PENGIRIMAN`, `ID_CUST`, `STATUS_PENGIRIMA
 ('YVVN191918', 1009, 1, 'Pengemasan', '2014-05-25', 'Surabaya', ''),
 ('YVVN191918', 1009, 1, 'Pengiriman', '2014-05-31', 'Surabaya', ''),
 ('YVVN191918', 1009, 1, 'Sedang Diproses', '2014-05-25', 'Surabaya', '');
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_all_armada`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_all_armada` (
+`ARMADA_ID` int(11)
+,`ARMADA_FORWARDER_ID` int(11)
+,`ARMADA_NAMA` varchar(30)
+,`ARMADA_KAPASITAS` int(11)
+,`ARMADA_KAPASITAS_TERSEDIA` int(11)
+,`ID_KOTA_ASAL` int(11)
+,`NAMA_KOTA_ASAL` varchar(30)
+,`ID_KOTA_TUJUAN` int(11)
+,`NAMA_KOTA_TUJUAN` varchar(30)
+);
 
 -- --------------------------------------------------------
 
@@ -390,6 +526,23 @@ CREATE TABLE `view_all_biaya_jarak` (
 ,`jarak` int(11)
 ,`total_berat` decimal(8,2)
 ,`biaya` decimal(8,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_all_forwarder`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_all_forwarder` (
+`FORWARDER_ID` int(11)
+,`FORWARDER_NAMA` varchar(30)
+,`FORWARDER_EMAIL` varchar(50)
+,`FORWARDER_PASSWORD` varchar(16)
+,`FORWARDER_ID_KOTA_ASAL` int(11)
+,`FORWARDER_ID_KOTA_TUJUAN` int(11)
+,`FORWARDER_NAMA_KOTA_ASAL` varchar(30)
+,`FORWARDER_NAMA_KOTA_TUJUAN` varchar(30)
 );
 
 -- --------------------------------------------------------
@@ -585,6 +738,17 @@ CREATE TABLE `view_history_pengiriman` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `view_id_pengiriman_sedang_diproses`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_id_pengiriman_sedang_diproses` (
+`ID_PENGIRIMAN` int(11)
+,`NAMA_PENERIMA` varchar(50)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `view_jumlah_pengiriman`
 -- (See below for the actual view)
 --
@@ -645,6 +809,20 @@ CREATE TABLE `view_pengiriman` (
 -- --------------------------------------------------------
 
 --
+-- Stand-in structure for view `view_pengiriman_detail`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_pengiriman_detail` (
+`NO_RESI` varchar(10)
+,`ID_PENGIRIMAN` int(11)
+,`ID_CUST` int(11)
+,`NAMA_CUST` varchar(50)
+,`FORWARDER_ID` int(11)
+);
+
+-- --------------------------------------------------------
+
+--
 -- Stand-in structure for view `view_pengiriman_sedang_diproses`
 -- (See below for the actual view)
 --
@@ -657,6 +835,7 @@ CREATE TABLE `view_pengiriman_sedang_diproses` (
 ,`nama_kota_asal` varchar(30)
 ,`nama_kota_tujuan` varchar(30)
 ,`jarak` int(11)
+,`berat_total_pengiriman` decimal(30,2)
 );
 
 -- --------------------------------------------------------
@@ -686,11 +865,29 @@ CREATE TABLE `view_surat_pengiriman` (
 -- --------------------------------------------------------
 
 --
+-- Structure for view `view_all_armada`
+--
+DROP TABLE IF EXISTS `view_all_armada`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_all_armada`  AS  select `a`.`ARMADA_ID` AS `ARMADA_ID`,`a`.`ARMADA_FORWARDER_ID` AS `ARMADA_FORWARDER_ID`,`a`.`ARMADA_NAMA` AS `ARMADA_NAMA`,`a`.`ARMADA_KAPASITAS` AS `ARMADA_KAPASITAS`,`a`.`ARMADA_KAPASITAS_TERSEDIA` AS `ARMADA_KAPASITAS_TERSEDIA`,`k1`.`ID_KOTA` AS `ID_KOTA_ASAL`,`k1`.`NAMA_KOTA` AS `NAMA_KOTA_ASAL`,`k2`.`ID_KOTA` AS `ID_KOTA_TUJUAN`,`k2`.`NAMA_KOTA` AS `NAMA_KOTA_TUJUAN` from ((`armada` `a` join `kota` `k1`) join `kota` `k2`) where ((`a`.`ARMADA_ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`a`.`ARMADA_ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`)) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `view_all_biaya_jarak`
 --
 DROP TABLE IF EXISTS `view_all_biaya_jarak`;
 
 CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_all_biaya_jarak`  AS  select `k1`.`ID_BIAYA` AS `id_biaya`,`k1`.`ID_KOTA_ASAL` AS `id_kota_asal`,`namak1`.`NAMA_KOTA` AS `nama_kota_asal`,`k1`.`ID_KOTA_TUJUAN` AS `id_kota_tujuan`,`namak2`.`NAMA_KOTA` AS `nama_kota_tujuan`,`k1`.`JARAK` AS `jarak`,`k1`.`TOTAL_BERAT` AS `total_berat`,`k1`.`BIAYA` AS `biaya` from ((`biaya_pengiriman` `k1` join `kota` `namak1`) join `kota` `namak2`) where ((`k1`.`ID_KOTA_ASAL` = `namak1`.`ID_KOTA`) and (`k1`.`ID_KOTA_TUJUAN` = `namak2`.`ID_KOTA`)) ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_all_forwarder`
+--
+DROP TABLE IF EXISTS `view_all_forwarder`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_all_forwarder`  AS  select `f`.`FORWARDER_ID` AS `FORWARDER_ID`,`f`.`FORWARDER_NAMA` AS `FORWARDER_NAMA`,`f`.`FORWARDER_EMAIL` AS `FORWARDER_EMAIL`,`f`.`FORWARDER_PASSWORD` AS `FORWARDER_PASSWORD`,`f`.`FORWARDER_ID_KOTA_ASAL` AS `FORWARDER_ID_KOTA_ASAL`,`f`.`FORWARDER_ID_KOTA_TUJUAN` AS `FORWARDER_ID_KOTA_TUJUAN`,`k1`.`NAMA_KOTA` AS `FORWARDER_NAMA_KOTA_ASAL`,`k2`.`NAMA_KOTA` AS `FORWARDER_NAMA_KOTA_TUJUAN` from ((`forwarder` `f` join `kota` `k1`) join `kota` `k2`) where ((`f`.`FORWARDER_ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`f`.`FORWARDER_ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`)) ;
 
 -- --------------------------------------------------------
 
@@ -803,6 +1000,15 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `view_id_pengiriman_sedang_diproses`
+--
+DROP TABLE IF EXISTS `view_id_pengiriman_sedang_diproses`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_id_pengiriman_sedang_diproses`  AS  select `p`.`ID_PENGIRIMAN` AS `ID_PENGIRIMAN`,`p`.`NAMA_PENERIMA` AS `NAMA_PENERIMA` from (`pengiriman` `p` join `tracking` `t`) where (`t`.`ID_PENGIRIMAN` = `p`.`ID_PENGIRIMAN`) group by `t`.`ID_PENGIRIMAN` having (count(`t`.`STATUS_PENGIRIMAN`) < 2) ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `view_jumlah_pengiriman`
 --
 DROP TABLE IF EXISTS `view_jumlah_pengiriman`;
@@ -839,11 +1045,20 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 -- --------------------------------------------------------
 
 --
+-- Structure for view `view_pengiriman_detail`
+--
+DROP TABLE IF EXISTS `view_pengiriman_detail`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_pengiriman_detail`  AS  select `t`.`NO_RESI` AS `NO_RESI`,`t`.`ID_PENGIRIMAN` AS `ID_PENGIRIMAN`,`t`.`ID_CUST` AS `ID_CUST`,`c`.`NAMA_CUST` AS `NAMA_CUST`,`f`.`FORWARDER_ID` AS `FORWARDER_ID` from (((`tracking` `t` join `customer` `c`) join `pengiriman` `p`) join `forwarder` `f`) where ((`t`.`ID_CUST` = `c`.`ID_CUST`) and (`t`.`ID_PENGIRIMAN` = `p`.`ID_PENGIRIMAN`) and (`p`.`ID_FORWARDER_PENGIRIMAN` = `f`.`FORWARDER_ID`)) group by `t`.`NO_RESI` order by `t`.`ID_PENGIRIMAN` ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure for view `view_pengiriman_sedang_diproses`
 --
 DROP TABLE IF EXISTS `view_pengiriman_sedang_diproses`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_pengiriman_sedang_diproses`  AS  select `t`.`ID_PENGIRIMAN` AS `id_pengiriman`,`t`.`NO_RESI` AS `no_resi`,`b`.`ID_BIAYA` AS `id_biaya`,`b`.`ID_KOTA_ASAL` AS `id_kota_asal`,`b`.`ID_KOTA_TUJUAN` AS `id_kota_tujuan`,`k1`.`NAMA_KOTA` AS `nama_kota_asal`,`k2`.`NAMA_KOTA` AS `nama_kota_tujuan`,`b`.`JARAK` AS `jarak` from ((((`pengiriman` `p` join `tracking` `t`) join `biaya_pengiriman` `b`) join `kota` `k1`) join `kota` `k2`) where ((`p`.`ID_PENGIRIMAN` = `t`.`ID_PENGIRIMAN`) and (`p`.`ID_BIAYA` = `b`.`ID_BIAYA`) and (`b`.`ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`b`.`ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`)) group by `t`.`ID_PENGIRIMAN` having (count(`t`.`STATUS_PENGIRIMAN`) < 2) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_pengiriman_sedang_diproses`  AS  select `vid`.`ID_PENGIRIMAN` AS `id_pengiriman`,`t`.`NO_RESI` AS `no_resi`,`b`.`ID_BIAYA` AS `id_biaya`,`b`.`ID_KOTA_ASAL` AS `id_kota_asal`,`b`.`ID_KOTA_TUJUAN` AS `id_kota_tujuan`,`k1`.`NAMA_KOTA` AS `nama_kota_asal`,`k2`.`NAMA_KOTA` AS `nama_kota_tujuan`,`b`.`JARAK` AS `jarak`,sum(`br`.`BERAT_BARANG`) AS `berat_total_pengiriman` from (((((((`view_id_pengiriman_sedang_diproses` `vid` join `pengiriman` `p`) join `tracking` `t`) join `biaya_pengiriman` `b`) join `kota` `k1`) join `kota` `k2`) join `detil_pengiriman` `dt`) join `barang` `br`) where ((`p`.`ID_PENGIRIMAN` = `vid`.`ID_PENGIRIMAN`) and isnull(`p`.`ID_ARMADA_PENGIRIMAN`) and (`t`.`ID_PENGIRIMAN` = `vid`.`ID_PENGIRIMAN`) and (`p`.`ID_BIAYA` = `b`.`ID_BIAYA`) and (`b`.`ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`b`.`ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`) and (`p`.`ID_PENGIRIMAN` = `dt`.`ID_PENGIRIMAN`) and (`br`.`ID_BARANG` = `dt`.`ID_BARANG`)) group by `vid`.`ID_PENGIRIMAN` ;
 
 -- --------------------------------------------------------
 
@@ -872,6 +1087,13 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 ALTER TABLE `admin`
   ADD PRIMARY KEY (`ADMIN_ID`);
+
+--
+-- Indexes for table `armada`
+--
+ALTER TABLE `armada`
+  ADD PRIMARY KEY (`ARMADA_ID`),
+  ADD KEY `FK_ARMADA_FORWARDER_ID` (`ARMADA_FORWARDER_ID`);
 
 --
 -- Indexes for table `barang`
@@ -910,6 +1132,14 @@ ALTER TABLE `detil_pengiriman`
   ADD KEY `FK_DETIL_PENGIRIMAN_DARI_PENGIRIMAN` (`ID_PENGIRIMAN`);
 
 --
+-- Indexes for table `forwarder`
+--
+ALTER TABLE `forwarder`
+  ADD PRIMARY KEY (`FORWARDER_ID`),
+  ADD KEY `FK_KOTA_ASAL` (`FORWARDER_ID_KOTA_ASAL`),
+  ADD KEY `FK_KOTA_TUJUAN` (`FORWARDER_ID_KOTA_TUJUAN`);
+
+--
 -- Indexes for table `jenis_barang`
 --
 ALTER TABLE `jenis_barang`
@@ -927,13 +1157,22 @@ ALTER TABLE `kota`
 --
 ALTER TABLE `pengiriman`
   ADD PRIMARY KEY (`ID_PENGIRIMAN`),
-  ADD KEY `FK_PENGIRIMAN_MEMPUNYAI_BIAYA_PENGIRIMAN` (`ID_BIAYA`);
+  ADD KEY `FK_PENGIRIMAN_MEMPUNYAI_BIAYA_PENGIRIMAN` (`ID_BIAYA`),
+  ADD KEY `FK_ARMADA_PENGIRIMAN` (`ID_ARMADA_PENGIRIMAN`),
+  ADD KEY `FK_FORWARDER_PENGIRIMAN` (`ID_FORWARDER_PENGIRIMAN`);
 
 --
 -- Indexes for table `provinsi`
 --
 ALTER TABLE `provinsi`
   ADD PRIMARY KEY (`ID_PROVINSI`);
+
+--
+-- Indexes for table `request_pengiriman`
+--
+ALTER TABLE `request_pengiriman`
+  ADD KEY `REQUEST_ID_PENGIRIMAN` (`REQUEST_ID_PENGIRIMAN`),
+  ADD KEY `REQUEST_ARMADA_ID` (`REQUEST_ARMADA_ID`);
 
 --
 -- Indexes for table `status_pengiriman`
@@ -955,6 +1194,12 @@ ALTER TABLE `tracking`
 --
 
 --
+-- AUTO_INCREMENT for table `armada`
+--
+ALTER TABLE `armada`
+  MODIFY `ARMADA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
@@ -964,7 +1209,7 @@ ALTER TABLE `barang`
 -- AUTO_INCREMENT for table `biaya_pengiriman`
 --
 ALTER TABLE `biaya_pengiriman`
-  MODIFY `ID_BIAYA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `ID_BIAYA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `bidang_kerja`
@@ -979,6 +1224,12 @@ ALTER TABLE `customer`
   MODIFY `ID_CUST` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
+-- AUTO_INCREMENT for table `forwarder`
+--
+ALTER TABLE `forwarder`
+  MODIFY `FORWARDER_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
 -- AUTO_INCREMENT for table `jenis_barang`
 --
 ALTER TABLE `jenis_barang`
@@ -988,17 +1239,23 @@ ALTER TABLE `jenis_barang`
 -- AUTO_INCREMENT for table `kota`
 --
 ALTER TABLE `kota`
-  MODIFY `ID_KOTA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `ID_KOTA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
 
 --
 -- AUTO_INCREMENT for table `provinsi`
 --
 ALTER TABLE `provinsi`
-  MODIFY `ID_PROVINSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `ID_PROVINSI` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- Constraints for dumped tables
 --
+
+--
+-- Constraints for table `armada`
+--
+ALTER TABLE `armada`
+  ADD CONSTRAINT `FK_ARMADA_FORWARDER_ID` FOREIGN KEY (`ARMADA_FORWARDER_ID`) REFERENCES `forwarder` (`FORWARDER_ID`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `barang`
@@ -1027,6 +1284,13 @@ ALTER TABLE `detil_pengiriman`
   ADD CONSTRAINT `FK_DETIL_PENGIRIMAN_DARI_PENGIRIMAN` FOREIGN KEY (`ID_PENGIRIMAN`) REFERENCES `pengiriman` (`ID_PENGIRIMAN`) ON DELETE CASCADE;
 
 --
+-- Constraints for table `forwarder`
+--
+ALTER TABLE `forwarder`
+  ADD CONSTRAINT `FK_KOTA_ASAL` FOREIGN KEY (`FORWARDER_ID_KOTA_ASAL`) REFERENCES `kota` (`ID_KOTA`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_KOTA_TUJUAN` FOREIGN KEY (`FORWARDER_ID_KOTA_TUJUAN`) REFERENCES `kota` (`ID_KOTA`) ON DELETE CASCADE;
+
+--
 -- Constraints for table `kota`
 --
 ALTER TABLE `kota`
@@ -1036,7 +1300,16 @@ ALTER TABLE `kota`
 -- Constraints for table `pengiriman`
 --
 ALTER TABLE `pengiriman`
+  ADD CONSTRAINT `FK_ARMADA_PENGIRIMAN` FOREIGN KEY (`ID_ARMADA_PENGIRIMAN`) REFERENCES `armada` (`ARMADA_ID`) ON DELETE SET NULL,
+  ADD CONSTRAINT `FK_FORWARDER_PENGIRIMAN` FOREIGN KEY (`ID_FORWARDER_PENGIRIMAN`) REFERENCES `forwarder` (`FORWARDER_ID`) ON DELETE SET NULL,
   ADD CONSTRAINT `FK_PENGIRIMAN_MEMPUNYAI_BIAYA_PENGIRIMAN` FOREIGN KEY (`ID_BIAYA`) REFERENCES `biaya_pengiriman` (`ID_BIAYA`) ON DELETE CASCADE;
+
+--
+-- Constraints for table `request_pengiriman`
+--
+ALTER TABLE `request_pengiriman`
+  ADD CONSTRAINT `FK_REQUEST_ARMADA_ID` FOREIGN KEY (`REQUEST_ARMADA_ID`) REFERENCES `armada` (`ARMADA_ID`) ON DELETE CASCADE,
+  ADD CONSTRAINT `FK_REQUEST_ID_PENGIRIMAN` FOREIGN KEY (`REQUEST_ID_PENGIRIMAN`) REFERENCES `pengiriman` (`ID_PENGIRIMAN`) ON DELETE CASCADE;
 
 --
 -- Constraints for table `tracking`
