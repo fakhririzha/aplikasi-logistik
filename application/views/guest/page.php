@@ -1,13 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 	<title><?php echo $judul; ?> - PesanTruk</title>
 	<!-- Meta -->
-	<?php 
-		echo meta('description', 'Website tracking PesanTruk');
-		echo meta('keywoards', 'kirim barang, tracking, pelayaran, pengiriman');
-		echo meta('Content-type', 'text/html; charset=utf-8', 'equiv'); 
-		echo meta('viewport', 'width=device-width, initial-scale=1.0');
+	<?php
+	echo meta('description', 'Website tracking PesanTruk');
+	echo meta('keywoards', 'kirim barang, tracking, pelayaran, pengiriman');
+	echo meta('Content-type', 'text/html; charset=utf-8', 'equiv');
+	echo meta('viewport', 'width=device-width, initial-scale=1.0');
 	?>
 	<!-- CSS -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
@@ -15,18 +16,21 @@
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/mystyle.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/flick/jquery-ui-1.9.2.custom.css">
 	<style type="text/css">
-		.content{
+		.content {
 			padding-top: 40px;
 			padding-bottom: 20px;
 		}
-		.spacer-large{
+
+		.spacer-large {
 			height: 100px;
 		}
-		.icon-chevron-right{
+
+		.icon-chevron-right {
 			opacity: .25;
 		}
-    </style>
+	</style>
 </head>
+
 <body>
 	<!-- Navbar -->
 	<div class="navbar navbar-fixed-top navbar-inverse">
@@ -39,13 +43,13 @@
 				</button>
 				<div class="nav-collapse collapse">
 					<ul class="nav">
-						<li class="<?php if ($this->uri->segment(2)=='') echo $aktif; ?>">
+						<li class="<?php if ($this->uri->segment(2) == '') echo $aktif; ?>">
 							<a href="<?php echo base_url(); ?>">Beranda</a>
 						</li>
-						<li class="<?php if ($this->uri->segment(2)=='layanan') echo $aktif; ?>">
+						<li class="<?php if ($this->uri->segment(2) == 'layanan') echo $aktif; ?>">
 							<a href="<?php echo base_url(); ?>index.php/page/layanan">Layanan</a>
 						</li>
-						<li class="<?php if ($this->uri->segment(2)=='profil') echo $aktif; ?>">
+						<li class="<?php if ($this->uri->segment(2) == 'profil') echo $aktif; ?>">
 							<a href="<?php echo base_url(); ?>index.php/page/profil">Profil Perusahaan</a>
 						</li>
 					</ul>
@@ -65,7 +69,7 @@
 								<ul class="dropdown-menu">
 									<li><a href="<?php echo base_url(); ?>index.php/customer/edit_cust/<?php echo $id_cust; ?>">Pengaturan Akun</a></li>
 									<li class="divider"></li>
-									<?php echo "<li><a href='".base_url()."index.php/customer/logout' role='button'>Keluar</a></li>"; ?>
+									<?php echo "<li><a href='" . base_url() . "index.php/customer/logout' role='button'>Keluar</a></li>"; ?>
 								</ul>
 							</li>
 						<?php
@@ -78,7 +82,7 @@
 	</div>
 	<!-- Navbar -->
 
-	<!-- Header -->	
+	<!-- Header -->
 	<div class="header">
 		<a href="#">
 			<img src="<?php echo base_url(); ?>assets/img/head2.jpg" alt="PT. Haluan Indah Transporindo">
@@ -96,37 +100,49 @@
 			<div class="span3">
 				<!--Sidebar content-->
 				<ul class="nav nav-tabs nav-stacked">
-					<li class="<?php if ($this->uri->segment(2)=='') echo $aktif; ?>">
+					<li class="<?php if ($this->uri->segment(2) == '') echo $aktif; ?>">
 						<a href="<?php echo base_url(); ?>">Beranda
-						<i class="icon-chevron-right pull-right"></i></a>
+							<i class="icon-chevron-right pull-right"></i></a>
 					</li>
-					<li class="<?php if ($this->uri->segment(2)=='pengiriman_barang') echo $aktif; ?>">
+					<li class="<?php if ($this->uri->segment(2) == 'pengiriman_barang') echo $aktif; ?>">
 						<?php
 						$masuk = $this->session->userdata('status');
 						if ($masuk != "masuk") {
 							echo "<a href='#loginModal' role='button' data-toggle='modal'>Pengiriman Barang";
 						} else {
 							$nama = $this->session->userdata('nama_cust');
-							echo "<a href='".base_url()."index.php/page/pengiriman_barang'>Pengiriman Barang";
+							echo "<a href='" . base_url() . "index.php/page/pengiriman_barang'>Pengiriman Barang";
 						}
 						?>
 						<i class="icon-chevron-right pull-right"></i></a>
 					</li>
-					<li class="<?php if ($this->uri->segment(2)=='tracking') echo $aktif; ?>">
+					<li class="<?php if ($this->uri->segment(2) == 'tracking') echo $aktif; ?>">
 						<?php
 						$masuk = $this->session->userdata('status');
 						if ($masuk != "masuk") {
 							echo "<a href='#loginModal' role='button' data-toggle='modal'>Tracking Area";
 						} else {
 							$nama = $this->session->userdata('nama_cust');
-							echo "<a href='".base_url()."index.php/page/tracking'>Tracking Area";
+							echo "<a href='" . base_url() . "index.php/page/tracking'>Tracking Area";
 						}
 						?>
 						<i class="icon-chevron-right pull-right"></i></a>
 					</li>
-					<li class="<?php if ($this->uri->segment(2)=='biaya_pengiriman') echo $aktif; ?>">
-						<a href="<?php echo base_url(); ?>index.php/page/biaya_pengiriman">Informasi Biaya
+					<li class="<?php if ($this->uri->segment(2) == 'status_pembayaran') echo $aktif; ?>">
+						<?php
+						$masuk = $this->session->userdata('status');
+						if ($masuk != "masuk") {
+							echo "<a href='#loginModal' role='button' data-toggle='modal'>Tracking Area";
+						} else {
+							$nama = $this->session->userdata('nama_cust');
+							echo "<a href='" . base_url() . "index.php/page/status_pembayaran'>Status Pembayaran";
+						}
+						?>
 						<i class="icon-chevron-right pull-right"></i></a>
+					</li>
+					<li class="<?php if ($this->uri->segment(2) == 'biaya_pengiriman') echo $aktif; ?>">
+						<a href="<?php echo base_url(); ?>index.php/page/biaya_pengiriman">Informasi Biaya
+							<i class="icon-chevron-right pull-right"></i></a>
 					</li>
 				</ul>
 			</div>
@@ -151,7 +167,7 @@
 								echo "<a href='#loginModal' role='button' data-toggle='modal'>Pengiriman Barang";
 							} else {
 								$nama = $this->session->userdata('nama_cust');
-								echo "<a href='".base_url()."index.php/page/pengiriman_barang'>Pengiriman Barang";
+								echo "<a href='" . base_url() . "index.php/page/pengiriman_barang'>Pengiriman Barang";
 							}
 							?>
 						</li>
@@ -162,7 +178,7 @@
 								echo "<a href='#loginModal' role='button' data-toggle='modal'>Tracking Area";
 							} else {
 								$nama = $this->session->userdata('nama_cust');
-								echo "<a href='".base_url()."index.php/page/tracking'>Tracking Area";
+								echo "<a href='" . base_url() . "index.php/page/tracking'>Tracking Area";
 							}
 							?>
 						</li>
@@ -237,7 +253,7 @@
 						<fieldset>
 							<legend>Belum Terdaftar</legend>
 							<label>
-								Bagi Anda yang belum memiliki akun, silahkan 
+								Bagi Anda yang belum memiliki akun, silahkan
 								<a href="<?php echo base_url(); ?>index.php/page/daftar_pelanggan">klik disini</a>.
 							</label>
 						</fieldset>
@@ -255,4 +271,5 @@
 	<script src="<?php echo base_url(); ?>assets/js/mine.js"></script>
 	<script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
 </body>
+
 </html>

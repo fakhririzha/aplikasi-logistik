@@ -1,10 +1,11 @@
-<?php if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+<?php if (!defined('BASEPATH')) exit('No direct script access allowed');
 /**
-* @author Thony Hermawan
-*/
+ * @author Thony Hermawan
+ */
 class Page extends CI_Controller
 {
-	function __construct(){
+	function __construct()
+	{
 		parent::__construct();
 	}
 
@@ -15,7 +16,7 @@ class Page extends CI_Controller
 		$data['aktif'] = 'active';
 		$this->load->view('guest/page', $data);
 	}
-	
+
 	public function biaya_pengiriman()
 	{
 		$data['judul'] = 'Biaya Pengiriman';
@@ -56,7 +57,7 @@ class Page extends CI_Controller
 		$data['konten'] = 'guest/pengiriman';
 		$data['aktif'] = 'active';
 		$id_pengiriman = $this->mpengiriman->genIdPengiriman();
-		if (count($id_pengiriman)>0) {
+		if (count($id_pengiriman) > 0) {
 			foreach ($id_pengiriman as $i) {
 				$id = $id_pengiriman['new_id'];
 			}
@@ -67,6 +68,12 @@ class Page extends CI_Controller
 		$this->load->view('guest/page', $data);
 	}
 
+	public function bayar($ID_PENGIRIMAN)
+	{
+		$this->mtracking->update_status_pembayaran($ID_PENGIRIMAN);
+		redirect('page/status_pembayaran', 'refresh');
+	}
+
 	public function tracking()
 	{
 		$id_cust = $this->session->userdata('id_cust');
@@ -74,6 +81,16 @@ class Page extends CI_Controller
 		$data['konten'] = 'guest/tracking';
 		$data['aktif'] = 'active';
 		$data['tracking'] = $this->mtracking->getTrackingForCust($id_cust);
+		$this->load->view('guest/page', $data);
+	}
+
+	public function status_pembayaran()
+	{
+		$id_cust = $this->session->userdata('id_cust');
+		$data['judul'] = 'Biaya Pengiriman';
+		$data['konten'] = 'guest/status_pembayaran';
+		$data['aktif'] = 'active';
+		$data['status_biaya'] = $this->mtracking->get_status_pembayaran_by_id_cust($id_cust);
 		$this->load->view('guest/page', $data);
 	}
 
@@ -117,4 +134,3 @@ class Page extends CI_Controller
 		$this->load->view('guest/page', $data);
 	}
 }
-?>

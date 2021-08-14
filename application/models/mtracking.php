@@ -1,10 +1,11 @@
 <?php
+
 /**
-* @author Thony Hermawan
-*/
+ * @author Thony Hermawan
+ */
 class Mtracking extends CI_Model
 {
-	
+
 	function __construct()
 	{
 		parent::__construct();
@@ -30,7 +31,7 @@ class Mtracking extends CI_Model
 	{
 		$data = array();
 		$query = $this->db->query('select no_resi, id_pengiriman, id_cust, status_pengiriman, tanggal, posisi, keterangan
-			from tracking where id_cust = '.$id_cust.' group by no_resi order by tanggal asc');
+			from tracking where id_cust = ' . $id_cust . ' group by no_resi order by tanggal asc');
 		//$this->db->select('no_resi, id_pengiriman, id_cust, status_pengiriman, tanggal, posisi, keterangan');
 		//$this->db->from('tracking');
 		//$this->db->where('id_cust', $id_cust);
@@ -44,11 +45,50 @@ class Mtracking extends CI_Model
 		return $data;
 	}
 
+	public function get_status_pembayaran_by_id_cust($id_cust)
+	{
+		$data = array();
+		$query = $this->db->query(
+			'
+				SELECT
+					t.ID_CUST,
+					t.NO_RESI,
+					p.ID_PENGIRIMAN,
+					p.ID_BIAYA,
+					p.BIAYA_PENGIRIMAN,
+					p.STATUS_PEMBAYARAN
+				FROM
+					pengiriman p,
+					tracking t
+				WHERE
+					t.ID_CUST = ' . $id_cust . '
+					AND p.ID_PENGIRIMAN = t.ID_PENGIRIMAN
+					AND p.STATUS_PEMBAYARAN = "Belum Dibayar"
+			'
+		);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
+	public function update_status_pembayaran($ID_PENGIRIMAN)
+	{
+		$data = array(
+			'STATUS_PEMBAYARAN' => 'Sudah Dibayar'
+		);
+		$this->db->where('ID_PENGIRIMAN', $ID_PENGIRIMAN);
+		$this->db->update('pengiriman', $data);
+	}
+
 	public function detil_tracking($no_resi)
 	{
 		$data = array();
 		$query = $this->db->query("select no_resi, id_pengiriman, id_cust, status_pengiriman, tanggal, posisi, keterangan
-			from tracking where no_resi = '".$no_resi."' order by tanggal desc");
+			from tracking where no_resi = '" . $no_resi . "' order by tanggal desc");
 		//$this->db->select('no_resi, id_pengiriman, id_cust, status_pengiriman, tanggal, posisi, keterangan');
 		//$this->db->from('tracking');
 		//$this->db->where('no_resi', $no_resi);
@@ -81,26 +121,30 @@ class Mtracking extends CI_Model
 		$karakter = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
 		$angka = '1234567890';
 		$string = '';
-		for ($i=0; $i < 4; $i++) { 
-			$pos = rand(0, strlen($karakter)-1);
-			$string .= $karakter{$pos};
+		for ($i = 0; $i < 4; $i++) {
+			$pos = rand(0, strlen($karakter) - 1);
+			$string .= $karakter{
+				$pos};
 		}
-		for ($i=0; $i < 6; $i++) { 
-			$pos = rand(0, strlen($angka)-1);
-			$string .= $angka{$pos};
+		for ($i = 0; $i < 6; $i++) {
+			$pos = rand(0, strlen($angka) - 1);
+			$string .= $angka{
+				$pos};
 		}
 		return $string;
 	}
 
 	public function insert($no_resi, $id_pengiriman, $id_cust, $status_pengiriman, $tanggal, $posisi, $keterangan)
 	{
-		$data = array('no_resi' => $no_resi, 
-			'id_pengiriman' => $id_pengiriman, 
-			'id_cust' => $id_cust, 
+		$data = array(
+			'no_resi' => $no_resi,
+			'id_pengiriman' => $id_pengiriman,
+			'id_cust' => $id_cust,
 			'status_pengiriman' => $status_pengiriman,
 			'tanggal' => $tanggal,
 			'posisi' => $posisi,
-			'keterangan' => $keterangan);
+			'keterangan' => $keterangan
+		);
 		$this->db->insert('tracking', $data);
 	}
 
@@ -145,4 +189,3 @@ class Mtracking extends CI_Model
 		return $query->result_array();
 	}
 }
-?>

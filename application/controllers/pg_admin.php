@@ -135,29 +135,29 @@ class Pg_admin extends CI_Controller
 		$this->load->view('admin/pg_admin', $data, FALSE);
 	}
 
-	public function pilih_forwarder_kiriman(){
+	public function pilih_forwarder_kiriman()
+	{
 		$armada_forwarder = explode(",", $this->input->post('idForwarderArmada'));
 		$id_forwarder = $armada_forwarder[0];
 		$id_armada = $armada_forwarder[1];
 
 		$id_pengiriman = $this->input->post('id_pengiriman');
 		$berat_total_pengiriman = $this->input->post('berat_total_pengiriman');
-		
+
 		$query = $this->mforwarder->update_forwarder_armada_pengiriman($id_forwarder, $id_armada, $id_pengiriman, $berat_total_pengiriman);
 		// $this->session->set_flashdata('message', 'Informasi armada berhasil diubah');
-		if($query == 0){
+		if ($query == 0) {
 			$this->session->set_flashdata(array(
 				'status' => 'failed',
 				'message' => 'Gagal mengeset forwarder dan armada pengiriman'
 			));
 			redirect('pg_admin/urutkan_pengiriman', 'refresh');
-		} 
-		else {
+		} else {
 			$this->session->set_flashdata(array(
-			'status' => 'success',
-			'message' => 'Sukses mengeset forwarder dan armada pengiriman'
-		));
-		redirect('pg_admin/urutkan_pengiriman', 'refresh');
+				'status' => 'success',
+				'message' => 'Sukses mengeset forwarder dan armada pengiriman'
+			));
+			redirect('pg_admin/urutkan_pengiriman', 'refresh');
 		}
 	}
 
