@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 01, 2021 at 03:37 PM
+-- Generation Time: Aug 18, 2021 at 10:56 AM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -85,7 +85,8 @@ CREATE TABLE `armada` (
 --
 
 INSERT INTO `armada` (`ARMADA_ID`, `ARMADA_FORWARDER_ID`, `ARMADA_NAMA`, `ARMADA_KAPASITAS`, `ARMADA_KAPASITAS_TERSEDIA`, `ARMADA_ID_KOTA_ASAL`, `ARMADA_ID_KOTA_TUJUAN`) VALUES
-(1, 1, 'Hino Dutro', 1000, 950, 1, 2);
+(1, 1, 'Hino Dutro', 1000, 690, 1, 2),
+(2, 1, 'FUSO', 1500, 1500, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -336,7 +337,8 @@ INSERT INTO `kota` (`ID_KOTA`, `ID_PROVINSI`, `NAMA_KOTA`) VALUES
 (34, 21, 'Manado'),
 (35, 32, 'Padang'),
 (36, 31, 'Palembang'),
-(37, 18, 'Bandar Lampung');
+(37, 18, 'Bandar Lampung'),
+(38, 1, 'Tebing Tinggi');
 
 -- --------------------------------------------------------
 
@@ -354,22 +356,23 @@ CREATE TABLE `pengiriman` (
   `ALAMAT_PENERIMA` varchar(100) DEFAULT NULL,
   `BERAT_PENGIRIMAN` decimal(8,2) DEFAULT NULL,
   `ID_ARMADA_PENGIRIMAN` int(11) DEFAULT NULL,
-  `ID_FORWARDER_PENGIRIMAN` int(11) DEFAULT NULL
+  `ID_FORWARDER_PENGIRIMAN` int(11) DEFAULT NULL,
+  `STATUS_PEMBAYARAN` enum('Belum Dibayar','Sudah Dibayar') DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pengiriman`
 --
 
-INSERT INTO `pengiriman` (`ID_PENGIRIMAN`, `ID_BIAYA`, `TGL_PENGIRIMAN`, `BIAYA_PENGIRIMAN`, `NAMA_PENERIMA`, `TUJUAN_PENGIRIMAN`, `ALAMAT_PENERIMA`, `BERAT_PENGIRIMAN`, `ID_ARMADA_PENGIRIMAN`, `ID_FORWARDER_PENGIRIMAN`) VALUES
-(1001, 1, '2014-05-22', '100000.00', 'Risqi Kurniawan', 'PT. Joyo Agromulyo', 'Jalan Anggrek No. 109', '0.00', 1, 1),
-(1006, 1, '2014-05-27', '100000.00', 'Moh. Oby Maulana', 'PT. Gunung Sari Merdeka', 'Jl. Sumatera No. 202-205', '0.00', NULL, NULL),
-(1008, 3, '2014-05-28', '75000.00', 'Ali Bachtiar', 'PT. Karangan Indah Semesta', 'Jl. Nusantara No. 16', '0.00', NULL, NULL),
-(1009, 5, '2014-05-30', '45000.00', 'Moh. Oby Maulana', 'CV. Kami Sayang Anda', 'Jl. Kusumo No. 86 Bangil', '0.00', NULL, NULL),
-(1010, 7, '2014-06-02', '100000.00', 'Rio Sonja Permana', 'PT. Karangan Indah Semesta', 'Jl. Nias Nusantara No. 190-201', '50.00', NULL, NULL),
-(1011, 7, '2014-06-05', '100000.00', 'Thony Hermawan', 'PT. Semoga Tidak Bencana', 'Jl. Selamat No. 99', '150.00', NULL, NULL),
-(1012, 7, '2014-06-02', '100000.00', 'Dwi Prasetyo', 'PT. Pesona Bahari Nusantara', 'Jl. Cinggarum No. 24-29', '100.00', NULL, NULL),
-(1013, 5, '2014-06-04', '45000.00', 'Thony Hermawan', 'PT. Sumbangan Suka Rela', 'Jl. Pandaan Malang Km. 30', '150.00', NULL, NULL);
+INSERT INTO `pengiriman` (`ID_PENGIRIMAN`, `ID_BIAYA`, `TGL_PENGIRIMAN`, `BIAYA_PENGIRIMAN`, `NAMA_PENERIMA`, `TUJUAN_PENGIRIMAN`, `ALAMAT_PENERIMA`, `BERAT_PENGIRIMAN`, `ID_ARMADA_PENGIRIMAN`, `ID_FORWARDER_PENGIRIMAN`, `STATUS_PEMBAYARAN`) VALUES
+(1001, 1, '2014-05-22', '100000.00', 'Risqi Kurniawan', 'PT. Joyo Agromulyo', 'Jalan Anggrek No. 109', '0.00', 1, 1, 'Sudah Dibayar'),
+(1006, 1, '2014-05-27', '100000.00', 'Moh. Oby Maulana', 'PT. Gunung Sari Merdeka', 'Jl. Sumatera No. 202-205', '0.00', 1, 1, 'Sudah Dibayar'),
+(1008, 3, '2014-05-28', '75000.00', 'Ali Bachtiar', 'PT. Karangan Indah Semesta', 'Jl. Nusantara No. 16', '0.00', 1, 1, 'Belum Dibayar'),
+(1009, 5, '2014-05-30', '45000.00', 'Moh. Oby Maulana', 'CV. Kami Sayang Anda', 'Jl. Kusumo No. 86 Bangil', '0.00', 1, 1, 'Sudah Dibayar'),
+(1010, 7, '2014-06-02', '100000.00', 'Rio Sonja Permana', 'PT. Karangan Indah Semesta', 'Jl. Nias Nusantara No. 190-201', '50.00', NULL, NULL, 'Belum Dibayar'),
+(1011, 7, '2014-06-05', '100000.00', 'Thony Hermawan', 'PT. Semoga Tidak Bencana', 'Jl. Selamat No. 99', '150.00', NULL, NULL, 'Sudah Dibayar'),
+(1012, 7, '2014-06-02', '100000.00', 'Dwi Prasetyo', 'PT. Pesona Bahari Nusantara', 'Jl. Cinggarum No. 24-29', '100.00', NULL, NULL, 'Belum Dibayar'),
+(1013, 5, '2014-06-04', '45000.00', 'Thony Hermawan', 'PT. Sumbangan Suka Rela', 'Jl. Pandaan Malang Km. 30', '150.00', NULL, NULL, 'Belum Dibayar');
 
 -- --------------------------------------------------------
 
@@ -452,7 +455,7 @@ CREATE TABLE `status_pengiriman` (
 
 INSERT INTO `status_pengiriman` (`STATUS_PENGIRIMAN`, `KETERANGAN`) VALUES
 ('Pengambilan Barang', 'Barang yang ingin Anda kirimkan sedang dalam proses pengambilan barang ke tempat perusahaan/intitusi'),
-('Pengemasan', 'Permintaan pengiriman barang Anda dalam tahap pengemasan, hal ini dilakukan untuk keamanan kondisi b'),
+('Pengemasan', 'Permintaan pengiriman anda sudah diterima. Harap segera melakukan pengemasan pada kiriman anda dan lakukan penyerahan kepada forwarder yang dituju.'),
 ('Pengiriman', 'Permintaan pengiriman Anda sudah atau sedang dalam proses pengiriman.'),
 ('Penurunan Barang', 'Pengiriman barang telah sampai dipelabuhan atau tujuan yang Anda inginkan.'),
 ('Sedang Diproses', 'Permintaan pengiriman barang Anda sedang diproses secara administratif untuk tahap berikutnya.'),
@@ -1197,7 +1200,7 @@ ALTER TABLE `tracking`
 -- AUTO_INCREMENT for table `armada`
 --
 ALTER TABLE `armada`
-  MODIFY `ARMADA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `ARMADA_ID` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `barang`
@@ -1239,7 +1242,7 @@ ALTER TABLE `jenis_barang`
 -- AUTO_INCREMENT for table `kota`
 --
 ALTER TABLE `kota`
-  MODIFY `ID_KOTA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `ID_KOTA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=39;
 
 --
 -- AUTO_INCREMENT for table `provinsi`
