@@ -8,6 +8,7 @@ class Pengiriman extends CI_Controller
 	function __construct()
 	{
 		parent::__construct();
+		$this->load->helper('url');
 	}
 
 	public function buat_permintaan_pengiriman()
@@ -209,4 +210,3 @@ class Pengiriman extends CI_Controller
 		$this->load->view('admin/cetak_pengambilan_barang', $data, FALSE);
 	}
 }
-?>

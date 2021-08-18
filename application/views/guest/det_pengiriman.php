@@ -98,7 +98,7 @@ if (count($pengiriman) > 0) {
 	</label>
 	<a href="javascript:;" onclick="win_popup('<?php echo base_url(); ?>index.php/pengiriman/cetak_detil/<?php echo $id; ?>', 800, 600);" class="btn btn-primary">
 		<i class="icon-print icon-white"></i>&nbsp;Cetak</a>
-	<a href="<?php base_url('index.php/page/tracking') ?>" class="btn btn-primary pull-right"><i class="icon-ok-circle icon-white"></i>&nbsp;Selesai</a>
+	<a href="<?php echo base_url('index.php/page/tracking'); ?>" class="btn btn-primary pull-right"><i class="icon-ok-circle icon-white"></i>&nbsp;Selesai</a>
 	<!-- Modal -->
 	<form class="form-horizontal" method="post" action="<?php echo base_url(); ?>index.php/pengiriman/add_barang">
 		<div id="modalTambahBarang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
