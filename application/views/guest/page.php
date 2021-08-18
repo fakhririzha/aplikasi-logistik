@@ -132,7 +132,7 @@
 						<?php
 						$masuk = $this->session->userdata('status');
 						if ($masuk != "masuk") {
-							echo "<a href='#loginModal' role='button' data-toggle='modal'>Tracking Area";
+							echo "<a href='#loginModal' role='button' data-toggle='modal'>Status Pembayaran";
 						} else {
 							$nama = $this->session->userdata('nama_cust');
 							echo "<a href='" . base_url() . "index.php/page/status_pembayaran'>Status Pembayaran";
@@ -228,7 +228,7 @@
 					<td style="width: 50%; border-right:1px solid #eeeeee; padding-right: 10px;">
 						<form method="post" action="<?php echo base_url(); ?>index.php/customer/ceklogin">
 							<fieldset>
-								<legend>Sudah Terdaftar</legend>
+								<legend>Shipper Login</legend>
 								<table style="width: 100%;">
 									<tr>
 										<td><label for="txtEmail">Email</label></td>
@@ -255,6 +255,12 @@
 							<label>
 								Bagi Anda yang belum memiliki akun, silahkan
 								<a href="<?php echo base_url(); ?>index.php/page/daftar_pelanggan">klik disini</a>.
+							</label>
+							<hr>
+							<label for=""> Login sebagai Admin/Forwarder?
+								<br>
+								<a href="<?php echo base_url('index.php/pg_admin/') ?>" class="btn btn-success">Admin</a> |
+								<a href="<?php echo base_url('index.php/forwarder/') ?>" class="btn btn-warning">Forwarder</a>
 							</label>
 						</fieldset>
 					</td>

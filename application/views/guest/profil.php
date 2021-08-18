@@ -69,7 +69,7 @@
 		Dengan mengoptimalkan muatan Transporter, Pesan Truk menawarkan harga yang kompetitif, memastikan biaya logistik Anda menjadi lebih efisien.</li>
 </ul>
 <hr>
-<h3>Transporter</h3>
+<h3>Forwarder</h3>
 <h6>Tingkatkan Utilitas Truk Anda</h6>
 <ul>
 	<li>

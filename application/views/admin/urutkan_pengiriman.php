@@ -2,12 +2,12 @@
 <p>Berikut adalah daftar pengiriman:</p>
 <?php
 
-if($this->session->flashdata('pilih_forwarder')){
+if ($this->session->flashdata('pilih_forwarder')) {
 	$msg = $this->session->flashdata('pilih_forwarder');
-	if($msg['status'] == 'success'){
-		echo "<div class=\"alert alert-success\" role=\"alert\">".$msg['message']."</div>";
-	} else if($msg['status'] == 'failed'){
-		echo "<div class=\"alert alert-danger\" role=\"alert\">".$msg['message']."</div>";
+	if ($msg['status'] == 'success') {
+		echo "<div class=\"alert alert-success\" role=\"alert\">" . $msg['message'] . "</div>";
+	} else if ($msg['status'] == 'failed') {
+		echo "<div class=\"alert alert-danger\" role=\"alert\">" . $msg['message'] . "</div>";
 	}
 }
 
@@ -27,30 +27,30 @@ if($this->session->flashdata('pilih_forwarder')){
 			</tr>
 		</thead>
 		<tbody>
-			<?php 
+			<?php
 			if (count($belum_urut) > 0) {
 				$idx = 1;
 				foreach ($belum_urut as $list) {
 					echo "<tr>";
-					echo "<td>".$list['id_pengiriman']."</td>";
-					echo "<td>".$list['no_resi']."</td>";
-					echo "<td>".$list['nama_kota_asal']."</td>";
-					echo "<td>".$list['nama_kota_tujuan']."</td>";
-					echo "<td>".$list['jarak']." km</td>";
-					echo "<td>".intval($list['berat_total_pengiriman'])." kg</td>";
-					echo "<form class=\"form-horizontal\" method=\"POST\" action=\"".base_url()."index.php/pg_admin/pilih_forwarder_kiriman\">";
+					echo "<td>" . $list['id_pengiriman'] . "</td>";
+					echo "<td>" . $list['no_resi'] . "</td>";
+					echo "<td>" . $list['nama_kota_asal'] . "</td>";
+					echo "<td>" . $list['nama_kota_tujuan'] . "</td>";
+					echo "<td>" . $list['jarak'] . " km</td>";
+					echo "<td>" . intval($list['berat_total_pengiriman']) . " kg</td>";
+					echo "<form class=\"form-horizontal\" method=\"POST\" action=\"" . base_url() . "index.php/pg_admin/pilih_forwarder_kiriman\">";
 					echo "<td>";
-					echo "<input type=\"hidden\" name=\"id_pengiriman\" value=\"".$list['id_pengiriman']."\">";
-					echo "<input type=\"hidden\" name=\"berat_total_pengiriman\" value=\"".intval($list['berat_total_pengiriman'])."\">";
+					echo "<input type=\"hidden\" name=\"id_pengiriman\" value=\"" . $list['id_pengiriman'] . "\">";
+					echo "<input type=\"hidden\" name=\"berat_total_pengiriman\" value=\"" . intval($list['berat_total_pengiriman']) . "\">";
 					echo "<select name=\"idForwarderArmada\" class=\"form-control\">";
 					// foreach ($forwarder as $data) {
 					// 	echo "<option value=\"". $data['FORWARDER_ID'] ."\">".$data['FORWARDER_NAMA']."</option>";
 					// }
 					foreach ($forwarder as $f) {
-						echo "<optgroup label=\"".$f['FORWARDER_NAMA']."\">";
+						echo "<optgroup label=\"" . $f['FORWARDER_NAMA'] . "\">";
 						foreach ($armada as $a) {
-							if($a['ARMADA_FORWARDER_ID'] == $f['FORWARDER_ID']){
-								echo "<option value=\"". $a['ARMADA_FORWARDER_ID'] .",".$a['ARMADA_ID']."\">".$a['ARMADA_NAMA']." (Kapasitas: ".$a['ARMADA_KAPASITAS_TERSEDIA']."kg)</option>";
+							if ($a['ARMADA_FORWARDER_ID'] == $f['FORWARDER_ID']) {
+								echo "<option value=\"" . $a['ARMADA_FORWARDER_ID'] . "," . $a['ARMADA_ID'] . "\">" . $a['ARMADA_NAMA'] . " (Kapasitas: " . $a['ARMADA_KAPASITAS_TERSEDIA'] . "kg) - (" . $a['NAMA_KOTA_ASAL'] . "-" . $a['NAMA_KOTA_TUJUAN'] . ")</option>";
 							}
 						}
 						echo "</optgroup>";
@@ -70,7 +70,7 @@ if($this->session->flashdata('pilih_forwarder')){
 			?>
 		</tbody>
 	</table>
-    <!-- <button type="button" class="btn btn-primary">Urutkan pengiriman</button> -->
+	<!-- <button type="button" class="btn btn-primary">Urutkan pengiriman</button> -->
 </div>
 <!-- Modal -->
 <form class="form-horizontal" method="post" action="<?php echo base_url(); ?>index.php/biaya/add">
@@ -87,7 +87,7 @@ if($this->session->flashdata('pilih_forwarder')){
 					<select id="inputKotaAsal" name="cbKotaAsal">
 						<?php
 						foreach ($kota as $data) {
-							echo "<option value='".$data['id_kota']."'>".$data['nama_kota']."</option>";
+							echo "<option value='" . $data['id_kota'] . "'>" . $data['nama_kota'] . "</option>";
 						}
 						?>
 					</select>
@@ -99,7 +99,7 @@ if($this->session->flashdata('pilih_forwarder')){
 					<select id="inputKotaTujuan" name="cbKotaTujuan">
 						<?php
 						foreach ($kota as $data) {
-							echo "<option value='".$data['id_kota']."'>".$data['nama_kota']."</option>";
+							echo "<option value='" . $data['id_kota'] . "'>" . $data['nama_kota'] . "</option>";
 						}
 						?>
 					</select>

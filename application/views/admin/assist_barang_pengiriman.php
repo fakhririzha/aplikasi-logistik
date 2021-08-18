@@ -1,13 +1,15 @@
 <!DOCTYPE html>
 <html>
+
 <head>
-	<title><?php echo $judul; ?> - PT. Haluan Indah Transporindo</title>
+	<title><?php echo $judul; ?> - PesanTruk</title>
 	<!-- CSS -->
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/bootstrap-responsive.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/mystyle.css">
 	<link rel="stylesheet" href="<?php echo base_url(); ?>assets/css/flick/jquery-ui-1.9.2.custom.css">
 </head>
+
 <body>
 	<!-- Navbar -->
 	<div class="navbar navbar-fixed-top navbar-inverse">
@@ -78,7 +80,7 @@
 						<select id="inputJenisBarang" name="cbJenisBarang">
 							<?php
 							foreach ($jenis as $data) {
-								echo "<option value='".$data['id_jenis_barang']."'>".$data['jenis_barang']."</option>";
+								echo "<option value='" . $data['id_jenis_barang'] . "'>" . $data['jenis_barang'] . "</option>";
 							}
 							?>
 						</select>
@@ -112,4 +114,5 @@
 	<script src="<?php echo base_url(); ?>assets/js/mine.js"></script>
 	<script src="<?php echo base_url(); ?>assets/ckeditor/ckeditor.js"></script>
 </body>
+
 </html>
