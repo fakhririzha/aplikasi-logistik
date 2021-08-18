@@ -1,4 +1,4 @@
-<?php 
+<?php
 echo heading('Permintaan Pengiriman Barang', 3);
 $id_cust = $this->session->userdata('id_cust');
 ?>
@@ -17,11 +17,10 @@ $id_cust = $this->session->userdata('id_cust');
 		<label class="control-label" for="cbKotaAsal">Kota Asal</label>
 		<div class="controls">
 			<select id="cbKotaAsal" class="span4" name="cbKotaAsal">
-				<option value="1">Surabaya</option>
 				<?php
-				//foreach ($kota as $k) {
-				//	echo "<option value='".$k['id_kota']."'>".$k['nama_kota']."</option>";
-				//}
+				foreach ($kota1 as $k1) {
+					echo "<option value='" . $k1['id_kota'] . "'>" . $k1['nama_kota'] . "</option>";
+				}
 				?>
 			</select>
 		</div>
@@ -32,7 +31,7 @@ $id_cust = $this->session->userdata('id_cust');
 			<select id="cbKotaTujuan" class="span4" name="cbKotaTujuan">
 				<?php
 				foreach ($kota1 as $k1) {
-					echo "<option value='".$k1['id_kota']."'>".$k1['nama_kota']."</option>";
+					echo "<option value='" . $k1['id_kota'] . "'>" . $k1['nama_kota'] . "</option>";
 				}
 				?>
 			</select>
@@ -63,7 +62,7 @@ $id_cust = $this->session->userdata('id_cust');
 		</div>
 	</div>
 	<div class="form-actions">
-    	<button type="submit" class="btn btn-primary">Lanjut</button>
-    	<a href="<?php echo base_url(); ?>" class="btn">Batal</a>
-    </div>
+		<button type="submit" class="btn btn-primary">Lanjut</button>
+		<a href="<?php echo base_url(); ?>" class="btn">Batal</a>
+	</div>
 </form>
