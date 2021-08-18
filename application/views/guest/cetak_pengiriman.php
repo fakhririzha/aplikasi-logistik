@@ -33,18 +33,18 @@ if (count($pengiriman) > 0) {
 	$pdf = new FPDF();
 	$pdf->AddPage("", "A4");
 
-	$pdf->SetAuthor("PT. Haluan Indah Transporindo");
+	$pdf->SetAuthor("PesanTruk Indonesia");
 	$pdf->SetTitle("Laporan Pengiriman Bulanan");
 
 	$pdf->SetFont("Times", "B", "18");
-	$pdf->Cell(0, 20, "PT. Haluan Indah Transporindo", "B", 1, "C");
+	$pdf->Cell(0, 20, "PesanTruk Indonesia", "B", 1, "C");
 	$pdf->Ln(10);
 
 	$pdf->SetFont("Times", "B", "14");
 	$pdf->Cell(0, 10, "Informasi Pengiriman", "B", 1, "L");
 	$pdf->Ln(5);
 	$pdf->SetFont("Times", "B", "12");
-	$pdf->Cell(30, 10, "No. Pengiriman", 1, 0, "C");
+	$pdf->Cell(30, 10, "ID Pengiriman", 1, 0, "C");
 	$pdf->Cell(30, 10, "No. Resi", 1, 0, "C");
 	$pdf->Cell(30, 10, "Tanggal", 1, 0, "C");
 	$pdf->Cell(50, 10, "Penerima", 1, 0, "C");
@@ -54,7 +54,7 @@ if (count($pengiriman) > 0) {
 	$pdf->Cell(30, 10, $num_resi, 1, 0, "C");
 	$pdf->Cell(30, 10, date('d/m/Y', strtotime($tgl)), 1, 0, "C");
 	$pdf->Cell(50, 10, $nama, 1, 0, "C");
-	$pdf->Cell(50, 10, "Rp".number_format($biaya*$tot_berat, 0, ",", ".").",00", 1, 1, "C");
+	$pdf->Cell(50, 10, "Rp" . number_format($biaya * $tot_berat, 0, ",", ".") . ",00", 1, 1, "C");
 	$pdf->Ln(5);
 
 	$pdf->SetFont("Times", "B", "14");
@@ -70,18 +70,17 @@ if (count($pengiriman) > 0) {
 	foreach ($detil_pengiriman as $d) {
 		$pdf->Cell(10, 10, $idx, 1, 0, "R");
 		$pdf->Cell(140, 10, $d['nama_barang'], 1, 0, "L");
-		$pdf->Cell(40, 10, $d['berat_barang']." Kg", 1, 1, "R");
+		$pdf->Cell(40, 10, $d['berat_barang'] . " Kg", 1, 1, "R");
 		$idx++;
 		$tberat += $d['berat_barang'];
 	}
 	$pdf->Cell(150, 10, "Total Berat", 1, 0, "R");
-	$pdf->Cell(40, 10, $tberat." Kg", 1, 1, "R");
+	$pdf->Cell(40, 10, $tberat . " Kg", 1, 1, "R");
 
-	$pdf->Output("Detil Pengiriman (No. Pengiriman ".$id.").pdf", "I");
+	$pdf->Output("Detil Pengiriman (No. Pengiriman " . $id . ").pdf", "I");
 } else {
 	$pdf->SetFont("Times", "B", "18");
 	$pdf->Cell(0, 20, "Maaf! Terjadi kesalahan. Silahkan tunggu beberapa saat atau 
 		silahkan hubungi Customer Service kami.", "", 1, "C");
-	$pdf->Output("Detil Pengiriman (No. Pengiriman ".$id.").pdf", "I");
+	$pdf->Output("Detil Pengiriman (No. Pengiriman " . $id . ").pdf", "I");
 }
-?>

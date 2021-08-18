@@ -51,10 +51,10 @@ if (count($pengiriman) > 0) {
 				<td><?php echo $id; ?></td>
 				<td><?php echo $num_resi; ?></td>
 				<td><?php echo date('d/m/Y', strtotime($tgl)); ?></td>
-				<td><?php echo $nama." - ".$tujuan; ?></td>
-				<td><?php echo $alamat." - ".$kota; ?></td>
+				<td><?php echo $nama . " - " . $tujuan; ?></td>
+				<td><?php echo $alamat . " - " . $kota; ?></td>
 				<td>Rp<?php echo number_format($biaya, 0, ",", "."); ?>,00</td>
-				<td><?php echo "Rp".number_format($biaya*$tot_berat, 0, ",", ".").",00"; ?></td>
+				<td><?php echo "Rp" . number_format($biaya * $tot_berat, 0, ",", ".") . ",00"; ?></td>
 			</tr>
 		</tbody>
 	</table>
@@ -77,10 +77,10 @@ if (count($pengiriman) > 0) {
 				$idx = 1;
 				foreach ($detil_pengiriman as $d) {
 					echo "<tr>";
-					echo "<td>".$idx."</td>";
-					echo "<td>".$d['nama_barang']."</td>";
-					echo "<td>".$d['berat_barang']." Kg</td>";
-					echo "<td>".anchor('barang/remove_detil/'.$d['id_barang'].'/'.$id, 'Hapus', '')."</td>";
+					echo "<td>" . $idx . "</td>";
+					echo "<td>" . $d['nama_barang'] . "</td>";
+					echo "<td>" . $d['berat_barang'] . " Kg</td>";
+					echo "<td>" . anchor('barang/remove_detil/' . $d['id_barang'] . '/' . $id, 'Hapus', '') . "</td>";
 					echo "</tr>";
 					$idx++;
 				}
@@ -96,10 +96,9 @@ if (count($pengiriman) > 0) {
 			<i class="icon-white icon-plus"></i>&nbsp;Tambah Barang
 		</a>
 	</label>
-	<a href="javascript:;" onclick="win_popup('<?php echo base_url(); ?>index.php/pengiriman/cetak_detil/<?php echo $id; ?>', 800, 600);" 
-		class="btn btn-primary">
+	<a href="javascript:;" onclick="win_popup('<?php echo base_url(); ?>index.php/pengiriman/cetak_detil/<?php echo $id; ?>', 800, 600);" class="btn btn-primary">
 		<i class="icon-print icon-white"></i>&nbsp;Cetak</a>
-	<a href="javascript:window.back();" class="btn btn-primary pull-right"><i class="icon-ok-circle icon-white"></i>&nbsp;Selesai</a>
+	<a href="<?php base_url('index.php/page/tracking') ?>" class="btn btn-primary pull-right"><i class="icon-ok-circle icon-white"></i>&nbsp;Selesai</a>
 	<!-- Modal -->
 	<form class="form-horizontal" method="post" action="<?php echo base_url(); ?>index.php/pengiriman/add_barang">
 		<div id="modalTambahBarang" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -110,7 +109,7 @@ if (count($pengiriman) > 0) {
 			<div class="modal-body">
 				<p>Silahkan isi data barang yang ingin ditambahkan.</p>
 				<input type="hidden" name="txtIdPengiriman" value="<?php echo $id; ?>">
-				<input type="hidden" name="txtIdBarang" value="<?php echo $id_b+1; ?>">
+				<input type="hidden" name="txtIdBarang" value="<?php echo $id_b + 1; ?>">
 				<div class="control-group">
 					<label class="control-label" for="inputNamaBarang">Nama Barang</label>
 					<div class="controls">
@@ -123,7 +122,7 @@ if (count($pengiriman) > 0) {
 						<select id="inputJenisBarang" name="cbJenisBarang">
 							<?php
 							foreach ($jenis as $data) {
-								echo "<option value='".$data['id_jenis_barang']."'>".$data['jenis_barang']."</option>";
+								echo "<option value='" . $data['id_jenis_barang'] . "'>" . $data['jenis_barang'] . "</option>";
 							}
 							?>
 						</select>
