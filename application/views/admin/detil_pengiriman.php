@@ -82,11 +82,11 @@
 			<div class="control-group">
 				<label class="control-label">Operasi</label>
 				<div class="controls">
-					<a href="#modal" role="button" data-toggle="modal">
+					<!-- <a href="#modal" role="button" data-toggle="modal">
 						Buat Surat Pengambilan Barang
-					</a><br>
+					</a><br> -->
 					<a href="<?php echo base_url(); ?>index.php/pengiriman/buat_surat_pengiriman/<?php echo $id; ?>">
-						Buat Surat Pengiriman
+						Buat Surat Penerimaan Paket
 					</a>
 				</div>
 			</div>

@@ -59,9 +59,7 @@ if (count($tracking) > 0) {
 }
 ?>
 <div class="form-actions">
-    <button class="btn btn-primary" onclick="javascript:window.back();">
-        <i class="icon-chevron-left icon-white"></i>&nbsp;Kembali
-    </button>
+    <a href="<?php echo base_url('index.php/forwarder/list_kiriman'); ?>" class="btn btn-primary"><i class="icon-chevron-left icon-white"></i>&nbsp;Kembali</a>
 </div>
 
 <!-- Modal -->
