@@ -20,27 +20,25 @@
 				<th>Kota Asal</th>
 				<th>Kota Tujuan</th>
 				<th>Jarak</th>
-				<th>Total Berat (Kg)</th>
 				<th>Biaya (Rp)</th>
 				<th>Pilihan</th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php 
+			<?php
 			if (count($biaya) > 0) {
 				$idx = 1;
 				foreach ($biaya as $list) {
 					echo "<tr>";
-					echo "<td>".$idx."</td>";
-					echo "<td>".$list['nama_kota_asal']."</td>";
-					echo "<td>".$list['nama_kota_tujuan']."</td>";
-					echo "<td>".$list['jarak']." km</td>";
-					echo "<td>".$list['total_berat']."</td>";
-					echo "<td>Rp".number_format($list['biaya'], 0, ",", ".").",00</td>";
+					echo "<td>" . $idx . "</td>";
+					echo "<td>" . $list['nama_kota_asal'] . "</td>";
+					echo "<td>" . $list['nama_kota_tujuan'] . "</td>";
+					echo "<td>" . $list['jarak'] . " km</td>";
+					echo "<td>Rp" . number_format($list['biaya'], 0, ",", ".") . ",00</td>";
 					echo "<td>";
-					echo anchor('biaya/edit/'.$list['id_biaya'], 'Ubah', '');
-					echo nbs(2)."/".nbs(2);
-					echo anchor('biaya/remove/'.$list['id_biaya'], 'Hapus', '');
+					echo anchor('biaya/edit/' . $list['id_biaya'], 'Ubah', '');
+					echo nbs(2) . "/" . nbs(2);
+					echo anchor('biaya/remove/' . $list['id_biaya'], 'Hapus', '');
 					echo "</td>";
 					echo "</tr>";
 					$idx++;
@@ -67,7 +65,7 @@
 					<select id="inputKotaAsal" name="cbKotaAsal">
 						<?php
 						foreach ($kota as $data) {
-							echo "<option value='".$data['id_kota']."'>".$data['nama_kota']."</option>";
+							echo "<option value='" . $data['id_kota'] . "'>" . $data['nama_kota'] . "</option>";
 						}
 						?>
 					</select>
@@ -79,7 +77,7 @@
 					<select id="inputKotaTujuan" name="cbKotaTujuan" required>
 						<?php
 						foreach ($kota as $data) {
-							echo "<option value='".$data['id_kota']."'>".$data['nama_kota']."</option>";
+							echo "<option value='" . $data['id_kota'] . "'>" . $data['nama_kota'] . "</option>";
 						}
 						?>
 					</select>
@@ -91,12 +89,16 @@
 					<input type="number" id="inputTotalJarak" name="txtTotalJarak" placeholder="Jarak" class="input-small" required> Km
 				</div>
 			</div>
-			<div class="control-group">
-				<label class="control-label" for="inputTotalBerat">Total Berat</label>
+			<!-- <div class="control-group"> -->
+			<!-- <label class="control-label" for="inputTotalBerat">Total Berat</label> -->
+			<!-- <div class="controls"> -->
+			<input type="hidden" id="inputTotalBerat" value="0" name="txtTotalBerat" placeholder="Berat" class="input-small">
+			<!-- </div> -->
+			<!-- <label class="control-label" for="inputTotalBerat">Total Berat</label>
 				<div class="controls">
-					<input type="number" id="inputTotalBerat" name="txtTotalBerat" placeholder="Berat" class="input-small"> Kg
-				</div>
-			</div>
+					<input type="hidden" id="inputTotalBerat" value="0" name="txtTotalBerat" placeholder="Berat" class="input-small"> Kg
+				</div> -->
+			<!-- </div> -->
 			<div class="control-group">
 				<label class="control-label" for="inputBiaya">Biaya Pengiriman</label>
 				<div class="controls">

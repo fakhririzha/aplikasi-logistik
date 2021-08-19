@@ -63,7 +63,7 @@ class Page extends CI_Controller
 			}
 		}
 		$data['id'] = $id;
-		$data['kota1'] = $this->mkota->getKotaNotEqual('Surabaya');
+		// $data['kota1'] = $this->mkota->getKotaNotEqual('Surabaya');
 		$data['kota'] = $this->mkota->getAllKota();
 		$this->load->view('guest/page', $data);
 	}

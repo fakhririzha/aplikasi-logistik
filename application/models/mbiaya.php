@@ -1,10 +1,11 @@
 <?php
+
 /**
-* 
-*/
+ * 
+ */
 class Mbiaya extends CI_Model
 {
-	
+
 	function __construct()
 	{
 		parent::__construct();
@@ -26,7 +27,8 @@ class Mbiaya extends CI_Model
 		return $data;
 	}
 
-	public function getAllBiayaForView(){
+	public function getAllBiayaForView()
+	{
 		$data = array();
 		$query = $this->db->get('view_all_biaya_jarak');
 		if ($query->num_rows() > 0) {
@@ -114,8 +116,17 @@ class Mbiaya extends CI_Model
 			'jarak' => $jarak,
 			'total_berat' => $berat,
 			'biaya' => $biaya
-			);
+		);
 		$this->db->insert('biaya_pengiriman', $data);
+
+		$data2 = array(
+			'id_kota_asal' => $kota_tujuan,
+			'id_kota_tujuan' => $kota_asal,
+			'jarak' => $jarak,
+			'total_berat' => $berat,
+			'biaya' => $biaya
+		);
+		$this->db->insert('biaya_pengiriman', $data2);
 	}
 
 	public function delete($id_biaya)
@@ -130,9 +141,8 @@ class Mbiaya extends CI_Model
 			'total_berat' => $berat,
 			'jarak' => $jarak,
 			'biaya' => $biaya
-			);
+		);
 		$this->db->where('id_biaya', $id_biaya);
 		$this->db->update('biaya_pengiriman', $data);
 	}
 }
-?>

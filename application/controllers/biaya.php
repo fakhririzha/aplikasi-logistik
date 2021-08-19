@@ -15,7 +15,7 @@ class Biaya extends CI_Controller
 		$total_berat = $this->input->post('txtTotalBerat');
 		$total_jarak = $this->input->post('txtTotalJarak');
 		$biaya = $this->input->post('txtBiaya');
-		$data = $this->mbiaya->insert($kota_asal, $kota_tujuan, $total_berat, $biaya);
+		$data = $this->mbiaya->insert($kota_asal, $kota_tujuan, $total_jarak, $total_berat, $biaya);
 		$this->session->set_flashdata('message', 'Biaya pengiriman sudah dibuat');
 		redirect('pg_admin/biaya', 'refresh');
 		//echo $kota_asal." ".$kota_tujuan." ".$total_berat." ".$biaya;
@@ -52,4 +52,3 @@ class Biaya extends CI_Controller
 		//echo $id." ".$kota_asal." ".$kota_tujuan." ".$total_berat." ".$biaya;
 	}
 }
-?>

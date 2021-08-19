@@ -18,7 +18,7 @@ $id_cust = $this->session->userdata('id_cust');
 		<div class="controls">
 			<select id="cbKotaAsal" class="span4" name="cbKotaAsal">
 				<?php
-				foreach ($kota1 as $k1) {
+				foreach ($kota as $k1) {
 					echo "<option value='" . $k1['id_kota'] . "," . $k1['nama_kota'] . "'>" . $k1['nama_kota'] . "</option>";
 				}
 				?>
@@ -30,7 +30,7 @@ $id_cust = $this->session->userdata('id_cust');
 		<div class="controls">
 			<select id="cbKotaTujuan" class="span4" name="cbKotaTujuan">
 				<?php
-				foreach ($kota1 as $k1) {
+				foreach ($kota as $k1) {
 					echo "<option value='" . $k1['id_kota'] . "'>" . $k1['nama_kota'] . "</option>";
 				}
 				?>
