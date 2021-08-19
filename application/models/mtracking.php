@@ -64,6 +64,8 @@ class Mtracking extends CI_Model
 					t.ID_CUST = ' . $id_cust . '
 					AND p.ID_PENGIRIMAN = t.ID_PENGIRIMAN
 					AND p.STATUS_PEMBAYARAN = "Belum Dibayar"
+				GROUP BY
+					t.NO_RESI
 			'
 		);
 		if ($query->num_rows() > 0) {
