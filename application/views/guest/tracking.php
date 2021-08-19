@@ -1,5 +1,5 @@
-<?php 
-echo heading('Tracking Pengiriman Barang', 3); 
+<?php
+echo heading('Tracking Pengiriman Barang', 3);
 echo "<p>Masukkan nomer resi untuk melakukan <i>tracking</i> dalam kolom dibawah ini.</p>";
 ?>
 <form class="form-horizontal" method="post" action="">
@@ -20,20 +20,20 @@ echo "<p>Masukkan nomer resi untuk melakukan <i>tracking</i> dalam kolom dibawah
 			<tr>
 				<th>No.</th>
 				<th>No. Resi</th>
-				<th>Posisi</th>
+				<th>Kota Asal</th>
 				<th>Status</th>
 			</tr>
 		</thead>
 		<tbody>
-			<?php 
+			<?php
 			if (count($tracking) > 0) {
 				$idx = 1;
 				foreach ($tracking as $list) {
 					echo "<tr>";
-					echo "<td>".$idx."</td>";
-					echo "<td>".anchor('tracking/detil/'.$list['no_resi'], $list['no_resi'], '')."</td>";
-					echo "<td>".$list['posisi']."</td>";
-					echo "<td>".$list['status_pengiriman']."</td>";
+					echo "<td>" . $idx . "</td>";
+					echo "<td>" . anchor('tracking/detil/' . $list['no_resi'], $list['no_resi'], '') . "</td>";
+					echo "<td>" . $list['posisi'] . "</td>";
+					echo "<td>" . $list['status_pengiriman'] . "</td>";
 					echo "</tr>";
 					$idx++;
 				}
