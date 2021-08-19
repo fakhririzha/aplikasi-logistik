@@ -77,6 +77,37 @@ class Mtracking extends CI_Model
 		return $data;
 	}
 
+	public function get_status_pembayaran_paket_by_resi($no_resi)
+	{
+		$data = array();
+		$query = $this->db->query(
+			'
+				SELECT
+					t.ID_CUST,
+					t.NO_RESI,
+					p.ID_PENGIRIMAN,
+					p.ID_BIAYA,
+					p.BIAYA_PENGIRIMAN,
+					p.STATUS_PEMBAYARAN
+				FROM
+					pengiriman p,
+					tracking t
+				WHERE
+					t.NO_RESI = \'' . $no_resi . '\'
+					AND p.ID_PENGIRIMAN = t.ID_PENGIRIMAN
+				GROUP BY
+					t.NO_RESI
+			'
+		);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
 	public function update_status_pembayaran($ID_PENGIRIMAN)
 	{
 		$data = array(

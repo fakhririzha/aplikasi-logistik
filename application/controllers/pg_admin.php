@@ -55,8 +55,8 @@ class Pg_admin extends CI_Controller
 	{
 		$this->session->sess_destroy();
 		$this->session->set_flashdata('result', 'Anda sudah keluar');
-		header('location:' . base_url() . 'index.php/pg_admin/login');
-		redirect('pg_admin/login', 'refresh');
+		header('location:' . base_url() . 'index.php');
+		redirect('index.php', 'refresh');
 	}
 
 	public function kota_provinsi()

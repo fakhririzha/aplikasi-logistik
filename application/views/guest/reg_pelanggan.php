@@ -57,15 +57,13 @@
 		<div class="control-group">
 			<label class="control-label" for="inputKota">Kota</label>
 			<div class="controls">
-				<input type="text" class="span4" name="inputKota" id="inputKota" 
-					placeholder="Kota">
+				<input type="text" class="span4" name="inputKota" id="inputKota" placeholder="Kota">
 			</div>
 		</div>
 		<div class="control-group">
 			<label class="control-label" for="inputNoTelepon">No. Telepon</label>
 			<div class="controls">
-				<input type="number" class="span4" name="inputNoTelepon" id="inputNoTelepon" 
-					placeholder="No. Telepon">
+				<input type="number" class="span4" name="inputNoTelepon" id="inputNoTelepon" placeholder="No. Telepon">
 			</div>
 		</div>
 	</fieldset>
@@ -74,14 +72,13 @@
 		<div class="control-group">
 			<label class="control-label" for="inputNamaPerusahaan">Nama Perusahaan</label>
 			<div class="controls">
-				<input type="text" class="span4" name="inputNamaPerusahaan" id="inputNamaPerusahaan" 
-					placeholder="Nama Perusahaan">
+				<input type="text" class="span4" name="inputNamaPerusahaan" id="inputNamaPerusahaan" placeholder="Nama Perusahaan">
 			</div>
 		</div>
 		<input type="hidden" name="inputPekerjaan" value="3">
 		<!-- <div class="control-group"> -->
-			<!-- <label class="control-label" for="inputPekerjaan">Bidang Kerja</label> -->
-			<!-- <div class="controls">
+		<!-- <label class="control-label" for="inputPekerjaan">Bidang Kerja</label> -->
+		<!-- <div class="controls">
 				<select name="inputPekerjaan" id="inputPekerjaan" class="span4">
 					<?php
 					// foreach ($bidang as $option) {
@@ -94,8 +91,7 @@
 		<div class="control-group">
 			<label class="control-label" for="inputAlamatPerusahaan">Alamat Perusahaan</label>
 			<div class="controls">
-				<textarea id="inputAlamatPerusahaan" class="span4" name="inputAlamatPerusahaan" rows="3" 
-					placeholder="Alamat Perusahaan"></textarea>
+				<textarea id="inputAlamatPerusahaan" class="span4" name="inputAlamatPerusahaan" rows="3" placeholder="Alamat Perusahaan"></textarea>
 			</div>
 		</div>
 	</fieldset>
@@ -104,7 +100,7 @@
 		<div class="control-group">
 			<div class="controls">
 				<label class="checkbox">
-					<input type="checkbox"> Saya telah membaca dan menyetujui mengenai <a href="#">Perjanjian & Peraturan Layanan</a>.
+					<input type="checkbox"> Saya telah membaca dan menyetujui mengenai <a href="<?php echo base_url(); ?>index.php/page/profil">Perjanjian & Peraturan Layanan</a>.
 				</label>
 			</div>
 		</div>

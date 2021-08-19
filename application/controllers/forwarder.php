@@ -184,8 +184,8 @@ class Forwarder extends CI_Controller
 	{
 		$this->session->sess_destroy();
 		$this->session->set_flashdata('result', 'Anda sudah keluar');
-		header('location:' . base_url() . 'index.php/forwarder/login');
-		redirect('forwarder/login', 'refresh');
+		header('location:' . base_url() . 'index.php');
+		redirect('index.php', 'refresh');
 	}
 
 	public function add()

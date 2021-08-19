@@ -19,7 +19,7 @@ $id_cust = $this->session->userdata('id_cust');
 			<select id="cbKotaAsal" class="span4" name="cbKotaAsal">
 				<?php
 				foreach ($kota1 as $k1) {
-					echo "<option value='" . $k1['id_kota'] . "'>" . $k1['nama_kota'] . "</option>";
+					echo "<option value='" . $k1['id_kota'] . "," . $k1['nama_kota'] . "'>" . $k1['nama_kota'] . "</option>";
 				}
 				?>
 			</select>

@@ -19,6 +19,7 @@ class Tracking extends CI_Controller
 		$data['aktif'] = 'active';
 		$data['detil_barang'] = $this->mtracking->detil_barang($id_cust, $no_resi);
 		$data['detil_pengiriman'] = $this->mtracking->detil_pengiriman($id_cust, $no_resi);
+		$data['status_pembayaran_paket'] = $this->mtracking->get_status_pembayaran_paket_by_resi($no_resi);
 		$data['tracking'] = $this->mtracking->detil_tracking($no_resi);
 		$this->load->view('guest/page', $data);
 	}

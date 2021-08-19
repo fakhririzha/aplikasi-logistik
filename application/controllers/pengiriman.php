@@ -1,10 +1,11 @@
 <?php
+
 /**
-* @author Thony Hermawan
-*/
+ * @author Thony Hermawan
+ */
 class Pengiriman extends CI_Controller
 {
-	
+
 	function __construct()
 	{
 		parent::__construct();
@@ -77,7 +78,9 @@ class Pengiriman extends CI_Controller
 	{
 		$id_cust = $this->session->userdata('id_cust');
 		$id = $this->input->post('txtIdPengiriman');
-		$id_kota_asal = $this->input->post('cbKotaAsal');
+		$kota_asal = explode(",", $this->input->post('cbKotaAsal'));
+		$id_kota_asal = $kota_asal[0];
+		$nama_kota_asal = $kota_asal[1];
 		$id_kota_tujuan = $this->input->post('cbKotaTujuan');
 		$id_b = $this->mbiaya->getIdBiaya($id_kota_asal, $id_kota_tujuan);
 		foreach ($id_b as $data) {
@@ -92,11 +95,11 @@ class Pengiriman extends CI_Controller
 		$berat = "null";
 		$no_resi = $this->mtracking->generate_no_resi();
 		$date = date('Y-m-d');
-		$this->mpengiriman->insert($id, $id_biaya, $tgl, $biaya, $nama, $tujuan, $alamat, $berat);	
+		$this->mpengiriman->insert($id, $id_biaya, $tgl, $biaya, $nama, $tujuan, $alamat, $berat);
 		//echo $id." ".$id_biaya." ".$tgl." ".$biaya." ".$nama." ".$tujuan." ".$alamat." ".$berat;
-		$this->mtracking->insert($no_resi, $id, $id_cust, 'Sedang Diproses', $date, 'Surabaya', '');
+		$this->mtracking->insert($no_resi, $id, $id_cust, 'Sedang Diproses', $date, $nama_kota_asal, '');
 		$this->session->set_flashdata('message', 'Data pengiriman sudah dibuat');
-		redirect('pengiriman/view_detil_pengiriman/'.$id, 'refresh');
+		redirect('pengiriman/view_detil_pengiriman/' . $id, 'refresh');
 	}
 
 	public function data_barang()
@@ -125,7 +128,7 @@ class Pengiriman extends CI_Controller
 	public function view_detil_pengiriman($id_pengiriman)
 	{
 		$id_cust = $this->session->userdata('id_cust');
-		$data['judul'] = 'Detil Pengiriman (No. Pengiriman: '.$id_pengiriman.')';
+		$data['judul'] = 'Detil Pengiriman (No. Pengiriman: ' . $id_pengiriman . ')';
 		$data['konten'] = 'guest/det_pengiriman';
 		$data['aktif'] = 'active';
 		$data['jenis'] = $this->mjenis->getAllJenis();
@@ -141,7 +144,7 @@ class Pengiriman extends CI_Controller
 	public function cetak_detil($id_pengiriman)
 	{
 		$id_cust = $this->session->userdata('id_cust');
-		$data['judul'] = 'Detil Pengiriman (No. Pengiriman: '.$id_pengiriman.')';
+		$data['judul'] = 'Detil Pengiriman (No. Pengiriman: ' . $id_pengiriman . ')';
 		$data['konten'] = 'guest/det_pengiriman';
 		$data['aktif'] = 'active';
 		$data['jenis'] = $this->mjenis->getAllJenis();
@@ -167,14 +170,14 @@ class Pengiriman extends CI_Controller
 		//echo $id_barang." ".$id_pengiriman;
 		$this->mpengiriman->insert_detil_pengiriman($id_barang, $id_pengiriman);
 		$this->mpengiriman->update_berat_pengiriman($id_pengiriman, $berat_barang);
-		redirect('pengiriman/view_detil_pengiriman/'.$id_pengiriman, 'refresh');
+		redirect('pengiriman/view_detil_pengiriman/' . $id_pengiriman, 'refresh');
 	}
 
 	public function hapus_detil_barang($id_barang)
 	{
 		$id_pengiriman = $this->input->post('txtIdPengiriman');
 		$this->mpengiriman->delete_detil_pengiriman($id_barang, $id_pengiriman);
-		redirect('pengiriman/view_detil_pengiriman/'.$id_pengiriman, 'refresh');
+		redirect('pengiriman/view_detil_pengiriman/' . $id_pengiriman, 'refresh');
 	}
 
 	public function random_no_resi()
@@ -185,7 +188,7 @@ class Pengiriman extends CI_Controller
 
 	public function buat_surat_pengiriman($id_pengiriman)
 	{
-		$data['judul'] = 'Surat Pengiriman (No. Pengiriman: '.$id_pengiriman.')';
+		$data['judul'] = 'Surat Pengiriman (No. Pengiriman: ' . $id_pengiriman . ')';
 		$data['id_pengiriman'] = $id_pengiriman;
 		$data['data_pengiriman'] = $this->mpengiriman->data_surat_pengiriman($id_pengiriman);
 		$data['sum_berat'] = $this->mpengiriman->sum_berat($id_pengiriman);

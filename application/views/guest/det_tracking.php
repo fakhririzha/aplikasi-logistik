@@ -120,7 +120,7 @@ if (count($tracking) > 0) {
 			<tr>
 				<td>Status Pembayaran</td>
 				<td>:</td>
-				<td>LUNAS</td>
+				<td><?= $status_pembayaran_paket[0]['STATUS_PEMBAYARAN'] ?></td>
 			</tr>
 		</table>
 	</fieldset>
