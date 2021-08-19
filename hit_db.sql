@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 18, 2021 at 10:56 AM
+-- Generation Time: Aug 19, 2021 at 02:00 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -86,7 +86,7 @@ CREATE TABLE `armada` (
 
 INSERT INTO `armada` (`ARMADA_ID`, `ARMADA_FORWARDER_ID`, `ARMADA_NAMA`, `ARMADA_KAPASITAS`, `ARMADA_KAPASITAS_TERSEDIA`, `ARMADA_ID_KOTA_ASAL`, `ARMADA_ID_KOTA_TUJUAN`) VALUES
 (1, 1, 'Hino Dutro', 1000, 690, 1, 2),
-(2, 1, 'FUSO', 1500, 1500, 1, 12);
+(2, 1, 'FUSO', 1500, 1488, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -131,7 +131,13 @@ INSERT INTO `barang` (`ID_BARANG`, `ID_JENIS_BARANG`, `NAMA_BARANG`, `BERAT_BARA
 (22, 4, 'Tepung Terigu', '100.00', 'kg'),
 (23, 4, 'Tepung Terigu', '1.00', 'kg'),
 (24, 4, 'Tepung Terigu', '1.00', 'kg'),
-(25, 4, 'Tepung Terigu', '1.00', 'kg');
+(25, 4, 'Tepung Terigu', '1.00', 'kg'),
+(26, 4, 'Sayuran', '10.00', 'kg'),
+(27, 4, 'Tepung Terigu', '2.00', 'kg'),
+(28, 4, 'Tepung Terigu', '2.00', 'kg'),
+(29, 4, 'Tepung Terigu', '3.00', 'kg'),
+(30, 4, 'Sayuran', '3.00', 'kg'),
+(31, 1, 'aaa', '23.00', 'kg');
 
 -- --------------------------------------------------------
 
@@ -157,7 +163,13 @@ INSERT INTO `biaya_pengiriman` (`ID_BIAYA`, `ID_KOTA_ASAL`, `ID_KOTA_TUJUAN`, `J
 (3, 1, 6, 30, '40.00', '75000.00'),
 (4, 1, 4, 40, '50.00', '35000.00'),
 (5, 1, 5, 50, '50.00', '45000.00'),
-(7, 1, 2, 60, '40.00', '100000.00');
+(7, 1, 2, 60, '40.00', '100000.00'),
+(8, 6, 1, 30, '0.00', '75000.00'),
+(9, 4, 1, 40, '0.00', '35000.00'),
+(10, 5, 1, 50, '0.00', '45000.00'),
+(11, 2, 1, 60, '0.00', '100000.00'),
+(12, 1, 27, 200, '0.00', '150000.00'),
+(13, 27, 1, 200, '0.00', '150000.00');
 
 -- --------------------------------------------------------
 
@@ -237,7 +249,12 @@ INSERT INTO `detil_pengiriman` (`ID_BARANG`, `ID_PENGIRIMAN`) VALUES
 (15, 1010),
 (16, 1011),
 (17, 1012),
-(18, 1013);
+(18, 1013),
+(26, 1014),
+(27, 1015),
+(28, 1016),
+(30, 1018),
+(31, 1020);
 
 -- --------------------------------------------------------
 
@@ -357,7 +374,7 @@ CREATE TABLE `pengiriman` (
   `BERAT_PENGIRIMAN` decimal(8,2) DEFAULT NULL,
   `ID_ARMADA_PENGIRIMAN` int(11) DEFAULT NULL,
   `ID_FORWARDER_PENGIRIMAN` int(11) DEFAULT NULL,
-  `STATUS_PEMBAYARAN` enum('Belum Dibayar','Sudah Dibayar') DEFAULT NULL
+  `STATUS_PEMBAYARAN` enum('Belum Dibayar','Sudah Dibayar') DEFAULT 'Belum Dibayar'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -372,7 +389,13 @@ INSERT INTO `pengiriman` (`ID_PENGIRIMAN`, `ID_BIAYA`, `TGL_PENGIRIMAN`, `BIAYA_
 (1010, 7, '2014-06-02', '100000.00', 'Rio Sonja Permana', 'PT. Karangan Indah Semesta', 'Jl. Nias Nusantara No. 190-201', '50.00', NULL, NULL, 'Belum Dibayar'),
 (1011, 7, '2014-06-05', '100000.00', 'Thony Hermawan', 'PT. Semoga Tidak Bencana', 'Jl. Selamat No. 99', '150.00', NULL, NULL, 'Sudah Dibayar'),
 (1012, 7, '2014-06-02', '100000.00', 'Dwi Prasetyo', 'PT. Pesona Bahari Nusantara', 'Jl. Cinggarum No. 24-29', '100.00', NULL, NULL, 'Belum Dibayar'),
-(1013, 5, '2014-06-04', '45000.00', 'Thony Hermawan', 'PT. Sumbangan Suka Rela', 'Jl. Pandaan Malang Km. 30', '150.00', NULL, NULL, 'Belum Dibayar');
+(1013, 5, '2014-06-04', '45000.00', 'Thony Hermawan', 'PT. Sumbangan Suka Rela', 'Jl. Pandaan Malang Km. 30', '150.00', NULL, NULL, 'Belum Dibayar'),
+(1014, 1, '2021-08-19', '20000.00', 'Fakhri', 'USU', 'Medan', '10.00', 2, 1, 'Belum Dibayar'),
+(1015, 1, '2021-08-19', '20000.00', 'Fakhri Rizha Ananda', 'PT. Kalvo Company', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '2.00', 2, 1, 'Belum Dibayar'),
+(1016, 1, '2021-08-19', '20000.00', 'Fakhri Rizha Ananda', 'PT. Kalvo Company', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '2.00', NULL, NULL, 'Belum Dibayar'),
+(1018, 1, '2021-08-19', '20000.00', 'Fakhri Rizha Ananda', 'USU', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '3.00', NULL, NULL, 'Belum Dibayar'),
+(1019, 12, '0000-00-00', '150000.00', 'Fakhri Rizha Ananda', 'asdasdassssssss', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '0.00', NULL, NULL, 'Belum Dibayar'),
+(1020, 12, '2021-08-07', '150000.00', 'Fakhri Rizha Ananda', 'a', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '23.00', NULL, NULL, 'Belum Dibayar');
 
 -- --------------------------------------------------------
 
@@ -483,17 +506,25 @@ CREATE TABLE `tracking` (
 --
 
 INSERT INTO `tracking` (`NO_RESI`, `ID_PENGIRIMAN`, `ID_CUST`, `STATUS_PENGIRIMAN`, `TANGGAL`, `POSISI`, `KETERANGAN`) VALUES
+('AMIO316989', 1014, 6, 'Pengambilan Barang', '2021-07-16', 'Medan', ''),
+('AMIO316989', 1014, 6, 'Sedang Diproses', '2021-08-19', 'Surabaya', ''),
 ('BMHS819050', 1013, 2, 'Sedang Diproses', '2014-05-31', 'Surabaya', ''),
+('HHNZ428167', 1015, 6, 'Pengemasan', '2021-08-19', 'Surabaya', ''),
+('HHNZ428167', 1015, 6, 'Sedang Diproses', '2021-08-19', 'Surabaya', ''),
+('MEAK593670', 1016, 6, 'Sedang Diproses', '2021-08-19', 'Surabaya', ''),
 ('MGOH973487', 1012, 2, 'Sedang Diproses', '2014-05-31', 'Surabaya', ''),
 ('RXK001', 1001, 4, 'Pengemasan', '2021-07-14', 'Medan', ''),
 ('RXK001', 1001, 4, 'Sedang Diproses', '2014-05-21', 'Surabaya', ''),
 ('RXK002', 1006, 4, 'Sedang Diproses', '2014-05-24', 'Surabaya', ''),
 ('RXK003', 1008, 1, 'Sedang Diproses', '2014-05-25', 'Surabaya', NULL),
 ('VPFB067573', 1011, 6, 'Sedang Diproses', '2014-05-27', 'Surabaya', ''),
+('XAYC264376', 1018, 6, 'Sedang Diproses', '2021-08-19', 'Medan', ''),
+('XJNZ253341', 1020, 6, 'Sedang Diproses', '2021-08-19', 'Medan', ''),
 ('YOFX719159', 1010, 1, 'Sedang Diproses', '2014-05-27', 'Surabaya', ''),
 ('YVVN191918', 1009, 1, 'Pengambilan Barang', '2014-05-25', 'Surabaya', ''),
 ('YVVN191918', 1009, 1, 'Pengemasan', '2014-05-25', 'Surabaya', ''),
 ('YVVN191918', 1009, 1, 'Pengiriman', '2014-05-31', 'Surabaya', ''),
+('YVVN191918', 1009, 1, 'Penurunan Barang', '2021-08-18', 'Banjarmasin', ''),
 ('YVVN191918', 1009, 1, 'Sedang Diproses', '2014-05-25', 'Surabaya', '');
 
 -- --------------------------------------------------------
@@ -926,7 +957,7 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_barang_tracking`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_barang_tracking`  AS  select `tracking`.`NO_RESI` AS `no_resi`,`tracking`.`ID_CUST` AS `id_cust`,`tracking`.`ID_PENGIRIMAN` AS `id_pengiriman`,`barang`.`ID_BARANG` AS `id_barang`,`barang`.`NAMA_BARANG` AS `nama_barang`,`barang`.`BERAT_BARANG` AS `berat_barang` from ((`tracking` join `detil_pengiriman` on((`tracking`.`ID_PENGIRIMAN` = `detil_pengiriman`.`ID_PENGIRIMAN`))) join `barang` on((`barang`.`ID_BARANG` = `detil_pengiriman`.`ID_BARANG`))) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_barang_tracking`  AS  select `t`.`NO_RESI` AS `no_resi`,`t`.`ID_CUST` AS `id_cust`,`t`.`ID_PENGIRIMAN` AS `id_pengiriman`,`b`.`ID_BARANG` AS `id_barang`,`b`.`NAMA_BARANG` AS `nama_barang`,`b`.`BERAT_BARANG` AS `berat_barang` from ((`tracking` `t` join `detil_pengiriman` `d`) join `barang` `b`) where ((`t`.`ID_PENGIRIMAN` = `d`.`ID_PENGIRIMAN`) and (`b`.`ID_BARANG` = `d`.`ID_BARANG`)) group by `d`.`ID_BARANG` ;
 
 -- --------------------------------------------------------
 
@@ -1206,13 +1237,13 @@ ALTER TABLE `armada`
 -- AUTO_INCREMENT for table `barang`
 --
 ALTER TABLE `barang`
-  MODIFY `ID_BARANG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `ID_BARANG` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `biaya_pengiriman`
 --
 ALTER TABLE `biaya_pengiriman`
-  MODIFY `ID_BIAYA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `ID_BIAYA` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `bidang_kerja`
