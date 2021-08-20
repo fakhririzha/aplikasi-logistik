@@ -64,6 +64,7 @@ class Mtracking extends CI_Model
 					t.ID_CUST = ' . $id_cust . '
 					AND p.ID_PENGIRIMAN = t.ID_PENGIRIMAN
 					AND p.STATUS_PEMBAYARAN = "Belum Dibayar"
+					AND p.ID_ARMADA_PENGIRIMAN IS NOT NULL
 				GROUP BY
 					t.NO_RESI
 			'
