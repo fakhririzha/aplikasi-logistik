@@ -20,6 +20,32 @@ class Forwarder extends CI_Controller
 		}
 	}
 
+	public function edit($id_forwarder)
+	{
+		$data['judul'] = 'Kelola Informasi Forwarder';
+		$data['konten'] = 'admin/edit_forwarder';
+		$data['aktif'] = 'active';
+		$data['forwarder'] = $this->mforwarder->get_informasi_forwarder_by_id($id_forwarder);
+		$data['kota_asal_kecuali'] = $this->mkota->getAllKotaExcept($data['forwarder'][0]['FORWARDER_NAMA_KOTA_ASAL']);
+		$data['kota_tujuan_kecuali'] = $this->mkota->getAllKotaExcept($data['forwarder'][0]['FORWARDER_NAMA_KOTA_TUJUAN']);
+		$data['list_kota'] = $this->mkota->getAllKota();
+		$this->load->vars($data);
+		$this->load->view('admin/pg_admin', $data, FALSE);
+	}
+
+	public function edit_forwarder()
+	{
+		$forwarder_id = $this->input->post('idForwarder');
+		$forwarder_nama = $this->input->post('namaForwarder');
+		$forwarder_email = $this->input->post('emailForwarder');
+		$forwarder_password = $this->input->post('passwordForwarder');
+		$forwarder_asal = $this->input->post('cbKotaAsal');
+		$forwarder_tujuan = $this->input->post('cbKotaTujuan');
+		$data = $this->mforwarder->update_forwarder($forwarder_nama, $forwarder_email, $forwarder_password, $forwarder_asal, $forwarder_tujuan);
+		$this->session->set_flashdata('message', 'Forwarder telah berhasil ditambahkan');
+		redirect('pg_admin/forwarder', 'refresh');
+	}
+
 	public function daftar_kiriman()
 	{
 		$data['judul'] = 'Urutkan Pengiriman';

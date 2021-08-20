@@ -16,9 +16,6 @@ class Mkota extends CI_Model
 	public function getAllKota()
 	{
 		$data = array();
-		// $this->db->select('id_kota, nama_provinsi, nama_kota');
-		// $this->db->from('kota');
-		// $this->db->join('provinsi', 'provinsi.id_provinsi = kota.id_provinsi');
 		$query = $this->db->query("
 			SELECT
 				kota.ID_KOTA AS id_kota,
@@ -29,6 +26,33 @@ class Mkota extends CI_Model
 				provinsi
 			WHERE
 				provinsi.ID_PROVINSI = kota.ID_PROVINSI
+			ORDER BY
+				kota.NAMA_KOTA ASC
+		");
+		// $this->db->order_by('nama_provinsi', 'asc');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
+	public function getAllKotaExcept($nama_kota)
+	{
+		$data = array();
+		$query = $this->db->query("
+			SELECT
+				kota.ID_KOTA AS id_kota,
+				provinsi.NAMA_PROVINSI AS nama_provinsi,
+				kota.NAMA_KOTA AS nama_kota
+			FROM
+				kota,
+				provinsi
+			WHERE
+				kota.NAMA_KOTA != '" . $nama_kota . "'
+				AND provinsi.ID_PROVINSI = kota.ID_PROVINSI
 			ORDER BY
 				kota.NAMA_KOTA ASC
 		");

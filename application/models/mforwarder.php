@@ -25,6 +25,19 @@ class Mforwarder extends CI_Model
 		return $data;
 	}
 
+	public function get_informasi_forwarder_by_id($id_forwarder)
+	{
+		$data = array();
+		$query = $this->db->where('FORWARDER_ID', $id_forwarder)->get('view_all_forwarder');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
 	public function get_all_armada()
 	{
 		$data = array();
@@ -111,6 +124,19 @@ class Mforwarder extends CI_Model
 		$this->db->where('FORWARDER_ID', $forwarder_id);
 		$query = $this->db->get('view_pengiriman_detail', $num, $offset);
 		return $query->result_array();
+	}
+
+	public function update_forwarder($id_forwarder, $nama, $email, $password, $asal, $tujuan)
+	{
+		$data = array(
+			'FORWARDER_NAMA' => $nama,
+			'FORWARDER_EMAIL' => $email,
+			'FORWARDER_PASSWORD' => $password,
+			'FORWARDER_ID_KOTA_ASAL' => $asal,
+			'FORWARDER_ID_KOTA_TUJUAN' => $tujuan,
+		);
+		$this->db->where('FORWARDER_ID', $id_forwarder);
+		$this->db->update('forwarder', $data);
 	}
 
 	public function insert_forwarder($nama, $email, $password, $asal, $tujuan)
