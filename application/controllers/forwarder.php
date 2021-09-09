@@ -69,7 +69,7 @@ class Forwarder extends CI_Controller
 
 		$config['base_url'] = base_url() . 'index.php/forwarder/list_kiriman';
 		$config['total_rows'] = $jml->num_rows();
-		$config['per_page'] = 10;
+		$config['per_page'] = 5;
 		$config['uri_segment'] = 3;
 		$config['num_links'] = 3;
 		$config['full_tag_open'] = '<ul>';
@@ -118,14 +118,65 @@ class Forwarder extends CI_Controller
 		$this->load->view('forwarder/template', $data, FALSE);
 	}
 
+	public function atur_tataletak_armada()
+	{
+		$data['judul'] = 'Atur Tataletak Armada';
+		$data['konten'] = 'forwarder/atur_tataletak_armada';
+		$data['aktif'] = 'active';
+		$data['armada'] = $this->mforwarder->get_all_armada_by_forwarder_id($this->session->userdata('FORWARDER_ID'));
+		$data['kota'] = $this->mkota->getAllKota();
+		$this->load->vars($data);
+		$this->load->view('forwarder/template', $data, FALSE);
+	}
+
+	public function test()
+	{
+		$this->mforwarder->masukin();
+	}
+
+	public function lihat_tataletak_armada($id_armada, $id = NULL)
+	{
+		$data['judul'] = 'Lihat Tataletak Kiriman';
+		$data['konten'] = 'forwarder/lihat_tataletak_armada';
+		$data['aktif'] = 'active';
+		$data['kiriman_sdh'] = $this->mforwarder->get_all_pengiriman_by_armada_sudah_disusun($id_armada);
+		$data['kiriman_blm'] = $this->mforwarder->get_all_pengiriman_by_armada_belum_disusun($id_armada);
+		$data['armada'] = $this->mforwarder->get_armada_info_by_id($id_armada);
+
+		$this->load->library('pagination');
+
+		$jml = $this->db->where('MUATAN_ARMADA_ID', $id_armada)->get('muatan_armada');
+		$config['base_url'] = base_url() . 'index.php/forwarder/lihat_tataletak_armada/' . $id_armada;
+		$config['total_rows'] = $jml->num_rows();
+		$config['per_page'] = 10;
+		$config['uri_segment'] = 5;
+		$config['num_links'] = $jml->num_rows() / 10;
+		$config['full_tag_open'] = '<ul>';
+		$config['full_tag_close'] = '</ul>';
+		$config['first_link'] = 'First';
+		$config['last_link'] = 'Last';
+		$config['next_link'] = '&raquo;';
+		$config['prev_link'] = '&laquo;';
+
+		$this->pagination->initialize($config);
+
+		$data['paging'] = $this->pagination->create_links();
+		$data['slot'] = $this->mforwarder->get_muatan_armada_by_id($id_armada, $config['per_page'], $id);
+		$this->load->vars($data);
+		$this->load->view('forwarder/template', $data, FALSE);
+	}
+
 	public function tambah_armada()
 	{
 		$nama = $this->input->post('namaArmada');
 		$forwarder_id = $this->input->post('forwarderId');
 		$kapasitas = $this->input->post('kapasitasArmada');
+		$panjangArmada = $this->input->post('volPanjangArmada');
+		$lebarArmada = $this->input->post('volLebarArmada');
+		$tinggiArmada = $this->input->post('volTinggiArmada');
 		$asal = $this->input->post('cbKotaAsal');
 		$tujuan = $this->input->post('cbKotaTujuan');
-		$data = $this->mforwarder->insert_armada($nama, $forwarder_id, $kapasitas, $asal, $tujuan);
+		$data = $this->mforwarder->insert_armada($nama, $forwarder_id, $kapasitas, $panjangArmada, $lebarArmada, $tinggiArmada, $asal, $tujuan);
 		$this->session->set_flashdata('message', 'Armada telah berhasil ditambahkan');
 		redirect('forwarder/kelola_armada', 'refresh');
 	}

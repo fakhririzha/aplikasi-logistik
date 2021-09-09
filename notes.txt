@@ -1,0 +1,9 @@
+-barang paling berat di prioritaskan untuk diletak di bagian bawah
+-barang paling dekat di bagian depan
+
+menu admin :
+tambahkan tanggal kapan barang mau dikirimkan di urutkan pengiriman
+
+menu forwarder :
+penjadwalan berangkat armada
+utk memudahkan pemilihan armada di menu admin (cocokkan tanggal pengiriman dari shipper dan jadwal keberangkatan dari armada)

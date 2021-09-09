@@ -119,10 +119,57 @@ class Mforwarder extends CI_Model
 		return $data;
 	}
 
+	public function get_all_pengiriman_by_armada_belum_disusun($id)
+	{
+		$data = array();
+		$query = $this->db->query(
+			"
+		SELECT * FROM armada
+		JOIN view_pengiriman_sudah_diproses
+		ON ID_ARMADA_PENGIRIMAN = ARMADA_ID
+		WHERE ARMADA_ID = '" . $id . "' AND STATUS_URUTAN = 'Belum'
+		"
+		);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
+	public function get_all_pengiriman_by_armada_sudah_disusun($id)
+	{
+		$data = array();
+		$query = $this->db->query(
+			"
+		SELECT * FROM armada
+		JOIN view_pengiriman_sudah_diproses
+		ON ID_ARMADA_PENGIRIMAN = ARMADA_ID
+		WHERE ARMADA_ID = '" . $id . "' AND STATUS_URUTAN = 'Sudah'
+		"
+		);
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$data[] = $row;
+			}
+		}
+		$query->free_result();
+		return $data;
+	}
+
 	public function get_informasi_pengiriman($forwarder_id, $num, $offset)
 	{
 		$this->db->where('FORWARDER_ID', $forwarder_id);
 		$query = $this->db->get('view_pengiriman_detail', $num, $offset);
+		return $query->result_array();
+	}
+
+	public function get_muatan_armada_by_id($id_armada, $num, $offset)
+	{
+		$this->db->where('MUATAN_ARMADA_ID', $id_armada);
+		$query = $this->db->get('muatan_armada', $num, $offset);
 		return $query->result_array();
 	}
 
@@ -151,16 +198,40 @@ class Mforwarder extends CI_Model
 		$this->db->insert('forwarder', $data);
 	}
 
-	public function insert_armada($nama, $forwarder_id, $kapasitas, $asal, $tujuan)
+	public function masukin()
+	{
+		for ($x = 1; $x <= 150; $x++) {
+			$data = array(
+				'MUATAN_ARMADA_ID' => '1',
+				'MUATAN_SLOT_ID' => $x,
+			);
+			$this->db->insert('muatan_armada', $data);
+		}
+	}
+
+	public function insert_armada($nama, $forwarder_id, $kapasitas, $panjangArmada, $lebarArmada, $tinggiArmada, $asal, $tujuan)
 	{
 		$data = array(
 			'ARMADA_FORWARDER_ID' => $forwarder_id,
 			'ARMADA_NAMA' => $nama,
 			'ARMADA_KAPASITAS' => $kapasitas,
 			'ARMADA_KAPASITAS_TERSEDIA' => $kapasitas,
+			'ARMADA_PANJANG' => $panjangArmada,
+			'ARMADA_LEBAR' => $lebarArmada,
+			'ARMADA_TINGGI' => $tinggiArmada,
 			'ARMADA_ID_KOTA_ASAL' => $asal,
 			'ARMADA_ID_KOTA_TUJUAN' => $tujuan,
 		);
+
+		$volume = intval($panjangArmada) * intval($lebarArmada) * intval($tinggiArmada);
+		for ($x = 1; $x <= $volume; $x++) {
+			$data = array(
+				'MUATAN_ARMADA_ID' => '1',
+				'MUATAN_SLOT_ID' => $x,
+			);
+			$this->db->insert('muatan_armada', $data);
+		}
+
 		$this->db->insert('armada', $data);
 	}
 

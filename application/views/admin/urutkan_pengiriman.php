@@ -32,15 +32,15 @@ if ($this->session->flashdata('pilih_forwarder')) {
 				$idx = 1;
 				foreach ($belum_urut as $list) {
 					echo "<tr>";
-					echo "<td>" . $list['id_pengiriman'] . "</td>";
-					echo "<td>" . $list['no_resi'] . "</td>";
-					echo "<td>" . $list['nama_kota_asal'] . "</td>";
-					echo "<td>" . $list['nama_kota_tujuan'] . "</td>";
-					echo "<td>" . $list['jarak'] . " km</td>";
+					echo "<td>" . $list['ID_PENGIRIMAN'] . "</td>";
+					echo "<td>" . $list['NO_RESI'] . "</td>";
+					echo "<td>" . $list['NAMA_KOTA_ASAL'] . "</td>";
+					echo "<td>" . $list['NAMA_KOTA_TUJUAN'] . "</td>";
+					echo "<td>" . $list['JARAK'] . " km</td>";
 					echo "<td>" . intval($list['berat_total_pengiriman']) . " kg</td>";
 					echo "<form class=\"form-horizontal\" method=\"POST\" action=\"" . base_url() . "index.php/pg_admin/pilih_forwarder_kiriman\">";
 					echo "<td>";
-					echo "<input type=\"hidden\" name=\"id_pengiriman\" value=\"" . $list['id_pengiriman'] . "\">";
+					echo "<input type=\"hidden\" name=\"id_pengiriman\" value=\"" . $list['ID_PENGIRIMAN'] . "\">";
 					echo "<input type=\"hidden\" name=\"berat_total_pengiriman\" value=\"" . intval($list['berat_total_pengiriman']) . "\">";
 					echo "<select name=\"idForwarderArmada\" class=\"form-control\">";
 					// foreach ($forwarder as $data) {

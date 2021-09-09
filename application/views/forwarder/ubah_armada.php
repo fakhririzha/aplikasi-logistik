@@ -17,6 +17,24 @@
         </div>
     </div>
     <div class="control-group">
+        <label class="control-label" for="inputVolumeArmada">Panjang Armada</label>
+        <div class="controls">
+            <input type="number" id="inputVolumeArmada" value="<?= $armada[0]['ARMADA_PANJANG'] ?>" name="volPanjangArmada" class="input-large" disabled>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputVolumeArmada">Lebar Armada</label>
+        <div class="controls">
+            <input type="number" id="inputVolumeArmada" value="<?= $armada[0]['ARMADA_LEBAR'] ?>" name="volLebarArmada" class="input-large" disabled>
+        </div>
+    </div>
+    <div class="control-group">
+        <label class="control-label" for="inputVolumeArmada">Tinggi Armada</label>
+        <div class="controls">
+            <input type="number" id="inputVolumeArmada" value="<?= $armada[0]['ARMADA_TINGGI'] ?>" name="volTinggiArmada" class="input-large" disabled>
+        </div>
+    </div>
+    <div class="control-group">
         <label for="cbKotaAsal" class="control-label">Kota Asal</label>
         <div class="controls">
             <select name="cbKotaAsal">

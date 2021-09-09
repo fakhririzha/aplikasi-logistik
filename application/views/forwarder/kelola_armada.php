@@ -1,5 +1,5 @@
 <h3>Kelola Armada</h3>
-<p>Berikut adalah daftar forwarder yang tersedia:</p>
+<p>Berikut adalah daftar armada yang tersedia:</p>
 <form method="post" class="form-search">
 	<legend>Operasi</legend>
 	<div class="input-append">
@@ -61,11 +61,19 @@
 					<input type="text" id="inputNamaArmada" name="namaArmada" placeholder="Nama" class="input-large" required>
 				</div>
 			</div>
-            <input type="hidden" name="forwarderId" value="<?= $this->session->userdata('FORWARDER_ID') ?>">
+			<input type="hidden" name="forwarderId" value="<?= $this->session->userdata('FORWARDER_ID') ?>">
 			<div class="control-group">
 				<label class="control-label" for="inputKapasitasArmada">Kapasitas Armada (Kg)</label>
 				<div class="controls">
-					<input type="number" id="inputKapasitasArmada" name="kapasitasArmada" placeholder="Kapasitas" class="input-large" required>
+					<input type="number" id="inputKapasitasArmada" name="kapasitasArmada" placeholder="Kapasitas" class="input-large" required min="1">
+				</div>
+			</div>
+			<div class="control-group">
+				<label class="control-label" for="inputVolumeArmada">Volume Armada (PxLxT)</label>
+				<div class="controls">
+					<input type="number" id="inputVolumeArmada" name="volPanjangArmada" placeholder="Panjang" class="input-large" required min="1" max="50">
+					<input type="number" id="inputVolumeArmada" name="volLebarArmada" placeholder="Lebar" class="input-large" required min="1" max="50">
+					<input type="number" id="inputVolumeArmada" name="volTinggiArmada" placeholder="Tinggi" class="input-large" required min="1" max="50">
 				</div>
 			</div>
 			<div class="control-group">
