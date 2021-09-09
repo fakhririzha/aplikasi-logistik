@@ -2,7 +2,7 @@
 -barang paling dekat di bagian depan
 
 menu admin :
-tambahkan tanggal kapan barang mau dikirimkan di urutkan pengiriman
+tambahkan tanggal kapan barang mau dikirimkan di urutkan pengiriman done
 
 menu forwarder :
 penjadwalan berangkat armada

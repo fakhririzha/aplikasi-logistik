@@ -18,22 +18,27 @@ if ($this->session->flashdata('pilih_forwarder')) {
 			<tr>
 				<th>ID</th>
 				<th>No. Resi</th>
-				<th>Kota Asal</th>
-				<th>Kota Tujuan</th>
+				<th>Tanggal</th>
+				<th>Asal</th>
+				<th>Tujuan</th>
 				<th>Jarak</th>
-				<th>Berat Total</th>
+				<th>Berat</th>
 				<th>Forwarder</th>
 				<th>Aksi</th>
 			</tr>
 		</thead>
 		<tbody>
 			<?php
+
+			setlocale(LC_TIME, 'id_ID');
 			if (count($belum_urut) > 0) {
 				$idx = 1;
 				foreach ($belum_urut as $list) {
 					echo "<tr>";
 					echo "<td>" . $list['ID_PENGIRIMAN'] . "</td>";
 					echo "<td>" . $list['NO_RESI'] . "</td>";
+					// echo "<td>" . date_format(date_create($list['TGL_PENGIRIMAN']), "d-M-Y") . "</td>";
+					echo "<td>" . strftime("%d-%b-%Y", strtotime($list['TGL_PENGIRIMAN'])) . "</td>";
 					echo "<td>" . $list['NAMA_KOTA_ASAL'] . "</td>";
 					echo "<td>" . $list['NAMA_KOTA_TUJUAN'] . "</td>";
 					echo "<td>" . $list['JARAK'] . " km</td>";
