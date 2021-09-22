@@ -156,38 +156,6 @@ class Forwarder extends CI_Controller
 		}
 		$query->free_result();
 
-		$dua_dimensi = [
-			[
-				"JARAK" => 200,
-				"berat_total_pengiriman" => 23
-			],
-			[
-				"JARAK" => 0,
-				"berat_total_pengiriman" => 3
-			],
-			[
-				"JARAK" => 30,
-				"berat_total_pengiriman" => 50
-			],
-			[
-				"JARAK" => 0,
-				"berat_total_pengiriman" => 210
-			],
-			[
-				"JARAK" => 200,
-				"berat_total_pengiriman" => 50
-			],
-			[
-				"JARAK" => 50,
-				"berat_total_pengiriman" => 23
-			]
-		];
-
-		foreach ($unsortedPengirimanList as $data) {
-			echo "Jarak : " . $data["JARAK"] . ", Berat: " . intval($data["berat_total_pengiriman"]);
-			echo "<br>";
-		}
-
 		usort($unsortedPengirimanList, function ($a, $b) {
 			$retval = $b['JARAK'] <=> $a['JARAK'];
 			// JARAK SAMA
@@ -209,15 +177,6 @@ class Forwarder extends CI_Controller
 		});
 
 		$sortedPengirimanList = $unsortedPengirimanList;
-
-		echo "<hr>";
-		foreach ($sortedPengirimanList as $data) {
-			echo "Jarak : " . $data["JARAK"] . ", Berat: " . intval($data["berat_total_pengiriman"]);
-			echo "<br>";
-		}
-
-		echo "<hr>";
-		// echo count($slotArmada);
 
 		// Fungsi untuk meng-assign pengiriman ke slot tersedia
 		for ($i = 1; $i <= $slotArmada; $i++) {
