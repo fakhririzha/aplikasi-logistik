@@ -131,7 +131,14 @@ class Forwarder extends CI_Controller
 
 	public function test()
 	{
-		$this->mforwarder->masukin();
+		$query = $this->db->where("ID_PENGIRIMAN", "1012")->get('view_pengiriman_sudah_diproses');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$slotArmada[] = $row;
+			}
+		}
+		var_dump($query->row_array());
+		// $this->mforwarder->masukin();
 	}
 
 	public function sortir_isi_armada($id_armada)
@@ -180,7 +187,7 @@ class Forwarder extends CI_Controller
 
 		// Fungsi untuk meng-assign pengiriman ke slot tersedia
 		for ($i = 1; $i <= $slotArmada; $i++) {
-			if(!array_key_exists($i - 1, $sortedPengirimanList)){
+			if (!array_key_exists($i - 1, $sortedPengirimanList)) {
 				break;
 			}
 
