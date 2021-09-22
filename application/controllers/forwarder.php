@@ -142,7 +142,7 @@ class Forwarder extends CI_Controller
 
 		if ($check_isi > 0) {
 			$sdh_disusun = $this->mforwarder->get_all_pengiriman_by_armada_sudah_disusun($id_armada);
-			$unsortedPengirimanList = $blm_disusun + $sdh_disusun;
+			$unsortedPengirimanList = array_merge($blm_disusun, $sdh_disusun);
 		} else {
 			$unsortedPengirimanList = $blm_disusun;
 		}
@@ -154,7 +154,6 @@ class Forwarder extends CI_Controller
 				$slotArmada[] = $row;
 			}
 		}
-		$query->free_result();
 
 		usort($unsortedPengirimanList, function ($a, $b) {
 			$retval = $b['JARAK'] <=> $a['JARAK'];
@@ -176,22 +175,29 @@ class Forwarder extends CI_Controller
 			return $retval;
 		});
 
+
 		$sortedPengirimanList = $unsortedPengirimanList;
 
 		// Fungsi untuk meng-assign pengiriman ke slot tersedia
 		for ($i = 1; $i <= $slotArmada; $i++) {
-			if(array_key_exists($i - 1,$sortedPengirimanList)){
+			if(!array_key_exists($i - 1, $sortedPengirimanList)){
 				break;
 			}
+
 			$data = array(
 				'MUATAN_PENGIRIMAN_ID' => $sortedPengirimanList[$i - 1]["ID_PENGIRIMAN"]
 			);
 			$this->db->where([
 				"MUATAN_ARMADA_ID" => $id_armada,
 				"MUATAN_SLOT_ID" => $i
-			]);
-			$this->db->update('muatan_armada', $data);
-			$this->db->update('pengiriman', ["STATUS_URUTAN"=>"Sudah"]);
+			])->update('muatan_armada', $data);
+
+			$data2 = array(
+				'STATUS_URUTAN' => 'Sudah'
+			);
+			$this->db->where([
+				"ID_PENGIRIMAN" => $sortedPengirimanList[$i - 1]["ID_PENGIRIMAN"]
+			])->update('pengiriman', $data2);
 		}
 
 		redirect('forwarder/lihat_tataletak_armada/' . $id_armada, 'refresh');

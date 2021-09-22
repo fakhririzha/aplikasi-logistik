@@ -259,7 +259,8 @@ class Mforwarder extends CI_Model
 		} else {
 			$data = array(
 				'ID_FORWARDER_PENGIRIMAN' => $id_forwarder,
-				'ID_ARMADA_PENGIRIMAN' => $id_armada
+				'ID_ARMADA_PENGIRIMAN' => $id_armada,
+				'STATUS_URUTAN' => 'Belum'
 			);
 			$this->db->where('ID_PENGIRIMAN', $id_pengiriman);
 			$this->db->update('pengiriman', $data);
