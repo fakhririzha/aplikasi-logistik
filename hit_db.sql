@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Aug 19, 2021 at 02:00 PM
+-- Generation Time: Sep 22, 2021 at 05:07 PM
 -- Server version: 10.1.37-MariaDB
 -- PHP Version: 7.3.0
 
@@ -76,6 +76,10 @@ CREATE TABLE `armada` (
   `ARMADA_NAMA` varchar(30) NOT NULL,
   `ARMADA_KAPASITAS` int(11) NOT NULL,
   `ARMADA_KAPASITAS_TERSEDIA` int(11) NOT NULL,
+  `ARMADA_JADWAL_BERANGKAT` date NOT NULL,
+  `ARMADA_PANJANG` int(11) NOT NULL,
+  `ARMADA_LEBAR` int(11) NOT NULL,
+  `ARMADA_TINGGI` int(11) NOT NULL,
   `ARMADA_ID_KOTA_ASAL` int(11) NOT NULL,
   `ARMADA_ID_KOTA_TUJUAN` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
@@ -84,9 +88,9 @@ CREATE TABLE `armada` (
 -- Dumping data for table `armada`
 --
 
-INSERT INTO `armada` (`ARMADA_ID`, `ARMADA_FORWARDER_ID`, `ARMADA_NAMA`, `ARMADA_KAPASITAS`, `ARMADA_KAPASITAS_TERSEDIA`, `ARMADA_ID_KOTA_ASAL`, `ARMADA_ID_KOTA_TUJUAN`) VALUES
-(1, 1, 'Hino Dutro', 1000, 690, 1, 2),
-(2, 1, 'FUSO', 1500, 1488, 1, 12);
+INSERT INTO `armada` (`ARMADA_ID`, `ARMADA_FORWARDER_ID`, `ARMADA_NAMA`, `ARMADA_KAPASITAS`, `ARMADA_KAPASITAS_TERSEDIA`, `ARMADA_JADWAL_BERANGKAT`, `ARMADA_PANJANG`, `ARMADA_LEBAR`, `ARMADA_TINGGI`, `ARMADA_ID_KOTA_ASAL`, `ARMADA_ID_KOTA_TUJUAN`) VALUES
+(1, 1, 'Hino Dutro', 1000, 412, '2021-09-29', 10, 3, 5, 1, 2),
+(2, 1, 'FUSO', 1500, 1488, '2021-09-29', 0, 0, 0, 1, 12);
 
 -- --------------------------------------------------------
 
@@ -360,6 +364,174 @@ INSERT INTO `kota` (`ID_KOTA`, `ID_PROVINSI`, `NAMA_KOTA`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `muatan_armada`
+--
+
+CREATE TABLE `muatan_armada` (
+  `MUATAN_ARMADA_ID` int(11) NOT NULL,
+  `MUATAN_SLOT_ID` int(11) NOT NULL,
+  `MUATAN_PENGIRIMAN_ID` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `muatan_armada`
+--
+
+INSERT INTO `muatan_armada` (`MUATAN_ARMADA_ID`, `MUATAN_SLOT_ID`, `MUATAN_PENGIRIMAN_ID`) VALUES
+(1, 1, 1020),
+(1, 2, 1012),
+(1, 3, 1013),
+(1, 4, 1008),
+(1, 5, 1006),
+(1, 6, 1018),
+(1, 7, 1016),
+(1, 8, 0),
+(1, 9, 0),
+(1, 10, 0),
+(1, 11, 0),
+(1, 12, 0),
+(1, 13, 0),
+(1, 14, 0),
+(1, 15, 0),
+(1, 16, 0),
+(1, 17, 0),
+(1, 18, 0),
+(1, 19, 0),
+(1, 20, 0),
+(1, 21, 0),
+(1, 22, 0),
+(1, 23, 0),
+(1, 24, 0),
+(1, 25, 0),
+(1, 26, 0),
+(1, 27, 0),
+(1, 28, 0),
+(1, 29, 0),
+(1, 30, 0),
+(1, 31, 0),
+(1, 32, 0),
+(1, 33, 0),
+(1, 34, 0),
+(1, 35, 0),
+(1, 36, 0),
+(1, 37, 0),
+(1, 38, 0),
+(1, 39, 0),
+(1, 40, 0),
+(1, 41, 0),
+(1, 42, 0),
+(1, 43, 0),
+(1, 44, 0),
+(1, 45, 0),
+(1, 46, 0),
+(1, 47, 0),
+(1, 48, 0),
+(1, 49, 0),
+(1, 50, 0),
+(1, 51, 0),
+(1, 52, 0),
+(1, 53, 0),
+(1, 54, 0),
+(1, 55, 0),
+(1, 56, 0),
+(1, 57, 0),
+(1, 58, 0),
+(1, 59, 0),
+(1, 60, 0),
+(1, 61, 0),
+(1, 62, 0),
+(1, 63, 0),
+(1, 64, 0),
+(1, 65, 0),
+(1, 66, 0),
+(1, 67, 0),
+(1, 68, 0),
+(1, 69, 0),
+(1, 70, 0),
+(1, 71, 0),
+(1, 72, 0),
+(1, 73, 0),
+(1, 74, 0),
+(1, 75, 0),
+(1, 76, 0),
+(1, 77, 0),
+(1, 78, 0),
+(1, 79, 0),
+(1, 80, 0),
+(1, 81, 0),
+(1, 82, 0),
+(1, 83, 0),
+(1, 84, 0),
+(1, 85, 0),
+(1, 86, 0),
+(1, 87, 0),
+(1, 88, 0),
+(1, 89, 0),
+(1, 90, 0),
+(1, 91, 0),
+(1, 92, 0),
+(1, 93, 0),
+(1, 94, 0),
+(1, 95, 0),
+(1, 96, 0),
+(1, 97, 0),
+(1, 98, 0),
+(1, 99, 0),
+(1, 100, 0),
+(1, 101, 0),
+(1, 102, 0),
+(1, 103, 0),
+(1, 104, 0),
+(1, 105, 0),
+(1, 106, 0),
+(1, 107, 0),
+(1, 108, 0),
+(1, 109, 0),
+(1, 110, 0),
+(1, 111, 0),
+(1, 112, 0),
+(1, 113, 0),
+(1, 114, 0),
+(1, 115, 0),
+(1, 116, 0),
+(1, 117, 0),
+(1, 118, 0),
+(1, 119, 0),
+(1, 120, 0),
+(1, 121, 0),
+(1, 122, 0),
+(1, 123, 0),
+(1, 124, 0),
+(1, 125, 0),
+(1, 126, 0),
+(1, 127, 0),
+(1, 128, 0),
+(1, 129, 0),
+(1, 130, 0),
+(1, 131, 0),
+(1, 132, 0),
+(1, 133, 0),
+(1, 134, 0),
+(1, 135, 0),
+(1, 136, 0),
+(1, 137, 0),
+(1, 138, 0),
+(1, 139, 0),
+(1, 140, 0),
+(1, 141, 0),
+(1, 142, 0),
+(1, 143, 0),
+(1, 144, 0),
+(1, 145, 0),
+(1, 146, 0),
+(1, 147, 0),
+(1, 148, 0),
+(1, 149, 0),
+(1, 150, 0);
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `pengiriman`
 --
 
@@ -374,28 +546,29 @@ CREATE TABLE `pengiriman` (
   `BERAT_PENGIRIMAN` decimal(8,2) DEFAULT NULL,
   `ID_ARMADA_PENGIRIMAN` int(11) DEFAULT NULL,
   `ID_FORWARDER_PENGIRIMAN` int(11) DEFAULT NULL,
-  `STATUS_PEMBAYARAN` enum('Belum Dibayar','Sudah Dibayar') DEFAULT 'Belum Dibayar'
+  `STATUS_PEMBAYARAN` enum('Belum Dibayar','Sudah Dibayar') DEFAULT 'Belum Dibayar',
+  `STATUS_URUTAN` enum('Sudah','Belum') NOT NULL DEFAULT 'Belum'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `pengiriman`
 --
 
-INSERT INTO `pengiriman` (`ID_PENGIRIMAN`, `ID_BIAYA`, `TGL_PENGIRIMAN`, `BIAYA_PENGIRIMAN`, `NAMA_PENERIMA`, `TUJUAN_PENGIRIMAN`, `ALAMAT_PENERIMA`, `BERAT_PENGIRIMAN`, `ID_ARMADA_PENGIRIMAN`, `ID_FORWARDER_PENGIRIMAN`, `STATUS_PEMBAYARAN`) VALUES
-(1001, 1, '2014-05-22', '100000.00', 'Risqi Kurniawan', 'PT. Joyo Agromulyo', 'Jalan Anggrek No. 109', '0.00', 1, 1, 'Sudah Dibayar'),
-(1006, 1, '2014-05-27', '100000.00', 'Moh. Oby Maulana', 'PT. Gunung Sari Merdeka', 'Jl. Sumatera No. 202-205', '0.00', 1, 1, 'Sudah Dibayar'),
-(1008, 3, '2014-05-28', '75000.00', 'Ali Bachtiar', 'PT. Karangan Indah Semesta', 'Jl. Nusantara No. 16', '0.00', 1, 1, 'Belum Dibayar'),
-(1009, 5, '2014-05-30', '45000.00', 'Moh. Oby Maulana', 'CV. Kami Sayang Anda', 'Jl. Kusumo No. 86 Bangil', '0.00', 1, 1, 'Sudah Dibayar'),
-(1010, 7, '2014-06-02', '100000.00', 'Rio Sonja Permana', 'PT. Karangan Indah Semesta', 'Jl. Nias Nusantara No. 190-201', '50.00', NULL, NULL, 'Belum Dibayar'),
-(1011, 7, '2014-06-05', '100000.00', 'Thony Hermawan', 'PT. Semoga Tidak Bencana', 'Jl. Selamat No. 99', '150.00', NULL, NULL, 'Sudah Dibayar'),
-(1012, 7, '2014-06-02', '100000.00', 'Dwi Prasetyo', 'PT. Pesona Bahari Nusantara', 'Jl. Cinggarum No. 24-29', '100.00', NULL, NULL, 'Belum Dibayar'),
-(1013, 5, '2014-06-04', '45000.00', 'Thony Hermawan', 'PT. Sumbangan Suka Rela', 'Jl. Pandaan Malang Km. 30', '150.00', NULL, NULL, 'Belum Dibayar'),
-(1014, 1, '2021-08-19', '20000.00', 'Fakhri', 'USU', 'Medan', '10.00', 2, 1, 'Belum Dibayar'),
-(1015, 1, '2021-08-19', '20000.00', 'Fakhri Rizha Ananda', 'PT. Kalvo Company', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '2.00', 2, 1, 'Belum Dibayar'),
-(1016, 1, '2021-08-19', '20000.00', 'Fakhri Rizha Ananda', 'PT. Kalvo Company', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '2.00', NULL, NULL, 'Belum Dibayar'),
-(1018, 1, '2021-08-19', '20000.00', 'Fakhri Rizha Ananda', 'USU', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '3.00', NULL, NULL, 'Belum Dibayar'),
-(1019, 12, '0000-00-00', '150000.00', 'Fakhri Rizha Ananda', 'asdasdassssssss', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '0.00', NULL, NULL, 'Belum Dibayar'),
-(1020, 12, '2021-08-07', '150000.00', 'Fakhri Rizha Ananda', 'a', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '23.00', NULL, NULL, 'Belum Dibayar');
+INSERT INTO `pengiriman` (`ID_PENGIRIMAN`, `ID_BIAYA`, `TGL_PENGIRIMAN`, `BIAYA_PENGIRIMAN`, `NAMA_PENERIMA`, `TUJUAN_PENGIRIMAN`, `ALAMAT_PENERIMA`, `BERAT_PENGIRIMAN`, `ID_ARMADA_PENGIRIMAN`, `ID_FORWARDER_PENGIRIMAN`, `STATUS_PEMBAYARAN`, `STATUS_URUTAN`) VALUES
+(1001, 1, '2014-05-22', '100000.00', 'Risqi Kurniawan', 'PT. Joyo Agromulyo', 'Jalan Anggrek No. 109', '0.00', 1, 1, 'Sudah Dibayar', 'Sudah'),
+(1006, 1, '2014-05-27', '100000.00', 'Moh. Oby Maulana', 'PT. Gunung Sari Merdeka', 'Jl. Sumatera No. 202-205', '0.00', 1, 1, 'Sudah Dibayar', 'Sudah'),
+(1008, 3, '2014-05-28', '75000.00', 'Ali Bachtiar', 'PT. Karangan Indah Semesta', 'Jl. Nusantara No. 16', '0.00', 1, 1, 'Belum Dibayar', 'Sudah'),
+(1009, 5, '2014-05-30', '45000.00', 'Moh. Oby Maulana', 'CV. Kami Sayang Anda', 'Jl. Kusumo No. 86 Bangil', '0.00', 1, 1, 'Sudah Dibayar', 'Sudah'),
+(1010, 7, '2014-06-02', '100000.00', 'Rio Sonja Permana', 'PT. Karangan Indah Semesta', 'Jl. Nias Nusantara No. 190-201', '50.00', NULL, NULL, 'Belum Dibayar', 'Sudah'),
+(1011, 7, '2014-06-05', '100000.00', 'Thony Hermawan', 'PT. Semoga Tidak Bencana', 'Jl. Selamat No. 99', '150.00', NULL, NULL, 'Sudah Dibayar', 'Sudah'),
+(1012, 7, '2014-06-02', '100000.00', 'Dwi Prasetyo', 'PT. Pesona Bahari Nusantara', 'Jl. Cinggarum No. 24-29', '100.00', 1, 1, 'Belum Dibayar', 'Sudah'),
+(1013, 5, '2014-06-04', '45000.00', 'Thony Hermawan', 'PT. Sumbangan Suka Rela', 'Jl. Pandaan Malang Km. 30', '150.00', 1, 1, 'Belum Dibayar', 'Sudah'),
+(1014, 1, '2021-08-19', '20000.00', 'Fakhri', 'USU', 'Medan', '10.00', 2, 1, 'Belum Dibayar', 'Sudah'),
+(1015, 1, '2021-08-19', '20000.00', 'Fakhri Rizha Ananda', 'PT. Kalvo Company', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '2.00', 2, 1, 'Belum Dibayar', 'Sudah'),
+(1016, 1, '2021-08-19', '20000.00', 'Fakhri Rizha Ananda', 'PT. Kalvo Company', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '2.00', 1, 1, 'Belum Dibayar', 'Sudah'),
+(1018, 1, '2021-08-19', '20000.00', 'Fakhri Rizha Ananda', 'USU', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '3.00', 1, 1, 'Belum Dibayar', 'Sudah'),
+(1019, 12, '0000-00-00', '150000.00', 'Fakhri Rizha Ananda', 'asdasdassssssss', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '0.00', NULL, NULL, 'Belum Dibayar', 'Sudah'),
+(1020, 12, '2021-08-07', '150000.00', 'Fakhri Rizha Ananda', 'a', 'Jalan Sidodadi\r\nKomplek Johor Regency B6\r\nKecamatan Medan Johor', '23.00', 1, 1, 'Belum Dibayar', 'Sudah');
 
 -- --------------------------------------------------------
 
@@ -539,6 +712,9 @@ CREATE TABLE `view_all_armada` (
 ,`ARMADA_NAMA` varchar(30)
 ,`ARMADA_KAPASITAS` int(11)
 ,`ARMADA_KAPASITAS_TERSEDIA` int(11)
+,`ARMADA_PANJANG` int(11)
+,`ARMADA_LEBAR` int(11)
+,`ARMADA_TINGGI` int(11)
 ,`ID_KOTA_ASAL` int(11)
 ,`NAMA_KOTA_ASAL` varchar(30)
 ,`ID_KOTA_TUJUAN` int(11)
@@ -861,14 +1037,42 @@ CREATE TABLE `view_pengiriman_detail` (
 -- (See below for the actual view)
 --
 CREATE TABLE `view_pengiriman_sedang_diproses` (
-`id_pengiriman` int(11)
-,`no_resi` varchar(10)
-,`id_biaya` int(11)
-,`id_kota_asal` int(11)
-,`id_kota_tujuan` int(11)
-,`nama_kota_asal` varchar(30)
-,`nama_kota_tujuan` varchar(30)
-,`jarak` int(11)
+`ID_PENGIRIMAN` int(11)
+,`NO_RESI` varchar(10)
+,`TGL_PENGIRIMAN` date
+,`ID_BIAYA` int(11)
+,`ID_KOTA_ASAL` int(11)
+,`ID_KOTA_TUJUAN` int(11)
+,`NAMA_KOTA_ASAL` varchar(30)
+,`NAMA_KOTA_TUJUAN` varchar(30)
+,`JARAK` int(11)
+,`ID_ARMADA_PENGIRIMAN` int(11)
+,`ID_FORWARDER_PENGIRIMAN` int(11)
+,`STATUS_PENGIRIMAN` varchar(30)
+,`STATUS_URUTAN` enum('Sudah','Belum')
+,`berat_total_pengiriman` decimal(30,2)
+);
+
+-- --------------------------------------------------------
+
+--
+-- Stand-in structure for view `view_pengiriman_sudah_diproses`
+-- (See below for the actual view)
+--
+CREATE TABLE `view_pengiriman_sudah_diproses` (
+`ID_PENGIRIMAN` int(11)
+,`NO_RESI` varchar(10)
+,`TGL_PENGIRIMAN` date
+,`ID_BIAYA` int(11)
+,`ID_KOTA_ASAL` int(11)
+,`ID_KOTA_TUJUAN` int(11)
+,`NAMA_KOTA_ASAL` varchar(30)
+,`NAMA_KOTA_TUJUAN` varchar(30)
+,`JARAK` int(11)
+,`ID_ARMADA_PENGIRIMAN` int(11)
+,`ID_FORWARDER_PENGIRIMAN` int(11)
+,`STATUS_PENGIRIMAN` varchar(30)
+,`STATUS_URUTAN` enum('Sudah','Belum')
 ,`berat_total_pengiriman` decimal(30,2)
 );
 
@@ -903,7 +1107,7 @@ CREATE TABLE `view_surat_pengiriman` (
 --
 DROP TABLE IF EXISTS `view_all_armada`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_all_armada`  AS  select `a`.`ARMADA_ID` AS `ARMADA_ID`,`a`.`ARMADA_FORWARDER_ID` AS `ARMADA_FORWARDER_ID`,`a`.`ARMADA_NAMA` AS `ARMADA_NAMA`,`a`.`ARMADA_KAPASITAS` AS `ARMADA_KAPASITAS`,`a`.`ARMADA_KAPASITAS_TERSEDIA` AS `ARMADA_KAPASITAS_TERSEDIA`,`k1`.`ID_KOTA` AS `ID_KOTA_ASAL`,`k1`.`NAMA_KOTA` AS `NAMA_KOTA_ASAL`,`k2`.`ID_KOTA` AS `ID_KOTA_TUJUAN`,`k2`.`NAMA_KOTA` AS `NAMA_KOTA_TUJUAN` from ((`armada` `a` join `kota` `k1`) join `kota` `k2`) where ((`a`.`ARMADA_ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`a`.`ARMADA_ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`)) ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_all_armada`  AS  select `a`.`ARMADA_ID` AS `ARMADA_ID`,`a`.`ARMADA_FORWARDER_ID` AS `ARMADA_FORWARDER_ID`,`a`.`ARMADA_NAMA` AS `ARMADA_NAMA`,`a`.`ARMADA_KAPASITAS` AS `ARMADA_KAPASITAS`,`a`.`ARMADA_KAPASITAS_TERSEDIA` AS `ARMADA_KAPASITAS_TERSEDIA`,`a`.`ARMADA_PANJANG` AS `ARMADA_PANJANG`,`a`.`ARMADA_LEBAR` AS `ARMADA_LEBAR`,`a`.`ARMADA_TINGGI` AS `ARMADA_TINGGI`,`k1`.`ID_KOTA` AS `ID_KOTA_ASAL`,`k1`.`NAMA_KOTA` AS `NAMA_KOTA_ASAL`,`k2`.`ID_KOTA` AS `ID_KOTA_TUJUAN`,`k2`.`NAMA_KOTA` AS `NAMA_KOTA_TUJUAN` from ((`armada` `a` join `kota` `k1`) join `kota` `k2`) where ((`a`.`ARMADA_ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`a`.`ARMADA_ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`)) ;
 
 -- --------------------------------------------------------
 
@@ -1092,7 +1296,16 @@ CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW 
 --
 DROP TABLE IF EXISTS `view_pengiriman_sedang_diproses`;
 
-CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_pengiriman_sedang_diproses`  AS  select `vid`.`ID_PENGIRIMAN` AS `id_pengiriman`,`t`.`NO_RESI` AS `no_resi`,`b`.`ID_BIAYA` AS `id_biaya`,`b`.`ID_KOTA_ASAL` AS `id_kota_asal`,`b`.`ID_KOTA_TUJUAN` AS `id_kota_tujuan`,`k1`.`NAMA_KOTA` AS `nama_kota_asal`,`k2`.`NAMA_KOTA` AS `nama_kota_tujuan`,`b`.`JARAK` AS `jarak`,sum(`br`.`BERAT_BARANG`) AS `berat_total_pengiriman` from (((((((`view_id_pengiriman_sedang_diproses` `vid` join `pengiriman` `p`) join `tracking` `t`) join `biaya_pengiriman` `b`) join `kota` `k1`) join `kota` `k2`) join `detil_pengiriman` `dt`) join `barang` `br`) where ((`p`.`ID_PENGIRIMAN` = `vid`.`ID_PENGIRIMAN`) and isnull(`p`.`ID_ARMADA_PENGIRIMAN`) and (`t`.`ID_PENGIRIMAN` = `vid`.`ID_PENGIRIMAN`) and (`p`.`ID_BIAYA` = `b`.`ID_BIAYA`) and (`b`.`ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`b`.`ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`) and (`p`.`ID_PENGIRIMAN` = `dt`.`ID_PENGIRIMAN`) and (`br`.`ID_BARANG` = `dt`.`ID_BARANG`)) group by `vid`.`ID_PENGIRIMAN` ;
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_pengiriman_sedang_diproses`  AS  select `vid`.`ID_PENGIRIMAN` AS `ID_PENGIRIMAN`,`t`.`NO_RESI` AS `NO_RESI`,`p`.`TGL_PENGIRIMAN` AS `TGL_PENGIRIMAN`,`b`.`ID_BIAYA` AS `ID_BIAYA`,`b`.`ID_KOTA_ASAL` AS `ID_KOTA_ASAL`,`b`.`ID_KOTA_TUJUAN` AS `ID_KOTA_TUJUAN`,`k1`.`NAMA_KOTA` AS `NAMA_KOTA_ASAL`,`k2`.`NAMA_KOTA` AS `NAMA_KOTA_TUJUAN`,`b`.`JARAK` AS `JARAK`,`p`.`ID_ARMADA_PENGIRIMAN` AS `ID_ARMADA_PENGIRIMAN`,`p`.`ID_FORWARDER_PENGIRIMAN` AS `ID_FORWARDER_PENGIRIMAN`,`t`.`STATUS_PENGIRIMAN` AS `STATUS_PENGIRIMAN`,`p`.`STATUS_URUTAN` AS `STATUS_URUTAN`,sum(`br`.`BERAT_BARANG`) AS `berat_total_pengiriman` from (((((((`view_id_pengiriman_sedang_diproses` `vid` join `pengiriman` `p`) join `tracking` `t`) join `biaya_pengiriman` `b`) join `kota` `k1`) join `kota` `k2`) join `detil_pengiriman` `dt`) join `barang` `br`) where ((`p`.`ID_PENGIRIMAN` = `vid`.`ID_PENGIRIMAN`) and isnull(`p`.`ID_ARMADA_PENGIRIMAN`) and (`t`.`ID_PENGIRIMAN` = `vid`.`ID_PENGIRIMAN`) and (`p`.`ID_BIAYA` = `b`.`ID_BIAYA`) and (`b`.`ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`b`.`ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`) and (`p`.`ID_PENGIRIMAN` = `dt`.`ID_PENGIRIMAN`) and (`br`.`ID_BARANG` = `dt`.`ID_BARANG`) and (`t`.`STATUS_PENGIRIMAN` <> 'Selesai')) group by `vid`.`ID_PENGIRIMAN` ;
+
+-- --------------------------------------------------------
+
+--
+-- Structure for view `view_pengiriman_sudah_diproses`
+--
+DROP TABLE IF EXISTS `view_pengiriman_sudah_diproses`;
+
+CREATE ALGORITHM=UNDEFINED DEFINER=`root`@`localhost` SQL SECURITY DEFINER VIEW `view_pengiriman_sudah_diproses`  AS  select `vid`.`ID_PENGIRIMAN` AS `ID_PENGIRIMAN`,`t`.`NO_RESI` AS `NO_RESI`,`p`.`TGL_PENGIRIMAN` AS `TGL_PENGIRIMAN`,`b`.`ID_BIAYA` AS `ID_BIAYA`,`b`.`ID_KOTA_ASAL` AS `ID_KOTA_ASAL`,`b`.`ID_KOTA_TUJUAN` AS `ID_KOTA_TUJUAN`,`k1`.`NAMA_KOTA` AS `NAMA_KOTA_ASAL`,`k2`.`NAMA_KOTA` AS `NAMA_KOTA_TUJUAN`,`b`.`JARAK` AS `JARAK`,`p`.`ID_ARMADA_PENGIRIMAN` AS `ID_ARMADA_PENGIRIMAN`,`p`.`ID_FORWARDER_PENGIRIMAN` AS `ID_FORWARDER_PENGIRIMAN`,`t`.`STATUS_PENGIRIMAN` AS `STATUS_PENGIRIMAN`,`p`.`STATUS_URUTAN` AS `STATUS_URUTAN`,sum(`br`.`BERAT_BARANG`) AS `berat_total_pengiriman` from (((((((`view_id_pengiriman_sedang_diproses` `vid` join `pengiriman` `p`) join `tracking` `t`) join `biaya_pengiriman` `b`) join `kota` `k1`) join `kota` `k2`) join `detil_pengiriman` `dt`) join `barang` `br`) where ((`p`.`ID_PENGIRIMAN` = `vid`.`ID_PENGIRIMAN`) and (`t`.`ID_PENGIRIMAN` = `vid`.`ID_PENGIRIMAN`) and (`p`.`ID_BIAYA` = `b`.`ID_BIAYA`) and (`b`.`ID_KOTA_ASAL` = `k1`.`ID_KOTA`) and (`b`.`ID_KOTA_TUJUAN` = `k2`.`ID_KOTA`) and (`p`.`ID_PENGIRIMAN` = `dt`.`ID_PENGIRIMAN`) and (`br`.`ID_BARANG` = `dt`.`ID_BARANG`) and (`t`.`STATUS_PENGIRIMAN` <> 'Selesai')) group by `vid`.`ID_PENGIRIMAN` ;
 
 -- --------------------------------------------------------
 
@@ -1185,6 +1398,12 @@ ALTER TABLE `jenis_barang`
 ALTER TABLE `kota`
   ADD PRIMARY KEY (`ID_KOTA`),
   ADD KEY `FK_KOTA_BERASAL_PROVINSI` (`ID_PROVINSI`);
+
+--
+-- Indexes for table `muatan_armada`
+--
+ALTER TABLE `muatan_armada`
+  ADD KEY `FK_ARMADA_ID` (`MUATAN_ARMADA_ID`);
 
 --
 -- Indexes for table `pengiriman`
@@ -1331,6 +1550,12 @@ ALTER TABLE `kota`
   ADD CONSTRAINT `FK_KOTA_BERASAL_PROVINSI` FOREIGN KEY (`ID_PROVINSI`) REFERENCES `provinsi` (`ID_PROVINSI`);
 
 --
+-- Constraints for table `muatan_armada`
+--
+ALTER TABLE `muatan_armada`
+  ADD CONSTRAINT `FK_ARMADA_ID` FOREIGN KEY (`MUATAN_ARMADA_ID`) REFERENCES `armada` (`ARMADA_ID`);
+
+--
 -- Constraints for table `pengiriman`
 --
 ALTER TABLE `pengiriman`
@@ -1352,6 +1577,19 @@ ALTER TABLE `tracking`
   ADD CONSTRAINT `FK_DETIL_TRACKING_PENGIRIMAN` FOREIGN KEY (`ID_PENGIRIMAN`) REFERENCES `pengiriman` (`ID_PENGIRIMAN`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_TRACKING_DILAKUKAN_CUSTOMER` FOREIGN KEY (`ID_CUST`) REFERENCES `customer` (`ID_CUST`) ON DELETE CASCADE,
   ADD CONSTRAINT `FK_TRACKING_MEMPUNYAI_STATUS` FOREIGN KEY (`STATUS_PENGIRIMAN`) REFERENCES `status_pengiriman` (`STATUS_PENGIRIMAN`) ON DELETE CASCADE;
+
+DELIMITER $$
+--
+-- Events
+--
+CREATE DEFINER=`root`@`localhost` EVENT `update_jadwal_keberangkatan` ON SCHEDULE EVERY 1 HOUR STARTS '2021-09-09 12:13:32' ON COMPLETION NOT PRESERVE ENABLE DO UPDATE
+    armada
+SET
+    ARMADA_JADWAL_BERANGKAT = DATE_ADD(CURDATE(), INTERVAL 1 WEEK)
+WHERE
+    ARMADA_JADWAL_BERANGKAT < CURDATE()$$
+
+DELIMITER ;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
