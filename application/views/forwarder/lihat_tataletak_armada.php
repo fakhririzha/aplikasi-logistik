@@ -74,6 +74,11 @@
 <hr>
 <h3>Lihat Slot Barang Armada</h3>
 <p>Berikut adalah daftar slot barang pada armada <?= $armada[0]['ARMADA_NAMA'] ?>:</p>
+<a href="<?= base_url('index.php/forwarder/sortir_isi_armada/' . $this->uri->segment(3)) ?>" class="btn btn-primary">
+    <i class="icon-play-circle icon-white"></i>&nbsp;Sortir Posisi Barang
+</a>
+<br>
+<br>
 <div>
     <table class="table table-hover table-bordered" style="border-bottom: 2px solid black; border-top: 1px solid black;">
         <thead>

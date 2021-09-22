@@ -134,6 +134,110 @@ class Forwarder extends CI_Controller
 		$this->mforwarder->masukin();
 	}
 
+	public function sortir_isi_armada($id_armada)
+	{
+		$check_isi = $this->db->where(["MUATAN_PENGIRIMAN_ID !=" => 0, "MUATAN_ARMADA_ID" => 1])->get("muatan_armada")->num_rows();
+
+		$blm_disusun = $this->mforwarder->get_all_pengiriman_by_armada_belum_disusun($id_armada);
+
+		if ($check_isi > 0) {
+			$sdh_disusun = $this->mforwarder->get_all_pengiriman_by_armada_sudah_disusun($id_armada);
+			$unsortedPengirimanList = $blm_disusun + $sdh_disusun;
+		} else {
+			$unsortedPengirimanList = $blm_disusun;
+		}
+
+		$slotArmada = [];
+		$query = $this->db->where("MUATAN_ARMADA_ID", $id_armada)->get('muatan_armada');
+		if ($query->num_rows() > 0) {
+			foreach ($query->result_array() as $row) {
+				$slotArmada[] = $row;
+			}
+		}
+		$query->free_result();
+
+		$dua_dimensi = [
+			[
+				"JARAK" => 200,
+				"berat_total_pengiriman" => 23
+			],
+			[
+				"JARAK" => 0,
+				"berat_total_pengiriman" => 3
+			],
+			[
+				"JARAK" => 30,
+				"berat_total_pengiriman" => 50
+			],
+			[
+				"JARAK" => 0,
+				"berat_total_pengiriman" => 210
+			],
+			[
+				"JARAK" => 200,
+				"berat_total_pengiriman" => 50
+			],
+			[
+				"JARAK" => 50,
+				"berat_total_pengiriman" => 23
+			]
+		];
+
+		foreach ($unsortedPengirimanList as $data) {
+			echo "Jarak : " . $data["JARAK"] . ", Berat: " . intval($data["berat_total_pengiriman"]);
+			echo "<br>";
+		}
+
+		usort($unsortedPengirimanList, function ($a, $b) {
+			$retval = $b['JARAK'] <=> $a['JARAK'];
+			// JARAK SAMA
+			if ($retval == 0) {
+				$retval = intval($a['berat_total_pengiriman']) <=> intval($b['berat_total_pengiriman']);
+				if ($retval == 0) {
+					$retval = 0;
+				}
+				// A lebih berat dari B
+				else if ($retval == 1) {
+					$retval = -1;
+				}
+				// B lebih berat dari A
+				else if ($retval == -1) {
+					$retval = 1;
+				}
+			}
+			return $retval;
+		});
+
+		$sortedPengirimanList = $unsortedPengirimanList;
+
+		echo "<hr>";
+		foreach ($sortedPengirimanList as $data) {
+			echo "Jarak : " . $data["JARAK"] . ", Berat: " . intval($data["berat_total_pengiriman"]);
+			echo "<br>";
+		}
+
+		echo "<hr>";
+		// echo count($slotArmada);
+
+		// Fungsi untuk meng-assign pengiriman ke slot tersedia
+		for ($i = 1; $i <= $slotArmada; $i++) {
+			if(array_key_exists($i - 1,$sortedPengirimanList)){
+				break;
+			}
+			$data = array(
+				'MUATAN_PENGIRIMAN_ID' => $sortedPengirimanList[$i - 1]["ID_PENGIRIMAN"]
+			);
+			$this->db->where([
+				"MUATAN_ARMADA_ID" => $id_armada,
+				"MUATAN_SLOT_ID" => $i
+			]);
+			$this->db->update('muatan_armada', $data);
+			$this->db->update('pengiriman', ["STATUS_URUTAN"=>"Sudah"]);
+		}
+
+		redirect('forwarder/lihat_tataletak_armada/' . $id_armada, 'refresh');
+	}
+
 	public function lihat_tataletak_armada($id_armada, $id = NULL)
 	{
 		$data['judul'] = 'Lihat Tataletak Kiriman';

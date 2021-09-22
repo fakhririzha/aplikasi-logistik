@@ -2,8 +2,19 @@
 -barang paling dekat di bagian depan
 
 menu admin :
-tambahkan tanggal kapan barang mau dikirimkan di urutkan pengiriman done
+// DONE
+* tambahkan tanggal kapan barang mau dikirimkan di urutkan pengiriman
 
 menu forwarder :
-penjadwalan berangkat armada
-utk memudahkan pemilihan armada di menu admin (cocokkan tanggal pengiriman dari shipper dan jadwal keberangkatan dari armada)
+// DONE
+penjadwalan berangkat armada utk memudahkan pemilihan armada di menu admin (cocokkan tanggal pengiriman dari shipper dan jadwal keberangkatan dari armada)
+
+CREATE EVENT update_jadwal_keberangkatan ON SCHEDULE EVERY
+    1 HOUR STARTS CURRENT_TIMESTAMP
+DO
+UPDATE
+    armada
+SET
+    ARMADA_JADWAL_BERANGKAT = DATE_ADD(CURDATE(), INTERVAL 1 WEEK)
+WHERE
+    ARMADA_JADWAL_BERANGKAT < CURDATE();

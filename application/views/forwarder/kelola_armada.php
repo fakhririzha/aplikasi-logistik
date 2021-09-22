@@ -69,6 +69,12 @@
 				</div>
 			</div>
 			<div class="control-group">
+				<label class="control-label" for="jadwalKeberangkatan">Jadwal Keberangkatan</label>
+				<div class="controls">
+					<input type="text" id="jadwalKeberangkatan" class="datepicker" name="jadwalKeberangkatan" placeholder="YYYY-MM-DD" min="<?= date("Y-m-d") ?>" required>
+				</div>
+			</div>
+			<div class="control-group">
 				<label class="control-label" for="inputVolumeArmada">Volume Armada (PxLxT)</label>
 				<div class="controls">
 					<input type="number" id="inputVolumeArmada" name="volPanjangArmada" placeholder="Panjang" class="input-large" required min="1" max="50">
