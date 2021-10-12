@@ -170,7 +170,7 @@ class Mtracking extends CI_Model
 
 	public function insert($no_resi, $id_pengiriman, $id_cust, $status_pengiriman, $tanggal, $posisi, $keterangan)
 	{
-		if ($status_pengiriman = "Selesai") {
+		if ($status_pengiriman == "Selesai") {
 
 			$berat = $this->db->where("berat_total_pengiriman", $id_pengiriman)->get('view_pengiriman_sedang_diproses');
 
