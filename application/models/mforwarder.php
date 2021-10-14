@@ -222,17 +222,18 @@ class Mforwarder extends CI_Model
 			'ARMADA_ID_KOTA_ASAL' => $asal,
 			'ARMADA_ID_KOTA_TUJUAN' => $tujuan,
 		);
+		$this->db->insert('armada', $data);
+
+		$last_id = $this->db->insert_id();
 
 		$volume = intval($panjangArmada) * intval($lebarArmada) * intval($tinggiArmada);
 		for ($x = 1; $x <= $volume; $x++) {
-			$data = array(
-				'MUATAN_ARMADA_ID' => '1',
-				'MUATAN_SLOT_ID' => $x,
+			$dataMuatan = array(
+				'MUATAN_ARMADA_ID' => $last_id,
+				'MUATAN_SLOT_ID' => $x
 			);
-			$this->db->insert('muatan_armada', $data);
+			$this->db->insert('muatan_armada', $dataMuatan);
 		}
-
-		$this->db->insert('armada', $data);
 	}
 
 	public function ubah_armada($nama, $id_armada, $kapasitas, $asal, $tujuan)

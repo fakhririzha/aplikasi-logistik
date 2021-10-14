@@ -359,4 +359,15 @@ class Forwarder extends CI_Controller
 		$this->session->set_flashdata('message', 'Forwarder telah berhasil dihapus');
 		redirect('pg_admin/forwarder', 'refresh');
 	}
+
+	public function testt()
+	{
+		for ($i = 1; $i < 13; $i++) {
+			$this->db->insert('muatan_armada', [
+				'MUATAN_ARMADA_ID' => '2',
+				'MUATAN_SLOT_ID' => $i,
+				'MUATAN_PENGIRIMAN_ID' => '0'
+			]);
+		}
+	}
 }
