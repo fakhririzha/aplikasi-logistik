@@ -157,13 +157,13 @@ class Mtracking extends CI_Model
 		$string = '';
 		for ($i = 0; $i < 4; $i++) {
 			$pos = rand(0, strlen($karakter) - 1);
-			$string .= $karakter{
-				$pos};
+			$string .= $karakter[
+				$pos];
 		}
 		for ($i = 0; $i < 6; $i++) {
 			$pos = rand(0, strlen($angka) - 1);
-			$string .= $angka{
-				$pos};
+			$string .= $angka[
+				$pos];
 		}
 		return $string;
 	}
