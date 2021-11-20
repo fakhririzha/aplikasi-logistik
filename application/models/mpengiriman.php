@@ -170,6 +170,14 @@ class Mpengiriman extends CI_Model
 		return $data;
 	}
 
+	public function getBaseBiayaPengiriman($id_pengiriman)
+	{
+		$current_id_biaya = $this->db->get_where('pengiriman', ['id_pengiriman' => $id_pengiriman])->row()->ID_BIAYA;
+		$base_biaya = $this->db->get_where('biaya_pengiriman', ['id_biaya' => $current_id_biaya])->row()->BIAYA;
+
+		return $base_biaya;
+	}
+
 	public function detil_pengiriman($id_cust, $id_pengiriman)
 	{
 		$data = array();
@@ -201,11 +209,30 @@ class Mpengiriman extends CI_Model
 
 	public function update_berat_pengiriman($id_pengiriman, $berat_pengiriman)
 	{
+		$current_id_biaya = $this->db->get_where('pengiriman', ['id_pengiriman' => $id_pengiriman])->row()->ID_BIAYA;
+		$base_biaya = $this->db->get_where('biaya_pengiriman', ['id_biaya' => $current_id_biaya])->row()->BIAYA;
 		$current_biaya = $this->db->get_where('pengiriman', ['id_pengiriman' => $id_pengiriman])->row()->BIAYA_PENGIRIMAN;
-		$update_current_biaya = $current_biaya + ($current_biaya * intval($berat_pengiriman));
+		$current_berat = $this->db->get_where('pengiriman', ['id_pengiriman' => $id_pengiriman])->row()->BERAT_PENGIRIMAN;
+
+		if ($current_berat < 1) {
+			$total_biaya = $base_biaya * intval($berat_pengiriman);
+			echo $current_berat . "\n";
+			echo $total_biaya . "\n";
+			echo "<script>console.log($current_berat, 'IF')</script>";
+			echo "IF";
+			// die;
+		} else {
+			$total_biaya = $current_biaya + ($base_biaya * intval($berat_pengiriman));
+			echo $current_berat . "\n";
+			echo $total_biaya . "\n";
+			echo "<script>console.log($current_berat, 'ELSE')</script>";
+			echo "ELSE";
+			// die;
+		}
+
 		$data = [
-			'berat_pengiriman' => $berat_pengiriman,
-			'biaya_pengiriman' => $update_current_biaya
+			'berat_pengiriman' => $berat_pengiriman + $current_berat,
+			'biaya_pengiriman' => $total_biaya
 		];
 		$this->db->where('id_pengiriman', $id_pengiriman);
 		$this->db->update('pengiriman', $data);

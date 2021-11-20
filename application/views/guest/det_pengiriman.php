@@ -53,8 +53,8 @@ if (count($pengiriman) > 0) {
 				<td><?php echo date('d/m/Y', strtotime($tgl)); ?></td>
 				<td><?php echo $nama . " - " . $tujuan; ?></td>
 				<td><?php echo $alamat . " - " . $kota; ?></td>
-				<td>Rp<?php echo number_format($biaya, 0, ",", "."); ?>,00</td>
-				<td><?php echo "Rp" . number_format($biaya * $tot_berat, 0, ",", ".") . ",00"; ?></td>
+				<td>Rp<?php echo number_format($base_biaya_pengiriman, 0, ",", "."); ?>,00</td>
+				<td><?php echo "Rp" . number_format($biaya, 0, ",", ".") . ",00"; ?></td>
 			</tr>
 		</tbody>
 	</table>

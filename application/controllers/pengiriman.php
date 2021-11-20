@@ -137,6 +137,7 @@ class Pengiriman extends CI_Controller
 		$data['sum_berat'] = $this->mpengiriman->sum_berat($id_pengiriman);
 		$data['no_resi'] = $this->mtracking->getNoResi($id_cust, $id_pengiriman);
 		$data['id_barang'] = $this->mbarang->getLastBarang();
+		$data['base_biaya_pengiriman'] = $this->mpengiriman->getBaseBiayaPengiriman($id_pengiriman);
 		$this->load->vars($data);
 		$this->load->view('guest/page', $data, FALSE);
 	}
