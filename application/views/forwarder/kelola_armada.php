@@ -75,11 +75,11 @@
 				</div>
 			</div>
 			<div class="control-group">
-				<label class="control-label" for="inputVolumeArmada">Volume Armada (PxLxT)</label>
+				<label class="control-label" for="inputVolumeArmada">Volume Armada (m³)</label>
 				<div class="controls">
-					<input type="number" id="inputVolumeArmada" name="volPanjangArmada" placeholder="Panjang" class="input-large" required min="1" max="50">
-					<input type="number" id="inputVolumeArmada" name="volLebarArmada" placeholder="Lebar" class="input-large" required min="1" max="50">
-					<input type="number" id="inputVolumeArmada" name="volTinggiArmada" placeholder="Tinggi" class="input-large" required min="1" max="50">
+					<input type="number" id="inputVolumeArmada" name="volPanjangArmada" placeholder="Panjang (m)" class="input-large" required min="1" max="50">
+					<input type="number" id="inputVolumeArmada" name="volLebarArmada" placeholder="Lebar (m)" class="input-large" required min="1" max="50">
+					<input type="number" id="inputVolumeArmada" name="volTinggiArmada" placeholder="Tinggi (m)" class="input-large" required min="1" max="50">
 				</div>
 			</div>
 			<div class="control-group">
