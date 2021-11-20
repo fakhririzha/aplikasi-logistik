@@ -9,8 +9,25 @@ if (count($tracking) > 0) {
         $tanggal = $t['tanggal'];
         $posisi = $t['posisi'];
         $keterangan = $t['keterangan'];
+        $file_path = $t['file_path'];
     }
 ?>
+    <?php
+
+    if (!$this->session->userdata('error') && $this->session->userdata('message') != '') {
+        echo '<div class="alert alert-success">';
+        echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+        echo '<strong>' . $this->session->userdata('message') . '</strong>';
+        echo '</div>';
+    } elseif ($this->session->userdata('error') != '') {
+        echo '<div class="alert alert-error">';
+        echo '<button type="button" class="close" data-dismiss="alert">&times;</button>';
+        echo '<strong>' . $this->session->userdata('error') . '</strong>';
+        echo '</div>';
+    }
+
+    ?>
+
     <label class="label-inline" for="txtNoResi">Nomor Resi: &nbsp;
         <input type="text" id="txtNoResi" name="txtNoResi" value="<?php echo $no_resi; ?>" disabled>
         <input type="hidden" id="txtIdPengiriman" name="txtIdPengiriman" value="<?php echo $id_pengiriman; ?>" disabled>
@@ -25,6 +42,7 @@ if (count($tracking) > 0) {
                     <th>Tanggal</th>
                     <th>Lokasi</th>
                     <th>Status Pengiriman</th>
+                    <th>Foto Bukti</th>
                 </tr>
             </thead>
             <tbody>
@@ -34,11 +52,17 @@ if (count($tracking) > 0) {
                         $status_pengiriman = $t['status_pengiriman'];
                         $tanggal = date('d M Y', strtotime($t['tanggal']));
                         $posisi = $t['posisi'];
+                        $file_path = $t['file_path'];
 
                         echo "<tr>";
                         echo "<td>" . $tanggal . "</td>";
                         echo "<td>" . $posisi . "</td>";
                         echo "<td>" . $status_pengiriman . "</td>";
+                        if ($file_path != '') {
+                            echo "<td><img src='" . base_url("uploads/" . $file_path) . "' /></td>";
+                        } else {
+                            echo "<td>Tidak ada gambar.</td>";
+                        }
                         echo "</tr>";
                     }
                 } else {
@@ -63,7 +87,7 @@ if (count($tracking) > 0) {
 </div>
 
 <!-- Modal -->
-<form class="form-horizontal" method="post" action="<?php echo base_url(); ?>index.php/forwarder/detail_tracking_action">
+<form class="form-horizontal" method="post" action="<?php echo base_url(); ?>index.php/forwarder/detail_tracking_action" enctype="multipart/form-data">
     <div id="myModal" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">x</button>
@@ -116,7 +140,13 @@ if (count($tracking) > 0) {
             <div class="control-group">
                 <label class="control-label" for="inputKeterangan">Keterangan</label>
                 <div class="controls">
-                    <textarea id="inputKeterangan" name="txtKeterangan" placeholder="Keterangan"></textarea>
+                    <textarea id="inputKeterangan" name="txtKeterangan" placeholder="Keterangan" required></textarea>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="inputFoto">Bukti Foto</label>
+                <div class="controls">
+                    <input type="file" id="inputFoto" name="inputFoto" accept="image/*" required></input>
                 </div>
             </div>
         </div>

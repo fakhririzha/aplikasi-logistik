@@ -121,7 +121,7 @@ class Mtracking extends CI_Model
 	public function detil_tracking($no_resi)
 	{
 		$data = array();
-		$query = $this->db->query("select no_resi, id_pengiriman, id_cust, status_pengiriman, tanggal, posisi, keterangan
+		$query = $this->db->query("select no_resi, id_pengiriman, id_cust, status_pengiriman, tanggal, posisi, keterangan, file_path
 			from tracking where no_resi = '" . $no_resi . "' order by tanggal desc");
 		//$this->db->select('no_resi, id_pengiriman, id_cust, status_pengiriman, tanggal, posisi, keterangan');
 		//$this->db->from('tracking');
@@ -168,7 +168,7 @@ class Mtracking extends CI_Model
 		return $string;
 	}
 
-	public function insert($no_resi, $id_pengiriman, $id_cust, $status_pengiriman, $tanggal, $posisi, $keterangan)
+	public function insert($no_resi, $id_pengiriman, $id_cust, $status_pengiriman, $tanggal, $posisi, $keterangan, $inputGambar)
 	{
 		if ($status_pengiriman == "Selesai") {
 
@@ -189,7 +189,8 @@ class Mtracking extends CI_Model
 			'status_pengiriman' => $status_pengiriman,
 			'tanggal' => $tanggal,
 			'posisi' => $posisi,
-			'keterangan' => $keterangan
+			'keterangan' => $keterangan,
+			'file_path' => $inputGambar
 		);
 		$this->db->insert('tracking', $data);
 	}

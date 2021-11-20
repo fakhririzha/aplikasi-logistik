@@ -284,6 +284,10 @@ class Forwarder extends CI_Controller
 
 	public function detail_tracking_action()
 	{
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = '*';
+		$this->load->library('upload', $config);
+		
 		$no_resi = $this->input->post('txtNoResi');
 		$id_pengiriman = $this->input->post('txtIdPengiriman');
 		$id_cust = $this->input->post('txtIdCust');
@@ -293,9 +297,19 @@ class Forwarder extends CI_Controller
 		$ket = $this->input->post('txtKeterangan');
 		if (empty($ket)) $keterangan = "";
 		else $keterangan = $ket;
-		$this->mtracking->insert($no_resi, $id_pengiriman, $id_cust, $status_pengiriman, $tanggal, $posisi, $keterangan);
-		$this->session->set_flashdata('message', 'Status pengiriman sudah diperbarui.');
-		redirect('forwarder/detail_tracking/' . $no_resi, 'refresh');
+
+		if (!$this->upload->do_upload('inputFoto')) {
+			$this->session->set_flashdata('error', 'Gagal memperbarui kiriman, silahkan periksa kembali gambar yang anda unggah.');
+
+			redirect('forwarder/detail_tracking/' . $no_resi, 'refresh');
+		} else {
+			$inputFoto = $this->upload->data();
+
+			$this->mtracking->insert($no_resi, $id_pengiriman, $id_cust, $status_pengiriman, $tanggal, $posisi, $keterangan, $inputFoto['file_name']);
+			$this->session->set_flashdata('message', 'Status pengiriman sudah diperbarui.');
+
+			redirect('forwarder/detail_tracking/' . $no_resi, 'refresh');
+		}
 		//echo $no_resi." ".$id_pengiriman." ".$id_cust." ".$status_pengiriman." ".$tanggal." ".$posisi." ".$keterangan;
 	}
 
