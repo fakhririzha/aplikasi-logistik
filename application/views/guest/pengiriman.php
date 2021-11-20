@@ -10,7 +10,7 @@ $id_cust = $this->session->userdata('id_cust');
 	<div class="control-group">
 		<label class="control-label" for="txtTglPengiriman">Tanggal Pengiriman</label>
 		<div class="controls">
-			<input type="text" id="txtTglPengiriman" class="datepicker" name="txtTglPengiriman" placeholder="YYYY-MM-DD">
+			<input type="text" id="txtTglPengiriman" class="datepicker" name="txtTglPengiriman" placeholder="YYYY-MM-DD" required>
 		</div>
 	</div>
 	<div class="control-group">

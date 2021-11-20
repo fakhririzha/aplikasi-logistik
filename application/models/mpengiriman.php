@@ -201,7 +201,12 @@ class Mpengiriman extends CI_Model
 
 	public function update_berat_pengiriman($id_pengiriman, $berat_pengiriman)
 	{
-		$data = array('berat_pengiriman' => $berat_pengiriman);
+		$current_biaya = $this->db->get_where('pengiriman', ['id_pengiriman' => $id_pengiriman])->row()->BIAYA_PENGIRIMAN;
+		$update_current_biaya = $current_biaya + ($current_biaya * intval($berat_pengiriman));
+		$data = [
+			'berat_pengiriman' => $berat_pengiriman,
+			'biaya_pengiriman' => $update_current_biaya
+		];
 		$this->db->where('id_pengiriman', $id_pengiriman);
 		$this->db->update('pengiriman', $data);
 	}
