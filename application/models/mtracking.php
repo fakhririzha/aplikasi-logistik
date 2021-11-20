@@ -109,10 +109,11 @@ class Mtracking extends CI_Model
 		return $data;
 	}
 
-	public function update_status_pembayaran($ID_PENGIRIMAN)
+	public function update_status_pembayaran($ID_PENGIRIMAN, $foto_pembayaran)
 	{
 		$data = array(
-			'STATUS_PEMBAYARAN' => 'Sudah Dibayar'
+			'STATUS_PEMBAYARAN' => 'Sudah Dibayar',
+			'FOTO_PEMBAYARAN' => $foto_pembayaran
 		);
 		$this->db->where('ID_PENGIRIMAN', $ID_PENGIRIMAN);
 		$this->db->update('pengiriman', $data);

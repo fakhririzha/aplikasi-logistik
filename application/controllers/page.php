@@ -70,8 +70,21 @@ class Page extends CI_Controller
 
 	public function bayar($ID_PENGIRIMAN)
 	{
-		$this->mtracking->update_status_pembayaran($ID_PENGIRIMAN);
-		redirect('page/status_pembayaran', 'refresh');
+		$config['upload_path'] = './uploads/';
+		$config['allowed_types'] = '*';
+		$this->load->library('upload', $config);
+
+		if (!$this->upload->do_upload('inputFoto')) {
+			$this->session->set_flashdata('error', 'Gagal memperbarui pembayaran, silahkan periksa kembali gambar yang anda unggah.');
+
+			redirect('page/status_pembayaran', 'refresh');
+		} else {
+			$inputFoto = $this->upload->data();
+			$this->session->set_flashdata('message', 'Status pembayaran sudah diperbarui.');
+
+			$this->mtracking->update_status_pembayaran($ID_PENGIRIMAN, $inputFoto['file_name']);
+			redirect('page/status_pembayaran', 'refresh');
+		}
 	}
 
 	public function tracking()
