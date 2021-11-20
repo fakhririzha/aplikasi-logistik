@@ -59,7 +59,7 @@ if (count($tracking) > 0) {
                         echo "<td>" . $posisi . "</td>";
                         echo "<td>" . $status_pengiriman . "</td>";
                         if ($file_path != '') {
-                            echo "<td><img src='" . base_url("uploads/" . $file_path) . "' /></td>";
+                            echo "<td><img class='img-polaroid' src='" . base_url("uploads/" . $file_path) . "' /></td>";
                         } else {
                             echo "<td>Tidak ada gambar.</td>";
                         }
