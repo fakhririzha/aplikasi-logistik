@@ -97,7 +97,7 @@ class Pengiriman extends CI_Controller
 		$date = date('Y-m-d');
 		$this->mpengiriman->insert($id, $id_biaya, $tgl, $biaya, $nama, $tujuan, $alamat, $berat);
 		//echo $id." ".$id_biaya." ".$tgl." ".$biaya." ".$nama." ".$tujuan." ".$alamat." ".$berat;
-		$this->mtracking->insert($no_resi, $id, $id_cust, 'Sedang Diproses', $date, $nama_kota_asal, '');
+		$this->mtracking->insert($no_resi, $id, $id_cust, 'Sedang Diproses', $date, $nama_kota_asal, '', '');
 		$this->session->set_flashdata('message', 'Data pengiriman sudah dibuat');
 		redirect('pengiriman/view_detil_pengiriman/' . $id, 'refresh');
 	}
